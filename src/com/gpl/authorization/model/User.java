@@ -17,18 +17,19 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private String account;
 	private String password;
 	private Date createTime;
 	private String creator;
-	private int enabled;
+	private Integer enabled;
+	private String rname;
 	@Id
 	@GeneratedValue
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getAccount() {
@@ -57,17 +58,24 @@ public class User implements Serializable{
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-	public int getEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(int enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
+	}
+	public String getRname() {
+		return rname;
+	}
+	public void setRname(String rname) {
+		this.rname = rname;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", account=" + account + ", password=" + password + ", createTime=" + createTime
-				+ ", creator=" + creator + ", enabled=" + enabled + "]";
+				+ ", creator=" + creator + ", enabled=" + enabled + ", rname=" + rname + "]";
 	}
+	
 	
 	
 }

@@ -152,13 +152,14 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active" name="navItem" value="1"><a href="#">查看全部</a> </li>
-                    <li name="navItem" value="2"><a href="#">添加</a> </li>
+                <ul class="nav nav-sidebar" id="menu">
+                    <!-- <li class="active" name="navItem" value="1"><a href="#">查看全部</a> </li>
+                    <li name="navItem" value="2"><a href="#">添加</a> </li> -->
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <div id="listPage">
+            	<iframe height="100%" width="100%" frameborder="0" id="main" src="<%=basePath%>good/list"></iframe>
+                <%-- <div id="listPage">
                     <h2 class="sub-header">商品列表</h2>
                     <div class="table-responsive">
                         <table class="table table-striped" id="goodTable">
@@ -214,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --%>
 
     </div>
     <div class="modal fade" role="dialog" id="updateModal" aria-labelledby="updateModal">
@@ -282,13 +283,44 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
             </div>
         </div>
     </div>
-
 <script>
 
+$(function(){
+	$.post("<%=basePath %>user/getModules",
+			{account:"<%=((User)session.getAttribute("user")).getAccount() %>"},
+			function(result){
+			console.log(result);
+			var res = $.parseJSON(result);
+			if(result && res.success){
+				var menu = $("#menu");
+				var data = res.data;
+				menu.append("<li name='menuItem' class='active' id='"+data[0].url+"'><a href='#'>"+data[0].mname+"</a></li>");
+				for(var i = 1 ;i < data.length ; i++){
+					menu.append("<li name='menuItem' id='"+data[i].url+"'><a href='#'>"+data[i].mname+"</a></li>");
+				}
+				var lis = $("li[name='menuItem']");
+			    for (var i = 0; i < lis.length; i++) {
+			        lis[i].onclick = function () {
+			            for (var j = 0; j < lis.length; j++) {
+			                lis[j].className = "";
+			            }
+			            this.className = "active";
+			            var basePath = "<%=basePath %>";
+			       	 	$("#main").attr("src",basePath + this.id);
+			        }
+			    } 
+			}else{
+				alert(res.msg);
+			}
+		}
+	);
+});
+
+<%-- 
     //记录上一页的最后一条记录的id
     var lastId = 0;
     window.onload=function () {
-        $("#listPage").show();
+         $("#listPage").show();
         $("#addpage").hide();
         loadGoods(lastId);
         var lis = $("li[name='navItem']");
@@ -307,7 +339,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
                     $("#addPage").show();
                 }
             }
-        }
+        } 
     }
 
     function loadGoods(lastId){
@@ -436,7 +468,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
     	
     	$("#deleteForm").ajaxSubmit(options);
     	return false;
-    }
+    } --%>
 </script>
 </body>
 </html>

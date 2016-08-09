@@ -233,8 +233,13 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				try{
 				Query query = session.createQuery(hql);
 				return query.list();
+				}catch(Exception e){
+					e.printStackTrace();
+					return null;
+				}
 			}
 		});
 		return list;
