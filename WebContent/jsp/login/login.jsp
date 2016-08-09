@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
             /* padding-top: 40px;
             padding-bottom: 40px;
             background-color: #eee; */
-            background: url(${basePath}images/login/login_bg.jpg) center no-repeat;
+            background: url(<%=basePath %>images/login/login_bg.jpg) center no-repeat;
             background-size: 100% auto;
         }
 
