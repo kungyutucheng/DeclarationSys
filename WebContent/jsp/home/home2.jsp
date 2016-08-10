@@ -7,7 +7,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/default/easyui.css">
+ 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/bootstrap/easyui.css">
  	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/icon.css">
  	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
  	<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
@@ -61,9 +61,9 @@
 
         /* Sidebar navigation */
         .nav-sidebar {
-            margin-right: -21px; /* 20px padding + 1px border */
+            /* margin-right: -21px; 
             margin-bottom: 20px;
-            margin-left: -20px;
+            margin-left: -20px; */
         }
         .nav-sidebar > li > a {
             padding-right: 20px;
@@ -128,7 +128,7 @@
     </style>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',split:true" title="West" style="heigth:150px;margin-bottom:10px;">
+	<div data-options="region:'north',split:true" title="North" style="heigth:150px;margin-bottom:10px;">
 	    <nav class="navbar navbar-inverse navbar-fixed-top">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
@@ -150,20 +150,11 @@
 	    </nav>
 	</div>
 	        <div data-options="region:'west',split:true" title="West" style="width:300px;">
-	            <div id="menu" class="easyui-accordion" data-options="fit:true,border:false">
-	                <!-- <div title="Title1" style="padding:10px;">
-	                    content1
-	                </div>
-	                <div title="Title2" data-options="selected:true,iconCls:'icon-more'" style="padding:10px;">
-	                    content2
-	                </div>
-	                <div title="Title3" style="padding:10px">
-	                    content3
-	                </div> -->
+	            <div id="menu" class="easyui-accordion" data-options="border:false,multiple:true">
 	            </div>
 	        </div>
 	        <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-	            <div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+	            <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
 	                <div title="DataGrid" style="padding:5px">
 	                    <table id="dg">
 	                    </table>
@@ -192,7 +183,6 @@ $(function(){
 			console.log(result);
 			var res = $.parseJSON(result);
 			if(result && res.success){
-				var menu = $("#menu");
 				var data = res.data;
 				//生成左侧菜单栏
 				organizeMenu(data);
@@ -242,24 +232,31 @@ $(function(){
 		
 		
 		for(var i = result.length - 1;i>=0;i--){
-			var content = "";
+			var content = "<ul class='nav nav-sidebar'>";
 			for(var j = 0;j<result[i][1].length;j++){
-				content += '<a href="#">' + result[i][1][j].mname +'</a><br/>';
+				var url = ""+result[i][1][j].url;
+				var mname = "" + result[i][1][j].mname;
+				content += "<li onclick='openTab("+url+","+mname+")'><a href='#'>" + result[i][1][j].mname +"</a></li>";
 			}
-				/* $("#menu").accordion('add',{
-					title:result[i].mname,
-					content:content,
-					selected:false,
-					iconCls:'icon-more'
-				}); */
-				
-			var menu = $("#menu");
-				var icon = "icon-more";
-			menu.html('<div title="'+result[i].mname+'" data-options="iconCls:'+icon+'"></div>');
+			content += "</ul>";
+			$("#menu").accordion('add',{
+				title:result[i][0].mname,
+				content:content,
+				selected:false,
+				iconCls:'icon-more',
+			});
 		}
 	}
+	
 });
 
+	function openTab(url,mname){
+		console.log(url+":"+mname);
+		$("#tabs").tabs("add",{
+			href:"${basePath}/"+url,
+			title:mname
+		});
+	}
 
 </script>
 </body>
