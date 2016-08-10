@@ -1,0 +1,14 @@
+.searchTable{
+	width:auto;
+	height:auto;
+}
+.searchTable tr td:nth-child(odd){
+	text-align:right;
+	padding:0px 10px;
+}
+input{
+	width:140px;
+}
+select{
+	width:140px;
+}
