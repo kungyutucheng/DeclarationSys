@@ -1,17 +1,13 @@
 <%@page import="com.gpl.authorization.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  isELIgnored="false"%>
-<% String path = request.getContextPath(); 
-String basePath = request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() + path + "/"; %>
+
+<%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<%=basePath %>asserts/bootstrap/bootstrap.min.css" type="text/css">
-    <script type="text/javascript" src="<%=basePath %>asserts/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=basePath %>asserts/jquery/jquery.form.js"></script>
-    <script type="text/javascript" src="<%=basePath %>js/common.js"></script>
-    <script type="text/javascript" src="<%=basePath %>asserts/bootstrap/bootstrap.min.js"></script>
+ 
     <title>主页</title>
     <style>
         body {
@@ -158,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            	<iframe height="100%" width="100%" frameborder="0" id="main" src="<%=basePath%>good/list"></iframe>
+            	<iframe height="100%" width="100%" frameborder="0" id="main" src="${basePath }/good/list"></iframe>
                 <%-- <div id="listPage">
                     <h2 class="sub-header">商品列表</h2>
                     <div class="table-responsive">
@@ -225,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
                     <h4 class="modal-title" id="modalTitle">修改商品信息</h4>
                 </div>
-                <form class="form-group" id="updateForm" action="<%=basePath%>good/update" method="post" onsubmit="return updateGood();">
+                <form class="form-group" id="updateForm" action="${basePath }/good/update" method="post" onsubmit="return updateGood();">
                		<div class="modal-body">
                         <label for="updateGoodId">商品ID</label>
                         <input id="updateGoodId" name="id" type="text" readonly class="form-control">
@@ -257,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
                     	确认删除？
                 </div>
                 <div class="modal-footer">
-                	<form style="dispaly:none;"id="deleteForm" action="<%=basePath %>good/delete" method="get" onsubmit="return deleteGood();">
+                	<form style="dispaly:none;"id="deleteForm" action="${basePath }/good/delete" method="get" onsubmit="return deleteGood();">
                 		<input id="deleteGoodId" name="id" type="hidden">
                 		<button type="button" class="btn btn-primary myBtn" data-dismiss="modal">取消</button>
                     	<button type="submit" class="btn btn-primary myBtn">确定</button>
@@ -286,7 +282,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
 <script>
 
 $(function(){
-	$.post("<%=basePath %>user/getModules",
+	$.post("${basePath }/user/getModules",
 			{account:"<%=((User)session.getAttribute("user")).getAccount() %>"},
 			function(result){
 			console.log(result);
@@ -305,8 +301,7 @@ $(function(){
 			                lis[j].className = "";
 			            }
 			            this.className = "active";
-			            var basePath = "<%=basePath %>";
-			       	 	$("#main").attr("src",basePath + this.id);
+			       	 	$("#main").attr("src",basePath + "/" + this.id);
 			        }
 			    } 
 			}else{

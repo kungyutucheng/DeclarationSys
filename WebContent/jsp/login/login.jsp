@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8" isELIgnored="false"%>
-<% String path = request.getContextPath(); 
-String basePath = request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() + path + "/"; %>
 
+<%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<%=basePath %>asserts/bootstrap/bootstrap.min.css" type="text/css">
-    <script type="text/javascript" src="<%=basePath %>asserts/bootstrap/bootstrap.min.js"></script>
     <title>用户登录</title>
     <style>
 	    * {
@@ -24,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
             /* padding-top: 40px;
             padding-bottom: 40px;
             background-color: #eee; */
-            background: url(<%=basePath %>images/login/login_bg.jpg) center no-repeat;
+            background: url(${basePath}/images/login/login_bg.jpg) center no-repeat;
             background-size: 100% auto;
         }
 
@@ -80,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName() + ":" + requ
 </head>
 <body>
     <div class="container" style="padding:200px;">
-        <form class="form-signin" method="post" action="<%=basePath %>login/login">
+        <form class="form-signin" method="post" action="${basePath }/login/login">
         <h2 class="form-signin-heading">报关系统</h2>
         <label for="inputEmail" class="sr-only">Account</label>
         <input type="text" id="inputEmail" name="account" class="form-control" placeholder="请输入用户名" required autofocus>

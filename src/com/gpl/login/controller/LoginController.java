@@ -30,7 +30,7 @@ public class LoginController {
 			user.setAccount(account);
 			user.setPassword(password);
 			session.setAttribute("user", user);
-			return new ModelAndView("home/home");
+			return new ModelAndView("home/home2");
 		}else{
 			ModelAndView modelAndView = new ModelAndView("login/login");
 			modelAndView.addObject("errorMsg", "用户名或密码错误");
