@@ -34,4 +34,10 @@ public class UserController extends BaseController{
 		model.setMsg(msg);
 		return renderJsonStr(model);
 	}
+	
+	@RequestMapping(path = "/test",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String test(){
+		return renderJsonStr(userBiz.getModules("admin"));
+	}
 }

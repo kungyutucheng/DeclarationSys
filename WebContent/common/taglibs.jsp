@@ -6,7 +6,14 @@
 </script>
 <link rel="stylesheet" href="${basePath }/asserts/bootstrap/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="${basePath }/css/common.css" type="text/css">
-<script type="text/javascript" src="${basePath }/asserts/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${basePath }/asserts/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${basePath }/js/common.js"></script>
 <script type="text/javascript" src="${basePath }/asserts/bootstrap/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/bootstrap/easyui.css">
+ 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/icon.css">
+ 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
+ 	<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
+ 	<script type="text/javascript" src="${basePath }/asserts/easyui/extend/jquery.edatagrid.js"></script>
+ 	

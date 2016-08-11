@@ -7,24 +7,11 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/bootstrap/easyui.css">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/icon.css">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
- 	<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
+ 	
  	<title>主页</title>
     <style>
         body {
             padding-top: 50px;
-        }
-
-
-        /*
-         * Global add-ons
-         */
-
-        .sub-header {
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
         }
 
         /*
@@ -33,30 +20,6 @@
          */
         .navbar-fixed-top {
             border: 0;
-        }
-
-        /*
-         * Sidebar
-         */
-
-        /* Hide for mobile, show later */
-        .sidebar {
-            display: none;
-        }
-        @media (min-width: 768px) {
-            .sidebar {
-                position: fixed;
-                top: 51px;
-                bottom: 0;
-                left: 0;
-                z-index: 1000;
-                display: block;
-                padding: 20px;
-                overflow-x: hidden;
-                overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-                background-color: #f5f5f5;
-                border-right: 1px solid #eee;
-            }
         }
 
         /* Sidebar navigation */
@@ -74,56 +37,6 @@
         .nav-sidebar > .active > a:focus {
             color: #fff;
             background-color: #428bca;
-        }
-
-
-        /*
-         * Main content
-         */
-
-        .main {
-            padding: 20px;
-        }
-        @media (min-width: 768px) {
-            .main {
-                padding-right: 40px;
-                padding-left: 40px;
-            }
-        }
-        .main .page-header {
-            margin-top: 0;
-        }
-
-
-        /*
-         * Placeholder dashboard ideas
-         */
-
-        .placeholders {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .placeholders h4 {
-            margin-bottom: 0;
-        }
-        .placeholder {
-            margin-bottom: 20px;
-        }
-        .placeholder img {
-            display: inline-block;
-            border-radius: 50%;
-        }
-        form input,
-        form textarea,
-        form button,
-        form label{
-            margin:5px 0px;
-        }
-        .myBtn{
-            background:#428bca;
-        }
-        .a{
-        	cursor:pointer;
         }
     </style>
 </head>
@@ -149,18 +62,18 @@
 	        </div>
 	    </nav>
 	</div>
-	        <div data-options="region:'west',split:true" title="West" style="width:300px;">
-	            <div id="menu" class="easyui-accordion" data-options="border:false,multiple:true">
-	            </div>
-	        </div>
-	        <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-	            <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-	                <div title="DataGrid" style="padding:5px">
-	                    <table id="dg">
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
+	<div data-options="region:'west',split:true" style="width:300px;">
+		<div id="menu" class="easyui-accordion" data-options="border:false,multiple:true">
+	    </div>
+	</div>
+	<div data-options="region:'center'">
+	    <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true,closable:true">
+			<div title="DataGrid" style="padding:5px">
+				<table id="dg">
+				</table>
+			</div>
+		</div>
+	</div>
 <script>
 
 $(function(){
@@ -184,7 +97,7 @@ $(function(){
 			var res = $.parseJSON(result);
 			if(result && res.success){
 				var data = res.data;
-				//生成左侧菜单栏
+				//生成左侧菜单栏 
 				organizeMenu(data);
 			}else{
 			}
@@ -232,30 +145,47 @@ $(function(){
 		
 		
 		for(var i = result.length - 1;i>=0;i--){
-			var content = "<ul class='nav nav-sidebar'>";
+			var content = $("<ul></ul>");
+			content.attr("class","nav nav-sidebar");
 			for(var j = 0;j<result[i][1].length;j++){
-				var url = ""+result[i][1][j].url;
-				var mname = "" + result[i][1][j].mname;
-				content += "<li onclick='openTab("+url+","+mname+")'><a href='#'>" + result[i][1][j].mname +"</a></li>";
-			}
-			content += "</ul>";
+				var li = $("<li></li>");
+				li.attr("id",result[i][1][j].url);
+				li.attr("title",result[i][1][j].mname);
+				li.click(function(){
+					openTab(this);
+				}); 
+				var a = $("<a href='#'></a>");
+				a.text(result[i][1][j].mname);
+				li.append(a);
+				content.append(li);
+			} 
 			$("#menu").accordion('add',{
 				title:result[i][0].mname,
 				content:content,
 				selected:false,
-				iconCls:'icon-more',
+				iconCls:'icon-more'
+				
+				
 			});
 		}
 	}
 	
 });
 
-	function openTab(url,mname){
-		console.log(url+":"+mname);
+	function openTab(data){
+		if($("#tabs").tabs("exists",data.title)){
+			$("#tabs").tabs("select",data.title);
+			return;
+		}
+		var url = data.id;
+		var mname = data.title;
 		$("#tabs").tabs("add",{
+			id:mname,
 			href:"${basePath}/"+url,
-			title:mname
+			title:mname,
+			closable:true
 		});
+		
 	}
 
 </script>

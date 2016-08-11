@@ -1,14 +1,25 @@
-.searchTable{
-	width:auto;
+.myTable{
 	height:auto;
+	font-size:12px;
 }
-.searchTable tr td:nth-child(odd){
+.myTable tr td:nth-child(odd){
 	text-align:right;
-	padding:0px 10px;
+	padding:10px 10px;
 }
-input{
-	width:140px;
+
+.myTable tr td{
+	width:200px;
 }
-select{
-	width:140px;
+.myTable tr td input,
+.myTable tr td select{
+	width:190px;
+}
+
+.subTitle{
+	font-size:14px;
+	padding-left:20px;
+	font-weight:bold;
+}
+hr{
+	margin:0 auto;
 }
