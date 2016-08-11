@@ -105,6 +105,12 @@
 		$(function(){
 			$('#tt').edatagrid({
 			});
+			
+			$('#tt').edatagrid({
+				onSave:function(index,row){
+					console.log("index:" + index + ",row:" + row.id);
+				}
+			});
 		});
 		
 		

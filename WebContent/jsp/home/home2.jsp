@@ -38,11 +38,12 @@
             color: #fff;
             background-color: #428bca;
         }
+
     </style>
 </head>
-<body class="easyui-layout">
-	<div data-options="region:'north',split:true" title="North" style="heigth:150px;margin-bottom:10px;">
-	    <nav class="navbar navbar-inverse navbar-fixed-top">
+<body class="easyui-layout" style="min-width:500px;">
+	<div data-options="region:'north'" style="height:55px;">
+	   <nav class="navbar navbar-inverse navbar-fixed-top">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
 		            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -60,9 +61,33 @@
 		        	</ul>
 		        </div>
 	        </div>
-	    </nav>
+	    </nav> 
+	    <!-- <div class="content">
+			<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				<span>EasyUI</span>
+			</div>
+			<div id="elogo" class="navbar navbar-left">
+				<ul>
+					<li>
+						<a href="/index.php"><img src="/images/logo2.png" alt="jQuery EasyUI"/></a>
+					</li>
+				</ul>
+			</div>
+			<div id="navbar-1" class="navbar navbar-right">
+				<ul>
+					<li><a href="/index.php">Home</a></li>
+					<li><a href="/demo/main/index.php">Demo</a></li>
+					<li><a href="/tutorial/index.php">Tutorial</a></li>
+					<li><a href="/documentation/index.php">Documentation</a></li>
+					<li><a href="/download/index.php">Download</a></li>
+					<li><a href="/extension/index.php">Extension</a></li>
+					<li><a href="/contact.php">Contact</a></li>
+					<li><a href="/forum/index.php">Forum</a></li>
+				</ul>
+			</div>
+		</div> -->
 	</div>
-	<div data-options="region:'west',split:true" style="width:300px;">
+	<div data-options="region:'west',split:true" title="  " style="width:300px;">
 		<div id="menu" class="easyui-accordion" data-options="border:false,multiple:true">
 	    </div>
 	</div>
