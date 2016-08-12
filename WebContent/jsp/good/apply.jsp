@@ -19,21 +19,19 @@
 		                    <td>商品申请编号</td>
 		                    <td><input name="cargobCode" class="f1 easyui-textbox"></input></td>
 		                    <td>国检组织机构代码</td>
-		                    <td><input name="ciqbCode" class="f1 easyui-textbox"></input></td>
+		                    <td><input name="ciqbCode" class="f1 easyui-combobox"
+		                    	style="width:100%;" data-options="valueField:'code',textField:'name',url:'${basePath }/org/getAll'"></td>
 		                </tr>
 		                <tr>
 		                    <td>跨境电商企业</td>
 		                    <td>
-		                    	<select id="cbeComId" name="cbeComId" class="easyui-combobox">
-									<!-- <option value="0"></option> -->
-								</select>
+								<input id="cbeComId" class="easyui-combobox"
+								 name="cbeComId" style="width:100%;" data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll'">
 							</td>
 		                    <td>制单企业</td>
 		                    <td>
-		                    	<select name="editId" class="easyui-combobox">
-									<option value="1">企业1</option>
-									<option value="2">企业2</option>
-								</select>
+		                    	<input id="editId" class="easyui-combobox"
+								 name="editId" style="width:100%;" data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll'">
 		                    </td>
 		                </tr>
 		                <tr>
@@ -55,17 +53,27 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="javascript:$('#tt').edatagrid('saveRow')">保存</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="javascript:$('#tt').edatagrid('cancelRow')">撤销</a>
 		    </div>
-			<table id="tt" style="width:600px;height:200px"
-					method='get',
+			<table id="tt" style="width:auto;height:300px;"
 					singleSelect="true",
+					rownumbers="true",
 					toolbar="tb">
 				<thead>
 					<tr>
-						<th field="id" width="100" editor="{type:'validatebox',options:{required:true}}">Item ID</th>
-						<th field="mname" width="100" editor="text">Product ID</th>
-						<th field="sort" width="100" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
-						<th field="pid" width="100" align="right" editor="numberbox">Unit Cost</th>
-						<th field="url" width="150" editor="text">Attribute</th>
+						<th field="gCode" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入商品货号',validType:'maxLength[30]'}}">商品货号</th>
+						<th field="gname" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入商品名称',validType:'maxLength[255]'}}">商品名称</th>
+						<th field="spec" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入规格型号',validType:'maxLength[255]'}}">规格型号</th>
+						<th field="hsCode" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入hs编码',validType:'maxLength[32]'}}">hs编码</th>
+						<th field="unit" width="150" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入计量单位'}}">计量单位</th>
+						<th field="goodsBarCode" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[13]'}}">条形码</th>
+						<th field="goodsDesc" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[255]'}}">商品描述</th>
+						<th field="gRemark" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[255]'}}">商品备注</th>
+						<th field="comName" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">生产厂家</th>
+						<th field="manufactureAddr" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">生产厂家地址</th>
+						<th field="brand" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入规格型号',validType:'maxLength[255]'}}">品牌</th>
+						<th field="assemCountry" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入规格型号',validType:'maxLength[255]'}}">原产国/地区</th>
+						<th field="ingredient" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">成分</th>
+						<th field="additiveFlag" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">超范围使用食品添加剂</th>
+						<th field="poisonFlag" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">含有毒害物质</th>
 					</tr>
 				</thead>
 			</table>
@@ -79,18 +87,13 @@
 				}
 			});
 			
-			$.post("${basePath }/ent/getAll",null,function(result){
-				var result = $.parseJSON(result);
-				console.log(result.success);
-				if(result && result.success){
-					var data = result.data;
-					var selector = $("#cbeComId");
-					for(var i = 0 ;i < data.length;i++){
-						selector.append("<option value='" + data[i].id + "'>" + data[i].ename + "</option>");
-					}
-				}else{
-					layer.msg(result.msg);
-				}
+			$.extend($.fn.validatebox.defaults.rules, {
+			    maxLength: {
+			        validator: function(value, param){
+			            return value.length <= param[0];
+			        },
+			        message: '该字段长度请勿超过{0}'
+			    }
 			});
 		});
 		

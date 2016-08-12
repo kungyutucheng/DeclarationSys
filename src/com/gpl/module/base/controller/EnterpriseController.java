@@ -38,6 +38,6 @@ public class EnterpriseController extends BaseController{
 			model.setMsg("获取数据失败");
 			model.setSuccess(false);
 		}
-		return renderJsonStr(model);
+		return renderJsonStr(enterpriseBiz.getAll());
 	}
 }
