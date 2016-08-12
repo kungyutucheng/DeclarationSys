@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gpl.authorization.controller.UserController;
+import com.gpl.module.base.controller.EnterpriseController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = "classpath:/spring/spring.xml")
@@ -15,8 +16,11 @@ public class Test {
 	@Autowired
 	private UserController userController;
 	
+	@Autowired
+	private EnterpriseController enterpriseController;
 
 	@org.junit.Test
 	public void test(){
+		System.out.println(enterpriseController.getAll());
 	}
 }

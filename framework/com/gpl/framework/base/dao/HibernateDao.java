@@ -21,6 +21,7 @@ import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.security.config.http.MatcherType;
 import org.springside.modules.orm.PropertyFilter.MatchType;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 import com.gpl.framework.util.Page;
 

@@ -12,8 +12,10 @@
 <script type="text/javascript" src="${basePath }/asserts/bootstrap/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/bootstrap/easyui.css">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/icon.css">
- 	<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
- 	<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
- 	<script type="text/javascript" src="${basePath }/asserts/easyui/extend/jquery.edatagrid.js"></script>
+<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/color.css">
+<link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
+<script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${basePath }/asserts/easyui/extend/jquery.edatagrid.js"></script> 	
+<script type="text/javascript" src="${basePath }/asserts/layer/layer.js"></script> 	
  	

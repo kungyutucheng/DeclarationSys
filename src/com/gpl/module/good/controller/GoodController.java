@@ -13,5 +13,10 @@ public class GoodController {
 	public ModelAndView list(){
 		return new ModelAndView("/good/list");
 	}
+	
+	@RequestMapping(path = "/apply", method = RequestMethod.GET)
+	public ModelAndView apply(){
+		return new ModelAndView("good/apply");
+	}
 
 }

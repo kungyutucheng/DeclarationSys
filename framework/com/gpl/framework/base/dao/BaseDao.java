@@ -21,6 +21,7 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDao<T, PK> {
 	@Autowired
 	private BaseJdbcDao baseJdbcDao;
 	
+	
 	public BaseJdbcDao getBaseJdbcDao(){
 		return baseJdbcDao;
 	}
@@ -28,97 +29,6 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDao<T, PK> {
 	public void setBaseJdbcDao(BaseJdbcDao baseJdbcDao){
 		this.baseJdbcDao = baseJdbcDao;
 	}
-
-	/*@Autowired
-	protected SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
-	}
-	public T save(T t){
-		Session session = null;
-		Transaction transaction = null;
-		try{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.save(t);
-			transaction.commit();
-			return t;
-		}catch(Exception e){
-			e.printStackTrace();
-			if(transaction != null)
-			transaction.rollback();
-		}finally{
-			if(session != null){
-				session.close();
-			}
-		}
-		return null;
-	}
-	
-	
-	public boolean update(T t){
-		Session session = null;
-		Transaction transaction = null;
-		try{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.saveOrUpdate(t);
-			transaction.commit();
-			return true;
-		}catch (Exception e) {
-			e.printStackTrace();
-			if(transaction != null){
-				transaction.rollback();
-			}
-		}finally{
-			if(session != null)
-			session.close();
-		}
-		return false;
-	}
-	
-	
-	public boolean delete(T t){
-		Session session = null;
-		Transaction transaction = null;
-		try{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.delete(t);
-			transaction.commit();
-			return true;
-		}catch(Exception e){
-			e.printStackTrace();
-			if(transaction != null){
-				transaction.rollback();
-			}
-		}finally{
-			if(session != null){
-				session.close();
-			}
-		}
-		return false;
-	}
-	
-	public List<T> findPage(Page<T> page,String sql){
-		Session session = null;
-		try{
-			session = sessionFactory.openSession();
-			Query query = session.createQuery(sql);
-			query.setFirstResult(page.getPageNo() * page.getPageSize());
-			query.setMaxResults(page.getPageNo() * page.getPageSize() + page.getPageSize());
-			return query.list();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			if(session != null){
-				session.close();
-			}
-		}
-		return null;
-	}
-	*/
 
 	/**
 	 * ²éÑ¯·ÖÒ³Ò³Êý
