@@ -9,7 +9,7 @@
 <style>
 </style>
 </head>
-<body >
+<body>
 	<div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'north',split:true" title="备案信息" style="height:200px;">
 			<div style="text-align:center;">
@@ -47,35 +47,6 @@
 		                </tr>
 		            </table>
 		        </form>
-				<!-- <form style="text-align:center;">
-					<table class="myTable">
-						<tr>
-							<td>商品申请编号</td>
-							<td><input name="cargobCode" class="easyui-textbox" type="text" required></td>
-							<td>国检组织机构代码</td>
-							<td><input name="ciqbCode" class="easyui-textbox" type="text" required></td>
-							<td>跨境电商企业</td>
-							<td>
-								<select name="cbeComId" class="easyui-combobox">
-									<option value="1">企业1</option>
-									<option value="2">企业2</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>制单企业</td>
-							<td>
-								<select name="editId" class="easyui-combobox">
-									<option value="1">企业1</option>
-									<option value="2">企业2</option>
-								</select>
-							</td>
-							<td>备注</td>
-							<td colspan="3"><input style="width:100%;" type="text" class="easyui-textbox" name="remark"></td>
-						</tr>
-					</table>
-					<button type="submit">提交</button>
-				</form> -->
 			</div> 
 		</div>
 		<div data-options="region:'center',split:true" title="备案商品详细" style="height:auto;">

@@ -80,9 +80,20 @@
 		</tx:attributes>
 	</tx:advice>
 	
+	
+	<!-- 使用AspectJ方式配置AOP -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<aop:config proxy-target-class="true" />
+
 	<!-- 使用注解方式定义事务 -->
 	<tx:annotation-driven proxy-target-class="true"
 		transaction-manager="transactionManager" />
-	
+
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="serviceMethod"
+			expression="execution(* com.gpl.**.*.biz.*Biz.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+	</aop:config>
+
 	
 </beans:beans>

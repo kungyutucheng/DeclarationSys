@@ -47,19 +47,19 @@
 			</div> 
 		</div>
 		<div data-options="region:'center',split:true" title="备案商品详细" style="height:auto;">
-			<div id="tb" style="height:auto">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="javascript:$('#tt').edatagrid('addRow')">新增</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="javascript:$('#tt').edatagrid('destroyRow')">删除</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="javascript:$('#tt').edatagrid('saveRow')">保存</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="javascript:$('#tt').edatagrid('cancelRow')">撤销</a>
-		    </div>
-			<table id="tt" style="width:auto;height:300px;"
-					singleSelect="true",
-					rownumbers="true",
-					toolbar="tb">
-				<thead>
-					<tr>
-						<th field="gCode" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入商品货号',validType:'maxLength[30]'}}">商品货号</th>
+			<table id="dg" class="easyui-datagrid" title="Row Editing in DataGrid" style="width:700px;height:auto"
+	            data-options="
+	                iconCls: 'icon-edit',
+	                singleSelect: true,
+	                toolbar: '#tb',
+	                onClickCell: onClickCell,
+	                onEndEdit: onEndEdit,
+	                url:'${basePath }/good/getAll',
+	                method:'post'
+	            ">
+	        <thead>
+	            <tr>
+	                <th field="gCode" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入商品货号',validType:'maxLength[30]'}}">商品货号</th>
 						<th field="gname" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入商品名称',validType:'maxLength[255]'}}">商品名称</th>
 						<th field="spec" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入规格型号',validType:'maxLength[255]'}}">规格型号</th>
 						<th field="hsCode" width="100" editor="{type:'validatebox',options:{required:true,missingMessage:'请输入hs编码',validType:'maxLength[32]'}}">hs编码</th>
@@ -74,41 +74,22 @@
 						<th field="ingredient" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">成分</th>
 						<th field="additiveFlag" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">超范围使用食品添加剂</th>
 						<th field="poisonFlag" width="100" editor="{type:'validatebox',options:{required:false,validType:'maxLength[256]'}}">含有毒害物质</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
+	            </tr>
+	        </thead>
+	    </table>
+	 
+	    <div id="tb" style="height:auto">
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
+	    </div>
+    </div>
     <script type="text/javascript">
-		$(function(){
-			var goods = new Array();
-			$('#tt').edatagrid({
-				onSave:function(index,row){
-					goods.push(row);
-				},
-				//重写提示框
-				destroyMsg:{
-					norecord:{
-						title:'信息',
-						msg:'请至少选择一条记录'
-					},
-					confirm:{	// when select a row
-						title:'确认删除',
-						msg:'确认删除？'
-					}
-				}
-			});
-			
-			$.extend($.fn.validatebox.defaults.rules, {
-			    maxLength: {
-			        validator: function(value, param){
-			            return value.length <= param[0];
-			        },
-			        message: '该字段长度请勿超过{0}'
-			    }
-			});
-			
-			$("#applyForm").form({
+    
+    	$(function(){
+    		$("#applyForm").form({
 				url:"${basePath}/good/save",
 				onSubmit:function(){
 					$("#goods").val(JSON.stringify(goods));
@@ -160,10 +141,69 @@
 				}]
 			})
 		});
-		
-		
-		
-		
-	</script>
+    	var editIndex = undefined;
+        function endEditing(){
+            if (editIndex == undefined){return true}
+            if ($('#dg').datagrid('validateRow', editIndex)){
+                $('#dg').datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function onClickCell(index, field){
+            if (editIndex != index){
+                if (endEditing()){
+                    $('#dg').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                    var ed = $('#dg').datagrid('getEditor', {index:index,field:field});
+                    if (ed){
+                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                    }
+                    editIndex = index;
+                } else {
+                    setTimeout(function(){
+                        $('#dg').datagrid('selectRow', editIndex);
+                    },0);
+                }
+            }
+        }
+        function onEndEdit(index, row){
+            var ed = $(this).datagrid('getEditor', {
+                index: index,
+                field: 'productid'
+            });
+            row.productname = $(ed.target).combobox('getText');
+        }
+        function append(){
+            if (endEditing()){
+                $('#dg').datagrid('appendRow',{status:'P'});
+                editIndex = $('#dg').datagrid('getRows').length-1;
+                $('#dg').datagrid('selectRow', editIndex)
+                        .datagrid('beginEdit', editIndex);
+            }
+        }
+        function removeit(){
+            if (editIndex == undefined){return}
+            $('#dg').datagrid('cancelEdit', editIndex)
+                    .datagrid('deleteRow', editIndex);
+            editIndex = undefined;
+        }
+        function accept(){
+            if (endEditing()){
+                $('#dg').datagrid('acceptChanges');
+            }
+        }
+        function reject(){
+            $('#dg').datagrid('rejectChanges');
+            editIndex = undefined;
+        }
+        function getChanges(){
+            var rows = $('#dg').datagrid('getChanges');
+            alert(rows.length+' rows are changed!');
+        }
+    </script>
+	</div>
 </body>
 </html>

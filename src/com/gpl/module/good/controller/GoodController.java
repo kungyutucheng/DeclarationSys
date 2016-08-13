@@ -23,7 +23,6 @@ import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping(path = "/good")
-@Transactional
 public class GoodController extends BaseController{
 	
 	@Autowired
@@ -32,6 +31,12 @@ public class GoodController extends BaseController{
 	@Autowired
 	private GoodMainBiz goodMainBiz;
 	
+	@Autowired
+	private GoodDao goodDao;
+	
+	@Autowired
+	private GoodMainDao goodMainDao;
+	
 	@RequestMapping(path = "/list",method = RequestMethod.GET)
 	public ModelAndView list(){
 		return new ModelAndView("/good/list");
@@ -39,12 +44,13 @@ public class GoodController extends BaseController{
 	
 	@RequestMapping(path = "/apply", method = RequestMethod.GET)
 	public ModelAndView apply(){
-		return new ModelAndView("good/apply");
+		return new ModelAndView("good/apply2");
 	}
 
 
 	@RequestMapping(path = "/save",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
+	@Transactional
 	public String save(){
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("Ìí¼Ó³É¹¦");
@@ -64,7 +70,6 @@ public class GoodController extends BaseController{
 				good.setGmid(id);
 				goodBiz.save(good);
 			}
-			throw new RuntimeException("fsd");
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setSuccess(false);
@@ -72,5 +77,17 @@ public class GoodController extends BaseController{
 		}
 		
 		return renderJsonStr(model);
+	}
+	
+	@RequestMapping(path = "/getNull")
+	@ResponseBody
+	public String getNull(){
+		return "[]";
+	}
+	
+	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String getAll(){
+		return renderJsonStr(goodBiz.getAll());
 	}
 }

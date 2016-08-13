@@ -29,15 +29,6 @@ public class EnterpriseController extends BaseController{
 	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getAll(){
-		AjaxModel model = new AjaxModel(true);
-		model.setMsg("获取数据成功");
-		try{
-			model.setData(enterpriseBiz.getAll());
-		}catch(Exception e){
-			e.printStackTrace();
-			model.setMsg("获取数据失败");
-			model.setSuccess(false);
-		}
 		return renderJsonStr(enterpriseBiz.getAll());
 	}
 }
