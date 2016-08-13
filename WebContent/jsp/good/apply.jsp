@@ -13,7 +13,7 @@
 	<div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'north',split:true" title="备案信息" style="height:200px;">
 			<div style="text-align:center;">
-				<form id="ff" action="form1_proc.php" method="post" enctype="multipart/form-data">
+				<form id="applyForm" method="post">
 		            <table class="myTable">
 		                <tr>
 		                    <td>商品申请编号</td>
@@ -40,9 +40,10 @@
 		                </tr>
 		                <tr>
 		                    <td></td>
-		                    <td><input type="submit" class="btn btn-primary myBtn" value="提交" style="width:auto;"></input></td>
+		                    <td><input type="submit" class="btn btn-primary myBtn" value="提交" style="width:auto;"></td>
 		                </tr>
 		            </table>
+		            <input type="text" name="goods" id="goods">
 		        </form>
 			</div> 
 		</div>
@@ -81,9 +82,11 @@
 	</div>
     <script type="text/javascript">
 		$(function(){
+			var goods = new Array();
 			$('#tt').edatagrid({
 				onSave:function(index,row){
-					console.log("index:" + index + ",row:" + row.id);
+					goods.push(row);
+					console.log("index:" + index + ",row:" + row.gXode);
 				}
 			});
 			
@@ -95,7 +98,23 @@
 			        message: '该字段长度请勿超过{0}'
 			    }
 			});
+			
+			$("#applyForm").form({
+				url:"${basePath}/good/save",
+				onSubmit:function(){
+					$("#goods").val(JSON.stringify(goods));
+				},
+				success:function(result){
+					console.log(result);
+					var result = $.parseJSON(result);
+					layer.msg(result.msg);
+				}
+			});
+			
+			
 		});
+		
+		
 		
 		
 	</script>

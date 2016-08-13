@@ -63,8 +63,21 @@ public class GoodMain implements Serializable{
 	 */
 	private List<Good> goodList;
 	
+	public GoodMain(){
+		
+	}
 	
-	
+	public GoodMain(Integer id, String cargobCode, String ciqbCode, Integer cbeComId, String remark, Integer editId,
+			Integer status) {
+		super();
+		this.id = id;
+		this.cargobCode = cargobCode;
+		this.ciqbCode = ciqbCode;
+		this.cbeComId = cbeComId;
+		this.remark = remark;
+		this.editId = editId;
+		this.status = status;
+	}
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -108,7 +121,7 @@ public class GoodMain implements Serializable{
 	public void setEditId(Integer editId) {
 		this.editId = editId;
 	}
-	@Column
+	@Column(insertable = false , updatable = false)
 	public String getOperType() {
 		return operType;
 	}

@@ -9,6 +9,7 @@
 <script type="text/javascript" src="${basePath }/asserts/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${basePath }/asserts/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${basePath }/js/common.js"></script>
+<script type="text/javascript" src="${basePath }/js/json2.js"></script>
 <script type="text/javascript" src="${basePath }/asserts/bootstrap/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/bootstrap/easyui.css">

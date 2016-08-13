@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 @Entity
 @Table(name = "good")
 public class Good implements Serializable{
@@ -104,6 +107,76 @@ public class Good implements Serializable{
 	 * 商品备案申请主表id
 	 */
 	private Integer gmid;
+	
+	public Good() {
+	}
+
+	public Good(JSONObject jsonObject) throws JSONException{
+		if(jsonObject.has("id")){
+			this.id = jsonObject.getInt("id");
+		}
+		if(jsonObject.has("gCode")){
+			this.gCode = jsonObject.getString("gCode");
+		}
+		if(jsonObject.has("gname")){
+			this.gname = jsonObject.getString("gname");
+		}
+		if(jsonObject.has("spec")){
+			this.spec = jsonObject.getString("spec");
+		}
+		if(jsonObject.has("hsCode")){
+			this.hsCode = jsonObject.getString("hsCode");
+		}
+		if(jsonObject.has("unit")){
+			this.unit = jsonObject.getString("unit");
+		}
+		if(jsonObject.has("goodsBarCode")){
+			this.goodsBarCode = jsonObject.getString("goodsBarCode");
+		}
+		if(jsonObject.has("goodsDesc")){
+			this.goodsDesc = jsonObject.getString("goodsDesc");
+		}
+		if(jsonObject.has("gRemark")){
+			this.gRemark = jsonObject.getString("gRemark");
+		}
+		if(jsonObject.has("comName")){
+			this.comName = jsonObject.getString("comName");
+		}
+		if(jsonObject.has("manufactureAddr")){
+			this.manufactureAddr = jsonObject.getString("manufactureAddr");
+		}
+		if(jsonObject.has("brand")){
+			this.brand = jsonObject.getString("brand");
+		}
+		if(jsonObject.has("assemCountry")){
+			this.assemCountry = jsonObject.getString("assemCountry");
+		}
+		if(jsonObject.has("ingredient")){
+			this.ingredient = jsonObject.getString("ingredient");
+		}
+		if(jsonObject.has("additiveFlag")){
+			this.additiveFlag = jsonObject.getString("additiveFlag");
+		}
+		if(jsonObject.has("poisonFlag")){
+			this.poisonFlag = jsonObject.getString("poisonFlag");
+		}
+		if(jsonObject.has("num")){
+			this.num = (BigDecimal) jsonObject.get("num");
+		}
+		if(jsonObject.has("ciqGoodsNo")){
+			this.ciqGoodsNo = jsonObject.getString("ciqGoodsNo");
+		}
+		if(jsonObject.has("regStatus")){
+			this.regStatus = jsonObject.getString("regStatus");
+		}
+		if(jsonObject.has("regNotes")){
+			this.regNotes = jsonObject.getString("regNotes");
+		}
+		if(jsonObject.has("gmid")){
+			this.gmid = jsonObject.getInt("gmid");
+		}
+		
+	}
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -217,7 +290,7 @@ public class Good implements Serializable{
 	public void setPoisonFlag(String poisonFlag) {
 		this.poisonFlag = poisonFlag;
 	}
-	@Column
+	@Column(insertable = false)
 	public BigDecimal getNum() {
 		return num;
 	}

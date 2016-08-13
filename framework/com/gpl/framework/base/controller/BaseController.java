@@ -1,6 +1,7 @@
 package com.gpl.framework.base.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +47,11 @@ public class BaseController {
 	 */
 	@ModelAttribute
 	public void setRequestAndResponse(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		this.request = request;
 		this.response = response;
 		this.session = request.getSession();
