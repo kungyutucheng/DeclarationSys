@@ -1,5 +1,9 @@
 package com.gpl.module.good.controller;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.model.AjaxModel;
+import com.gpl.framework.util.Page;
 import com.gpl.module.good.biz.GoodBiz;
 import com.gpl.module.good.biz.GoodMainBiz;
 import com.gpl.module.good.dao.GoodDao;
@@ -44,7 +49,7 @@ public class GoodController extends BaseController{
 	
 	@RequestMapping(path = "/apply", method = RequestMethod.GET)
 	public ModelAndView apply(){
-		return new ModelAndView("good/apply2");
+		return new ModelAndView("good/apply");
 	}
 
 
@@ -61,13 +66,15 @@ public class GoodController extends BaseController{
 			goodMain.setCiqbCode(getString("ciqbCode"));
 			goodMain.setEditId(getInt("editId"));
 			goodMain.setRemark(getString("remark"));
-			goodMain.setStatus(1);
 			Integer id = goodMainBiz.save(goodMain);
 			
+			Date date = new Date();
 			JSONArray jsonArray = new JSONArray(getString("goods"));
 			for(int i = 0;i < jsonArray.length() ;i++){
 				Good good = new Good(jsonArray.getJSONObject(i));
 				good.setGmid(id);
+				good.setCreateTime(date);
+				good.setStatus(1);
 				goodBiz.save(good);
 			}
 		}catch(Exception e){
@@ -89,5 +96,18 @@ public class GoodController extends BaseController{
 	@ResponseBody
 	public String getAll(){
 		return renderJsonStr(goodBiz.getAll());
+	}
+	
+	@RequestMapping(path = "/searchgrid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String searchGrid(){
+		Page page = getPage();
+		page = goodBiz.queryPage(page);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("total", page.getTotal());
+		map.put("rows", page.getRows());
+		System.out.println("map:" + renderJsonStr(map));
+		System.out.println("page:" + renderJsonStr(page));
+		return renderJsonStr(page);
 	}
 }

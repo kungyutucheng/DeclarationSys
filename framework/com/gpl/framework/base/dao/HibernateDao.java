@@ -78,15 +78,15 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 					query.setProperties(values);
 				}
 				query.setMaxResults(page.getPageSize());
-				query.setFirstResult(page.getPageSize() * (page.getPageNo() - 1));
+				query.setFirstResult(page.getPageSize() * (page.getPage() - 1));
 				if(page.isAutoCount()){
 					long totalCount = countHqlResult(hql, values);
-					page.setTotalCount(totalCount);
+					page.setTotal(totalCount);
 				}
 				return query.list();
 			}
 		});
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -110,12 +110,12 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 						criteria.addOrder(Order.desc(order));
 					}
 				}
-				criteria.setMaxResults(page.getPageNo() * page.getPageSize());
-				criteria.setFirstResult((page.getPageNo() - 1) * page.getPageSize());
+				criteria.setMaxResults(page.getPage() * page.getPageSize());
+				criteria.setFirstResult((page.getPage() - 1) * page.getPageSize());
 				return criteria.list();
 			}
 		});
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -129,12 +129,12 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 			}
 		}
 		
-		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, (page.getPageNo() - 1) * page.getPageSize(), page.getPageNo() * page.getPageSize());
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, (page.getPage() - 1) * page.getPageSize(), page.getPage() * page.getPageSize());
 		if(page.isAutoCount()){
 			long totalCount = getCountByCriteria(detachedCriteria);
-			page.setTotalCount(totalCount);
+			page.setTotal(totalCount);
 		}
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -159,12 +159,12 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 			}
 		}
 		
-		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, (page.getPageNo() - 1) * page.getPageSize(), page.getPageNo() * page.getPageSize());
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria, (page.getPage() - 1) * page.getPageSize(), page.getPage() * page.getPageSize());
 		if(page.isAutoCount()){
 			long totalCount = getCountByCriteria(detachedCriteria);
-			page.setTotalCount(totalCount);
+			page.setTotal(totalCount);
 		}
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -190,17 +190,17 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 					throws HibernateException, SQLException {
 				String hql = "from " + clss.getName() + "where 1=1";
 				Query query = session.createQuery(hql);
-				query.setFirstResult((page.getPageNo() - 1) * page.getPageSize());
+				query.setFirstResult((page.getPage() - 1) * page.getPageSize());
 				query.setMaxResults(page.getPageSize());
 				List<T> list = query.list();
 				if(page.isAutoCount()){
 					long totalCount = countHqlResult(hql, page.getParams());
-					page.setTotalCount(totalCount);
+					page.setTotal(totalCount);
 				}
 				return list;
 			}
 		});
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -267,13 +267,13 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 				query.setMaxResults(page.getPageSize());
 				List<T> list = query.list();
 				if(page.isAutoCount()){
-					long totalCount = countHqlResult(hql, values);
-					page.setTotalCount(totalCount);
+					long totalCount = countHqlResult(hql);
+					page.setTotal(totalCount);
 				}
 				return list;
 			}
 		});
-		page.setResult(list);
+		page.setRows(list);
 		return page;
 	}
 	
@@ -291,6 +291,19 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 		}
 	}
 	
+	protected long countHqlResult(final String hql){
+		String countHql = prepareCountHql(hql);
+		try{
+			Long count = findUnique(countHql);
+			if(count == null){
+				return 0l;
+			}
+			return count;
+		}catch(Exception e){
+			throw new RuntimeException("hql can't be auto counted,hql is " + hql,e); 
+		}
+	}
+	
 	/**
 	 * select子句与order by子句会影响count查询,进行简单的排除
 	 * @param orgHql
@@ -298,7 +311,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	 */
 	private String prepareCountHql(String orgHql){
 		String fromHql = orgHql;
-		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
+		fromHql = StringUtils.substring(fromHql, StringUtils.lastIndexOf(fromHql, "from"));
 		fromHql = StringUtils.substringBefore(fromHql, "order by");
 		return "select count(*) " + fromHql;
 	}

@@ -222,6 +222,14 @@ public class SimpleHibernateDao<T,PK extends Serializable> extends HibernateDaoS
 		return null;
 	}
 	
+	public <X> X findUnique(final String hql){
+		List<X> list = (List<X>) this.getHibernateTemplate().find(hql);
+		if(list != null && list.size() > 0){
+			return list.get(0);
+		}
+		return null;
+	}
+	
 	public <X> X findUniqueByDetachedCriteria(DetachedCriteria detachedCriteria){
 		List<X> list = (List<X>) this.getHibernateTemplate().findByCriteria(detachedCriteria);
 		return (list != null && list.size() > 0) ? list.get(0) : null;

@@ -2,6 +2,7 @@ package com.gpl.module.good.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -94,11 +95,9 @@ public class Good implements Serializable{
 	 */
 	private String ciqGoodsNo;
 	/**
-	 * 商品审核状态：
-	 * 10：通过
-	 * 20：不通过
+	 * 当前状态，0-默认；1-待发送；2-待审核；3-接收失败；4-通过；5-不通过
 	 */
-	private String regStatus;
+	private Integer status;
 	/**
 	 * iciq回执信息
 	 */
@@ -107,6 +106,10 @@ public class Good implements Serializable{
 	 * 商品备案申请主表id
 	 */
 	private Integer gmid;
+	/**
+	 * 商品录入日期
+	 */
+	private Date createTime;
 	
 	public Good() {
 	}
@@ -166,8 +169,8 @@ public class Good implements Serializable{
 		if(jsonObject.has("ciqGoodsNo")){
 			this.ciqGoodsNo = jsonObject.getString("ciqGoodsNo");
 		}
-		if(jsonObject.has("regStatus")){
-			this.regStatus = jsonObject.getString("regStatus");
+		if(jsonObject.has("status")){
+			this.status = jsonObject.getInt("status");
 		}
 		if(jsonObject.has("regNotes")){
 			this.regNotes = jsonObject.getString("regNotes");
@@ -305,11 +308,11 @@ public class Good implements Serializable{
 		this.ciqGoodsNo = ciqGoodsNo;
 	}
 	@Column
-	public String getRegStatus() {
-		return regStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setRegStatus(String regStatus) {
-		this.regStatus = regStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	@Column
 	public String getRegNotes() {
@@ -325,15 +328,32 @@ public class Good implements Serializable{
 	public void setGmid(Integer gmid) {
 		this.gmid = gmid;
 	}
+
+	@Column(insertable = false,updatable = false)
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Good [id=" + id + ", gCode=" + gCode + ", gname=" + gname + ", spec=" + spec + ", hsCode=" + hsCode
-				+ ", unit=" + unit + ", goodsBarCode=" + goodsBarCode + ", goodsDesc=" + goodsDesc + ", gRemark="
-				+ gRemark + ", comName=" + comName + ", manufactureAddr=" + manufactureAddr + ", brand=" + brand
-				+ ", assemCountry=" + assemCountry + ", ingredient=" + ingredient + ", additiveFlag=" + additiveFlag
-				+ ", poisonFlag=" + poisonFlag + ", num=" + num + ", ciqGoodsNo=" + ciqGoodsNo + ", regStatus="
-				+ regStatus + ", regNotes=" + regNotes + ", gmid=" + gmid + "]";
+		return "Good [id=" + id + ", gCode=" + gCode + ", gname=" + gname
+				+ ", spec=" + spec + ", hsCode=" + hsCode + ", unit=" + unit
+				+ ", goodsBarCode=" + goodsBarCode + ", goodsDesc=" + goodsDesc
+				+ ", gRemark=" + gRemark + ", comName=" + comName
+				+ ", manufactureAddr=" + manufactureAddr + ", brand=" + brand
+				+ ", assemCountry=" + assemCountry + ", ingredient="
+				+ ingredient + ", additiveFlag=" + additiveFlag
+				+ ", poisonFlag=" + poisonFlag + ", num=" + num
+				+ ", ciqGoodsNo=" + ciqGoodsNo + ", status=" + status
+				+ ", regNotes=" + regNotes + ", gmid=" + gmid + ", createTime="
+				+ createTime + "]";
 	}
+	
+	
 	
 	
 

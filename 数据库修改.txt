@@ -1,0 +1,2 @@
+1、good表增加一下字段：
+createTime 创建时间

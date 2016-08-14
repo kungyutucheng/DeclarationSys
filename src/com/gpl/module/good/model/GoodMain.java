@@ -51,14 +51,6 @@ public class GoodMain implements Serializable{
 	 */
 	private String operType;
 	/**
-	 * 状态
-	 * 0-默认值
-	 * 1-请求发送
-	 * 2-审核中
-	 * 3-已收到审核回执
-	 */
-	private Integer status;
-	/**
 	 * 相对应的商品列表
 	 */
 	private List<Good> goodList;
@@ -67,8 +59,7 @@ public class GoodMain implements Serializable{
 		
 	}
 	
-	public GoodMain(Integer id, String cargobCode, String ciqbCode, Integer cbeComId, String remark, Integer editId,
-			Integer status) {
+	public GoodMain(Integer id, String cargobCode, String ciqbCode, Integer cbeComId, String remark, Integer editId) {
 		super();
 		this.id = id;
 		this.cargobCode = cargobCode;
@@ -76,7 +67,6 @@ public class GoodMain implements Serializable{
 		this.cbeComId = cbeComId;
 		this.remark = remark;
 		this.editId = editId;
-		this.status = status;
 	}
 	@Id
 	@GeneratedValue
@@ -134,13 +124,6 @@ public class GoodMain implements Serializable{
 	}
 	public void setGoodList(List<Good> goodList) {
 		this.goodList = goodList;
-	}
-	@Column
-	public Integer getStatus() {
-		return status;
-	}
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 	@Override
 	public String toString() {

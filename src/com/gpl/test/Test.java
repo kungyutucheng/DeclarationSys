@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gpl.authorization.controller.UserController;
 import com.gpl.module.base.controller.EnterpriseController;
 import com.gpl.module.base.controller.OrganizationController;
+import com.gpl.module.good.controller.GoodController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = "classpath:/spring/spring.xml")
@@ -23,8 +24,10 @@ public class Test {
 	@Autowired
 	private OrganizationController organizationController;
 
+	@Autowired
+	private GoodController goodController;
 	@org.junit.Test
 	public void test(){
-		System.out.println(enterpriseController.getAll());
+		System.out.println(goodController.searchGrid());
 	}
 }

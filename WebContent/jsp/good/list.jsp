@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  isELIgnored="false"%>
 <%@ include file="/common/taglibs.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,162 +50,88 @@
 			</div> 
 		</div>
 		<div data-options="region:'center',split:true" title="备案商品详细" style="height:auto;">
-			<div id="tb" style="height:auto">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="javascript:$('#tt').edatagrid('addRow')">Append</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="javascript:$('#tt').edatagrid('destroyRow')">Remove</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="javascript:$('#tt').edatagrid('saveRow')">Accept</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="javascript:$('#tt').edatagrid('cancelRow')">Reject</a>
-		    </div>
-			<table id="tt" style="width:600px;height:200px"
-					method='get',
-					singleSelect="true",
-					toolbar="tb">
-				<thead>
-					<tr>
-						<th field="id" width="100" editor="{type:'validatebox',options:{required:true}}">Item ID</th>
-						<th field="mname" width="100" editor="text">Product ID</th>
-						<th field="sort" width="100" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
-						<th field="pid" width="100" align="right" editor="numberbox">Unit Cost</th>
-						<th field="url" width="150" editor="text">Attribute</th>
-					</tr>
-				</thead>
-			</table>
+			<table id="goodDg"></table>
 		</div>
 	</div>
     <script type="text/javascript">
 		$(function(){
-			$('#tt').edatagrid({
+			$("#goodDg").datagrid({
+				url:"${basePath}/good/searchgrid",
+				method:"post",
+				pagination:true,
+				rownumbers:true,
+				loadMsg:"加载中，请稍后...",
+				ctrlSelect:true,
+				columns:[[
+				          {field:"ciqGoodsNo",title:"商品备案号",width:100},
+				          {field:"status",title:"审核状态",width:100,formatter:function(value,row,index){
+				        	  if(value == 0){
+				        		  return "<font color='pink'>新增</font>";
+				        	  }
+				          	  else if(value == 1){
+				        		  return "<font color='orange'>待发送</font>";
+				        	  }
+				        	  else if(value == 2){
+				        		  return "<font color='blue'>待审核</font>";
+				        	  }
+				        	  else if(value == 3){
+				        		  return "<font color='purple'>接收失败</font>";
+				        	  }
+				        	  else if(value == 4){
+				        		  return "<font color='green'>通过</font>";
+				        	  }
+				        	  else if(value == 5){
+				        		  return "<font color='red'>不通过</font>";
+				        	  }
+				          }},
+				          {field:"gCode",title:"商品货号",width:100},
+				          {field:"gname",title:"商品名称",width:300},
+				          {field:"spec",title:"规格描述",width:100},
+				          {field:"hsCode",title:"hs码",width:100},
+				          {field:"unit",title:"计量单位",width:100},
+				          {field:"goodsDesc",title:"商品描述",width:300},
+				          {field:"gRemark",title:"商品备注",width:100},
+				          {field:"comName",title:"生产厂家",width:300},
+				          {field:"manufactureAddr",title:"生产厂家地址",width:300},
+				          {field:"brand",title:"品牌",width:100},
+				          {field:"assemCountry",title:"原产国/地区",width:100},
+				          {field:"ingredient",title:"成分",width:200},
+				          {field:"addtiveFlag",title:"超范围使用添加剂",width:300},
+				          {field:"poisonFlag",title:"含有毒害物质",width:300},
+				          {field:"num",title:"库存",width:100,sortable:true},
+				          {field:"regNotes",title:"审核备注",width:100},
+				          {field:"cargobCode",title:"商品申请编码",width:100},
+				          {field:"ciqbName",title:"审核组织机构",width:100},
+				          {field:"cbeComName",title:"跨境电商企业",width:200},
+				          {field:"editName",title:"制单企业",width:200},
+				          {field:"remark",title:"申请备注",width:100},
+				          {field:"operType",title:"操作类型",width:40,styler:function(value,row,index){
+				        	  if(value == "A"){
+				        		  return "<font color='green'>新增</font>"
+				        	  }
+				        	  else if(value == "M"){
+				        		  return "<font color='green'>修改</font>"
+				        	  }
+				        	  else if(value == "I"){
+				        		  return "<font color='green'>自动引用</font>"
+				        	  }
+				          }},
+				          {field:"createTime",title:"申请时间",width:200,formatter:function(value,row,index){
+				        	  return (new Date(value)).format("yyyy-MM-dd hh:mm:ss");
+				          }},
+				          ]]
 			});
 			
-			$('#tt').edatagrid({
-				onSave:function(index,row){
-					console.log("index:" + index + ",row:" + row.id);
-				}
+			
+			var pager = $("#goodDg").datagrid("getPager");
+			pager.pagination({
+				loading:true,
+				displayMsg:"从第{from}条数据到第{to}条数据，共{total}条数据"
+				
 			});
 		});
 		
 		
-	</script>
-      <%-- <table id="dg" class="easyui-datagrid" title="Row Editing in DataGrid" style="width:700px;height:auto"
-            data-options="
-                iconCls: 'icon-edit',
-                singleSelect: true,
-                toolbar: '#tb',
-                url: '${basePath }/user/test',
-                method: 'get',
-                onClickCell: onClickCell,
-                onEndEdit: onEndEdit,
-                pagination:true,
-                onLoadSuccess:function(data){
-                	console.log(data)
-                }
-            ">
-        <thead>
-            <tr>
-                <th data-options="field:'id',width:80">Item ID</th>
-                <th data-options="field:'mname',width:100,editor:'textbox'">Product</th>
-                <th data-options="field:'url',width:80,align:'right',editor:'textbox'">List Price</th>
-                <th data-options="field:'pid',width:80,align:'right',editor:'textbox'">List Price</th>
-                <th data-options="field:'sort',width:80,align:'right',editor:'textbox'">List Price</th>
-            </tr>
-        </thead>
-    </table>
- 
-    <div id="tb" style="height:auto">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
-    </div>
-    
-    <script type="text/javascript">
-        var editIndex = undefined;
-        function endEditing(){
-        	console.log("endEditing");
-            if (editIndex == undefined){return true}
-            console.log("endEditing:if");
-            if ($('#dg').datagrid('validateRow', editIndex)){
-            	console.log("endEditing:" + editIndex);
-                $('#dg').datagrid('endEdit', editIndex);
-                console.log("endEditing:true");
-                editIndex = undefined;
-                return true;
-            } else {
-            	console.log("endEditing:false");
-                return false;
-            }
-        }
-        function onClickCell(index, field){
-        	console.log("onClickCell:"+index);
-            if (editIndex != index){
-            	console.log("onClickCell1:"+index);
-                if (endEditing()){
-                	try{
-                    $('#dg').datagrid('selectRow', index)
-                            .datagrid('beginEdit', index);
-                	}catch(e){
-                		console.log(e);
-                	}
-                	console.log("onClickCell22222:"+index);
-                    var ed = $('#dg').datagrid('getEditor', {index:index,field:field});
-                    if (ed){
-                    	console.log("onClickCell3:"+index);
-                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
-                    }
-                    editIndex = index;
-                } else {
-                	console.log("onClickCell4:"+index);
-                    setTimeout(function(){
-                        $('#dg').datagrid('selectRow', editIndex);
-                    },0);
-                }
-            }
-        }
-        function onEndEdit(index, row){
-        	console.log("onEndEdit:"+index);
-            var ed = $(this).datagrid('getEditor', {
-                index: index,
-                field: 'url'
-            });
-            row.productname = $(ed.target).combobox('getText');
-        }
-        function append(){
-        	console.log("append");
-            if (endEditing()){
-            	console.log("append1");
-                $('#dg').datagrid('appendRow');
-                console.log("append2");
-                editIndex = $('#dg').datagrid('getRows').length-1;
-                console.log("append3");
-                $('#dg').datagrid('selectRow', editIndex)
-                        .datagrid('beginEdit', editIndex);
-                console.log("append4");
-            }
-        }
-        function removeit(){
-        	console.log("remove");
-            if (editIndex == undefined){return}
-            $('#dg').datagrid('cancelEdit', editIndex)
-                    .datagrid('deleteRow', editIndex);
-            editIndex = undefined;
-        }
-        function accept(){
-        	console.log("accept");
-            if (endEditing()){
-                $('#dg').datagrid('acceptChanges');
-            }
-        }
-        function reject(){
-        	console.log("reject");
-            $('#dg').datagrid('rejectChanges');
-            editIndex = undefined;
-        }
-        function getChanges(){
-        	console.log("getChange");
-            var rows = $('#dg').datagrid('getChanges');
-            alert(rows.length+' rows are changed!');
-        }
-    </script> --%>
+	
 </body>
 </html>

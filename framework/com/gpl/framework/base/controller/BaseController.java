@@ -164,9 +164,11 @@ public class BaseController {
 	 * @return
 	 */
 	public Page getPage(){
+		System.out.println(request.getParameter("page") + "-----" + request.getParameter("rows"));
+		
 		Page page = new Page();
 		if(getInt(Page.PAGE_NO) != null){
-			page.setPageNo(getInt(Page.PAGE_NO).intValue());
+			page.setPage(getInt(Page.PAGE_NO).intValue());
 		}
 		if(getInt(Page.PAGE_SIZE) != null){
 			page.setPageSize(getInt(Page.PAGE_SIZE).intValue());

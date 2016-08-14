@@ -26,7 +26,7 @@ public class Page<T> implements Serializable {
 	/**
 	 * 页号
 	 */
-	private int pageNo = -1;
+	private int page = -1;
 	
 	
 	/**
@@ -37,12 +37,12 @@ public class Page<T> implements Serializable {
 	/**
 	 * 记录总数
 	 */
-	private long totalCount = -1;
+	private long total = -1;
 	
 	/**
 	 * 查询结果
 	 */
-	private List<T> result;
+	private List<T> rows;
 	
 	/**
 	 * 查询的排序字段（仅仅是字段），多个字段之间以“，”隔开
@@ -63,9 +63,9 @@ public class Page<T> implements Serializable {
 	/**
 	 * 字段常量，避免修改名字时引起的麻烦
 	 */
-	public static final String PAGE_NO = "pageNo";
-	public static final String PAGE_SIZE = "pageSize";
-	public static final String TOTAL_COUNT = "totalCount";
+	public static final String PAGE_NO = "page";
+	public static final String PAGE_SIZE = "rows";
+	public static final String TOTAL_COUNT = "total";
 	public static final String ORDER_BY = "orderBy";
 	public static final String ORDER = "order";
 	public static final String AUTO_COUNT = "autoCount";
@@ -82,19 +82,19 @@ public class Page<T> implements Serializable {
 	 * 获得当前的页号，序号从1开始，默认为1
 	 * @return
 	 */
-	public int getPageNo() {
-		return pageNo;
+	public int getPage() {
+		return page;
 	}
 
 	/**
 	 * 设置当前页的页号，序号从1开始，低于1时自动调整为1
 	 * @param pageNo
 	 */
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
+	public void setPage(int page) {
+		this.page = page;
 		
-		if(pageNo < 1){
-			this.pageNo = 1;
+		if(page < 1){
+			this.page = 1;
 		}
 	}
 	
@@ -103,8 +103,8 @@ public class Page<T> implements Serializable {
 	 * @param pageNo
 	 * @return
 	 */
-	public Page<T> pageNo(int pageNo) {
-		setPageNo(pageNo);
+	public Page<T> page(int page) {
+		setPage(page);
 		return this;
 	}
 
@@ -130,16 +130,16 @@ public class Page<T> implements Serializable {
 		return this;
 	}
 	
-	public long getTotalCount() {
-		return totalCount;
+	public long getTotal() {
+		return total;
 	}
 
 	/**
 	 * 设置数据总量，默认值为-1
 	 * @param totalCount
 	 */
-	public void setTotalCount(long totalCount) {
-		this.totalCount = totalCount;
+	public void setTotal(long total) {
+		this.total = total;
 	}
 	
 	/**
@@ -147,22 +147,22 @@ public class Page<T> implements Serializable {
 	 * @param totalCount
 	 * @return
 	 */
-	public Page<T> totalCount(long totalCount) {
-		setTotalCount(totalCount);
+	public Page<T> total(long total) {
+		setTotal(total);
 		return this;
 	}
 
 	
-	public List<T> getResult() {
-		return result;
+	public List<T> getRows() {
+		return rows;
 	}
 
 	/**
 	 * 返回查询结果集
 	 * @param result
 	 */
-	public void setResult(List<T> result) {
-		this.result = result;
+	public void setRows(List<T> rows) {
+		this.rows = rows;
 	}
 
 	public String getOrderBy() {
@@ -258,12 +258,12 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public long getPageCount(){
-		if(totalCount == 0)
+		if(total == 0)
 			return 0;
 		if(pageSize == 0)
 			return 0;
-		long pageCount = totalCount / pageSize;
-		if(totalCount % pageSize != 0){
+		long pageCount = total / pageSize;
+		if(total % pageSize != 0){
 			pageCount += 1;
 		}
 		return pageCount;
@@ -275,7 +275,7 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public int getFirstInPage(){
-		return (pageNo - 1) * pageSize + 1;
+		return (page - 1) * pageSize + 1;
 	}
 	
 	/**
@@ -283,7 +283,7 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public boolean hasNext(){
-		return pageNo + 1 <= getPageCount() ? true : false;
+		return page + 1 <= getPageCount() ? true : false;
 	}
 	
 	/**
@@ -291,7 +291,7 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public int getNextPage(){
-		return hasNext() ? pageNo + 1 : pageNo;
+		return hasNext() ? page + 1 : page;
 	}
 	
 	/**
@@ -299,7 +299,7 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public boolean hasPre(){
-		return pageNo - 1 >= 1 ? true : false;
+		return page - 1 >= 1 ? true : false;
 	}
 	
 	/**
@@ -307,6 +307,6 @@ public class Page<T> implements Serializable {
 	 * @return
 	 */
 	public int getPrePage(){
-		return hasPre() ? pageNo - 1 : pageNo;
+		return hasPre() ? page - 1 : page;
 	}
 }
