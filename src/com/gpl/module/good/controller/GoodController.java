@@ -22,6 +22,7 @@ import com.gpl.module.good.dao.GoodDao;
 import com.gpl.module.good.dao.GoodMainDao;
 import com.gpl.module.good.model.Good;
 import com.gpl.module.good.model.GoodMain;
+import com.gpl.module.util.Creator;
 
 import net.sf.json.JSONObject;
 
@@ -61,7 +62,7 @@ public class GoodController extends BaseController{
 		model.setMsg("Ìí¼Ó³É¹¦");
 		try{
 			GoodMain goodMain = new GoodMain();
-			goodMain.setCargobCode("123");
+			goodMain.setCargobCode(Creator.createCargobCode());
 			goodMain.setCbeComId(getInt("cbeComId"));
 			goodMain.setCiqbCode(getString("ciqbCode"));
 			goodMain.setEditId(getInt("editId"));
@@ -102,12 +103,9 @@ public class GoodController extends BaseController{
 	@ResponseBody
 	public String searchGrid(){
 		Page page = getPage();
+		System.out.println(getAllParams().toString());
+		page.setParams(getAllParams());
 		page = goodBiz.queryPage(page);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("total", page.getTotal());
-		map.put("rows", page.getRows());
-		System.out.println("map:" + renderJsonStr(map));
-		System.out.println("page:" + renderJsonStr(page));
 		return renderJsonStr(page);
 	}
 }

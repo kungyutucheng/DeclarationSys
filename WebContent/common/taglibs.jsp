@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/themes/color.css">
 <link rel="stylesheet" type="text/css" href="${basePath }/asserts/easyui/demo/demo.css">
 <script type="text/javascript" src="${basePath }/asserts/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${basePath }/asserts/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${basePath }/asserts/easyui/extend/jquery.edatagrid.js"></script> 	
 <script type="text/javascript" src="${basePath }/asserts/layer/layer.js"></script> 	
  	

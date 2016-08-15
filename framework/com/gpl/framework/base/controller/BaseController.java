@@ -164,7 +164,6 @@ public class BaseController {
 	 * @return
 	 */
 	public Page getPage(){
-		System.out.println(request.getParameter("page") + "-----" + request.getParameter("rows"));
 		
 		Page page = new Page();
 		if(getInt(Page.PAGE_NO) != null){

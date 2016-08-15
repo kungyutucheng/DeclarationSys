@@ -11,50 +11,128 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit:true">
-		<div data-options="region:'north',split:true" title="备案信息" style="height:200px;">
+		<div data-options="region:'north',split:true" title="查询条件" style="height:300px;">
 			<div style="text-align:center;">
-				<form id="ff" action="form1_proc.php" method="post" enctype="multipart/form-data">
+				<form id="searchForm" enctype="multipart/form-data">
 		            <table class="myTable">
 		                <tr>
+		                	<td>商品备案号</td>
+		                	<td><input name="ciqGoodsNo" class="easyui-textbox"></td>
+		                	<td>审核状态</td>
+		                    <td>
+		                    	<input name="status" class="easyui-combobox" data-options="
+		                    	valueField:'value',
+		                    	textField:'label',
+		                    	data:[{
+		                    		label:'待发送',
+		                    		value:1
+		                    	},{
+		                    		label:'待审核',
+		                    		value:2
+		                    	},{
+		                    		label:'接收失败',
+		                    		value:3
+		                    	},{
+		                    		label:'通过',
+		                    		value:4
+		                    	},{
+		                    		label:'不通过',
+		                    		value:5
+		                    	}],
+		                    	icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+							</td>
+		                    <td>商品货号</td>
+		                    <td><input name="gCode" class="easyui-textbox"></input></td>
+		               	</tr>
+		               	<tr>
+		                    <td>库存</td>
+		                    <td>
+		                    	<input name="startNum" class="easyui-textbox" style="width:80px;">&nbsp;-
+		                    	<input name="endNum" class="easyui-textbox" style="width:80px;">
+		                    </td>
+		                    <td>商品名称</td>
+		                    <td><input name="gname" class="easyui-textbox"></input></td>
+		                    <td>hs码</td>
+		                    <td><input name="hsCode" class="easyui-textbox"></input></td>
+		                </tr>
+		               	<tr>
+		                    <td>商品描述</td>
+		                    <td><input name="goodsDesc" class="easyui-textbox"></input></td>
+		                    <td>生产厂家</td>
+		                    <td><input name="comName" class="easyui-textbox"></input></td>
+		                    <td>品牌</td>
+		                    <td><input name="brand" class="easyui-textbox"></input></td>
+		                </tr>
+		               	<tr>
+		                    <td>原产国/地区</td>
+		                    <td><input name="assemCountry" class="easyui-textbox"></input></td>
 		                    <td>商品申请编号</td>
-		                    <td><input name="cargobCode" class="f1 easyui-textbox"></input></td>
-		                    <td>国检组织机构代码</td>
-		                    <td><input name="ciqbCode" class="f1 easyui-textbox"></input></td>
+		                    <td><input name="cargobCode" class="easyui-textbox"></input></td>
+		                    <td>国检组织机构</td>
+		                    <td>
+		                    	<input id="ciqbCode" name="ciqbCode" class="f1 easyui-combobox"
+		                    	data-options="valueField:'code',textField:'name',url:'${basePath }/org/getAll',
+		                    	icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+		                    </td>
 		                </tr>
 		                <tr>
 		                    <td>跨境电商企业</td>
 		                    <td>
-		                    	<select name="cbeComId" class="easyui-combobox">
-									<option value="1">企业1</option>
-									<option value="2">企业2</option>
-								</select>
+								<input id="cbeComId" class="easyui-combobox"
+								 name="cbeComId" data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll',
+								 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 							</td>
 		                    <td>制单企业</td>
 		                    <td>
-		                    	<select name="editId" class="easyui-combobox">
-									<option value="1">企业1</option>
-									<option value="2">企业2</option>
+		                    	<input id="editId" class="easyui-combobox"
+								 name="editId" data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll',
+								 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+		                    </td>
+		                    <td>操作类型</td>
+		                    <td>
+		                    	<select name="operType" class="easyui-combobox"
+		                    	 data-options="
+		                    	 valueField:'value',
+		                    	textField:'label',
+		                    	data:[{
+		                    		label:'新增',
+		                    		value:'A'
+		                    	},{
+		                    		label:'修改',
+		                    		value:'M'
+		                    	},{
+		                    		label:'自动引用',
+		                    		value:'I'
+		                    	}],
+		                    	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 								</select>
+							</td>
+		                </tr>
+		                <tr>
+		                    <td>申请时间</td>
+		                    <td  colspan="3">
+		                    	<input name="startTime" class="easyui-datetimebox" data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).datetimebox('clear');}}]">&nbsp;-
+		                    	<input name="endTime" class="easyui-datetimebox" data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).datetimebox('clear');}}]">
 		                    </td>
 		                </tr>
 		                <tr>
-		                    <td>备注</td>
-		                    <td  colspan="3"><input name="remark"class="f1 easyui-textbox" style="width:100%;"></input></td>
-		                </tr>
-		                <tr>
 		                    <td></td>
-		                    <td><input type="submit" value="Submit"></input></td>
+		                    <td>
+		                    	<input type="button" class="btn btn-primary myBtn" value="查询" onclick="searchgrid();" style="display:inline-block;width:auto;">
+		                    	<input type="button" class="btn btn-primary myBtn" value="重置" onclick="resetForm();" style="display:inline-block;width:auto;">
+		                    </td>
 		                </tr>
 		            </table>
 		        </form>
 			</div> 
 		</div>
-		<div data-options="region:'center',split:true" title="备案商品详细" style="height:auto;">
+		<div data-options="region:'center',split:true" title="查询结果" style="height:auto;">
 			<table id="goodDg"></table>
 		</div>
 	</div>
     <script type="text/javascript">
 		$(function(){
+			var queryParams = $("#searchForm").serializeObject();
 			$("#goodDg").datagrid({
 				url:"${basePath}/good/searchgrid",
 				method:"post",
@@ -62,6 +140,7 @@
 				rownumbers:true,
 				loadMsg:"加载中，请稍后...",
 				ctrlSelect:true,
+				queryParams:queryParams,
 				columns:[[
 				          {field:"ciqGoodsNo",title:"商品备案号",width:100},
 				          {field:"status",title:"审核状态",width:100,formatter:function(value,row,index){
@@ -84,6 +163,7 @@
 				        		  return "<font color='red'>不通过</font>";
 				        	  }
 				          }},
+				          {field:"num",title:"库存",width:100,sortable:true},
 				          {field:"gCode",title:"商品货号",width:100},
 				          {field:"gname",title:"商品名称",width:300},
 				          {field:"spec",title:"规格描述",width:100},
@@ -98,14 +178,13 @@
 				          {field:"ingredient",title:"成分",width:200},
 				          {field:"addtiveFlag",title:"超范围使用添加剂",width:300},
 				          {field:"poisonFlag",title:"含有毒害物质",width:300},
-				          {field:"num",title:"库存",width:100,sortable:true},
 				          {field:"regNotes",title:"审核备注",width:100},
 				          {field:"cargobCode",title:"商品申请编码",width:100},
 				          {field:"ciqbName",title:"审核组织机构",width:100},
 				          {field:"cbeComName",title:"跨境电商企业",width:200},
 				          {field:"editName",title:"制单企业",width:200},
 				          {field:"remark",title:"申请备注",width:100},
-				          {field:"operType",title:"操作类型",width:40,styler:function(value,row,index){
+				          {field:"operType",title:"操作类型",width:60,formatter:function(value,row,index){
 				        	  if(value == "A"){
 				        		  return "<font color='green'>新增</font>"
 				        	  }
@@ -129,9 +208,19 @@
 				displayMsg:"从第{from}条数据到第{to}条数据，共{total}条数据"
 				
 			});
+			
 		});
 		
 		
+		function searchgrid(){
+			$("#goodDg").datagrid("reload",$("#searchForm").serializeObject());
+		}
+		
+		function resetForm(){
+			$("#searchForm").form("reset");
+		}
+		
+		</script>
 	
 </body>
 </html>
