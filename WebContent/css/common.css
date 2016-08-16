@@ -16,12 +16,14 @@
 }
 
 .subTitle{
+	margin-top:10px;
 	font-size:14px;
 	padding-left:20px;
 	font-weight:bold;
+	color:#0081C2;
 }
 hr{
-	margin:0 auto;
+	margin:10px;
 }
 
 .myBtn{

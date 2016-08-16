@@ -10,6 +10,7 @@ import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.model.AjaxModel;
 import com.gpl.framework.util.Page;
 import com.gpl.module.base.biz.EnterpriseBiz;
+import com.gpl.module.base.model.Enterprise;
 
 @Controller
 @RequestMapping(path = "ent")
@@ -29,6 +30,6 @@ public class EnterpriseController extends BaseController{
 	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getAll(){
-		return renderJsonStr(enterpriseBiz.getAll());
+		return renderJsonStr(enterpriseBiz.getAll(Enterprise.class.getName()));
 	}
 }

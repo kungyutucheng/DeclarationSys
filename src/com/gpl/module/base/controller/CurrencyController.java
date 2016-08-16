@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpl.framework.base.controller.BaseController;
-import com.gpl.module.base.biz.OrganizationBiz;
-import com.gpl.module.base.model.Organization;
+import com.gpl.module.base.biz.CurrencyBiz;
+import com.gpl.module.base.model.Currency;
 
 @Controller
-@RequestMapping(path = "/org")
-public class OrganizationController extends BaseController{
+@RequestMapping(path = "/currency")
+public class CurrencyController extends BaseController{
 
 	@Autowired
-	private OrganizationBiz organizationBiz;
+	private CurrencyBiz currencyBiz;
 	
 	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getAll(){
-		return renderJsonStr(organizationBiz.getAll(Organization.class.getName()));
+		return renderJsonStr(currencyBiz.getAll(Currency.class.getName()));
 	}
 }

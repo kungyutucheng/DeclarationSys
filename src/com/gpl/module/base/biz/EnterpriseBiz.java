@@ -57,8 +57,5 @@ public class EnterpriseBiz extends BaseBiz<Enterprise, Integer>{
 		return enterpriseDao.findPage(page, hql);
 	}
 	
-	public List<Enterprise> getAll(){
-		String hql = "from Enterprise";
-		return enterpriseDao.find(hql);
-	}
+
 }

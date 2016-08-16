@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpl.framework.base.controller.BaseController;
-import com.gpl.module.base.biz.OrganizationBiz;
-import com.gpl.module.base.model.Organization;
+import com.gpl.module.base.biz.RegionBiz;
+import com.gpl.module.base.model.Region;
 
 @Controller
-@RequestMapping(path = "/org")
-public class OrganizationController extends BaseController{
+@RequestMapping(path = "/region")
+public class RegionController extends BaseController{
 
 	@Autowired
-	private OrganizationBiz organizationBiz;
+	private RegionBiz regionBiz;
 	
 	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getAll(){
-		return renderJsonStr(organizationBiz.getAll(Organization.class.getName()));
+		return renderJsonStr(regionBiz.getAll(Region.class.getName()));
 	}
 }

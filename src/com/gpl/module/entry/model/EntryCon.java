@@ -1,6 +1,7 @@
 package com.gpl.module.entry.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class EntryCon implements Serializable{
 	/**
 	 * 箱号
 	 */
-	private String contNo;
+	private String conNo;
 	/**
 	 * 尺寸
 	 */
@@ -40,6 +41,10 @@ public class EntryCon implements Serializable{
 	 * 封条号码
 	 */
 	private String sealNo;
+	/**
+	 * 创建时间
+	 */
+	private Date createTime;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -56,11 +61,11 @@ public class EntryCon implements Serializable{
 		this.eid = eid;
 	}
 	@Column
-	public String getContNo() {
-		return contNo;
+	public String getConNo() {
+		return conNo;
 	}
-	public void setContNo(String contNo) {
-		this.contNo = contNo;
+	public void setConNo(String conNo) {
+		this.conNo = conNo;
 	}
 	@Column
 	public String getConSize() {
@@ -83,11 +88,19 @@ public class EntryCon implements Serializable{
 	public void setSealNo(String sealNo) {
 		this.sealNo = sealNo;
 	}
+	@Column(insertable = false,updatable = false)
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	@Override
 	public String toString() {
-		return "EntryCon [id=" + id + ", eid=" + eid + ", contNo=" + contNo + ", conSize=" + conSize + ", conType="
-				+ conType + ", sealNo=" + sealNo + "]";
+		return "EntryCon [id=" + id + ", eid=" + eid + ", conNo=" + conNo + ", conSize=" + conSize + ", conType="
+				+ conType + ", sealNo=" + sealNo + ", createTime=" + createTime + "]";
 	}
+	
 	
 	
 }

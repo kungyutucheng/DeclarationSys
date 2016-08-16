@@ -70,7 +70,7 @@
 		                    <td><input name="cargobCode" class="easyui-textbox"></input></td>
 		                    <td>国检组织机构</td>
 		                    <td>
-		                    	<input id="ciqbCode" name="ciqbCode" class="f1 easyui-combobox"
+		                    	<input id="ciqbCode" name="ciqbCode" class="easyui-combobox"
 		                    	data-options="valueField:'code',textField:'name',url:'${basePath }/org/getAll',
 		                    	icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 		                    </td>

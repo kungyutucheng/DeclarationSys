@@ -60,8 +60,8 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 
 	//  --  ·ÖÒ³²éÑ¯º¯Êý -- //
 	
-	public List<T> getAll(){
-		String hql = " from " + entityClass.getName();
+	public List<T> getAll(String className){
+		String hql = " from " + className;
 		return this.find(hql);
 	}
 	

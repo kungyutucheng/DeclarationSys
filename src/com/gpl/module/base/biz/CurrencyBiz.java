@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gpl.framework.base.biz.BaseBiz;
-import com.gpl.module.base.dao.OrganizationDao;
-import com.gpl.module.base.model.Organization;
+import com.gpl.module.base.dao.CurrencyDao;
+import com.gpl.module.base.model.Currency;
 
 @Service
-public class OrganizationBiz extends BaseBiz<Organization, Integer>{
+public class CurrencyBiz extends BaseBiz<Currency, Integer>{
 
 	@Autowired
-	private OrganizationDao organizationDao;
-
+	private CurrencyDao currencyDao;
+	
 }

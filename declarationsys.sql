@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-08-15 17:31:45
+Date: 2016-08-16 17:32:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,7 +108,6 @@ INSERT INTO `base_currency_info` VALUES ('3', 'EUR', '欧元', null);
 INSERT INTO `base_currency_info` VALUES ('4', 'HKD', '港币', null);
 INSERT INTO `base_currency_info` VALUES ('5', 'JPY', '日本元', null);
 INSERT INTO `base_currency_info` VALUES ('6', 'USD', '美元', null);
-INSERT INTO `base_currency_info` VALUES ('7', '', '', null);
 
 -- ----------------------------
 -- Table structure for base_package_info
@@ -8529,7 +8528,7 @@ CREATE TABLE `entry` (
   `portLoad` varchar(255) NOT NULL COMMENT '起运港',
   `portDis` varchar(255) NOT NULL COMMENT '目的港',
   `fCode` varchar(255) NOT NULL COMMENT '币种',
-  `tool` tinyint(4) DEFAULT '0' COMMENT '运输工具',
+  `tool` tinyint(4) DEFAULT NULL COMMENT '运输工具',
   `toolName` varchar(256) DEFAULT NULL COMMENT '运输工具名称',
   `toolNo` varchar(256) DEFAULT NULL COMMENT '运输工具号',
   `blNo` varchar(256) NOT NULL COMMENT '提单号',
@@ -8569,10 +8568,11 @@ DROP TABLE IF EXISTS `entry_con`;
 CREATE TABLE `entry_con` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `eid` int(11) NOT NULL COMMENT '入境表id',
-  `contNo` varchar(128) NOT NULL COMMENT '箱号',
+  `conNo` varchar(128) NOT NULL COMMENT '箱号',
   `conSize` varchar(20) NOT NULL COMMENT '尺寸',
   `conType` varchar(20) NOT NULL COMMENT '柜型',
   `sealNo` varchar(128) DEFAULT NULL COMMENT '封条号码',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -8608,6 +8608,7 @@ CREATE TABLE `entry_good` (
   `packNum` decimal(10,0) DEFAULT NULL COMMENT '包装数量',
   `goodsBatchNo` varchar(30) NOT NULL COMMENT '商品批次号',
   `packPieceNum` int(11) DEFAULT NULL COMMENT '包装件数',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -8723,7 +8724,7 @@ CREATE TABLE `module` (
   `sort` int(11) DEFAULT NULL COMMENT '排序字段',
   `url` varchar(255) CHARACTER SET latin1 NOT NULL COMMENT '模块对应的url',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of module
@@ -8732,7 +8733,8 @@ INSERT INTO `module` VALUES ('1', '商品备案', null, '4', '');
 INSERT INTO `module` VALUES ('2', '入境进区', null, '3', '');
 INSERT INTO `module` VALUES ('3', '商品备案申请', '1', '4', 'good/apply');
 INSERT INTO `module` VALUES ('4', '商品备案查询', '1', '3', 'good/list');
-INSERT INTO `module` VALUES ('5', '入境进区申请', '2', '4', 'import/list');
+INSERT INTO `module` VALUES ('5', '入境进区申请', '2', '4', 'entry/apply');
+INSERT INTO `module` VALUES ('6', '入境进区查询', '2', '3', 'entry/list');
 
 -- ----------------------------
 -- Table structure for role_module

@@ -30,8 +30,8 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 		return baseDao.load(id);
 	}
 	
-	public List<T> getAll(){
-		return baseDao.getAll();
+	public List<T> getAll(String className){
+		return baseDao.getAll(className);
 	}
 	
 	public void deleteIds(String ids){

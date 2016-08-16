@@ -2,6 +2,7 @@ package com.gpl.module.entry.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -109,6 +110,10 @@ public class EntryGood implements Serializable{
 	 * 包装件数
 	 */
 	private int packPieceNum;
+	/**
+	 * 创建时间
+	 */
+	private Date createTime;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -271,6 +276,13 @@ public class EntryGood implements Serializable{
 	public void setPackPieceNum(int packPieceNum) {
 		this.packPieceNum = packPieceNum;
 	}
+	@Column(insertable = false,updatable = false)
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	@Override
 	public String toString() {
 		return "EntryGood [id=" + id + ", eid=" + eid + ", contId=" + contId + ", cbeComId=" + cbeComId + ", hsCode="
@@ -278,9 +290,7 @@ public class EntryGood implements Serializable{
 				+ ", packType=" + packType + ", fCode=" + fCode + ", uPric=" + uPric + ", buyFromCity=" + buyFromCity
 				+ ", qtp=" + qtp + ", qtpUnit=" + qtpUnit + ", qty=" + qty + ", qtyDesc=" + qtyDesc + ", kgs=" + kgs
 				+ ", net=" + net + ", fcy=" + fcy + ", kgsUnit=" + kgsUnit + ", packNum=" + packNum + ", goodsBatchNo="
-				+ goodsBatchNo + ", packPieceNum=" + packPieceNum + "]";
+				+ goodsBatchNo + ", packPieceNum=" + packPieceNum + ", createTime=" + createTime + "]";
 	}
-	
-	
 	
 }

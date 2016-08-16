@@ -17,7 +17,7 @@
 		            <table class="myTable">
 		                <tr>
 		                    <td>国检组织机构</td>
-		                    <td><input id="ciqbCode" name="ciqbCode" class="f1 easyui-combobox"
+		                    <td><input id="ciqbCode" name="ciqbCode" class="easyui-combobox"
 		                    	style="width:100%;" data-options="valueField:'code',textField:'name',url:'${basePath }/org/getAll',required:true,missingMessage:'请选择组织机构'">
 		                    </td>
 		                    <td>跨境电商企业</td>
@@ -35,7 +35,7 @@
 		                </tr>
 		                <tr>
 		                    <td>备注</td>
-		                    <td colspan="3"><input id="remark" name="remark"class="f1 easyui-textbox" style="width:100%;"></input></td>
+		                    <td colspan="3"><input id="remark" name="remark"class="easyui-textbox" style="width:100%;"></input></td>
 		                </tr>
 		                <tr>
 		                    <td></td>
