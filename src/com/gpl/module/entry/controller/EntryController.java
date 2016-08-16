@@ -30,11 +30,10 @@ public class EntryController extends BaseController{
 		return new ModelAndView("entry/apply");
 	}
 	
-	@RequestMapping(path = "/searchgrid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/getCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String searchGrid(){
 		Page page = getPage();
-		System.out.println(getAllParams().toString());
 		page.setParams(getAllParams());
 		page = entryConBiz.queryPage(page);
 		return renderJsonStr(page);
@@ -71,9 +70,10 @@ public class EntryController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@RequestMapping(path = "/deleteCon",method = RequestMethod.GET,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/deleteCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String deleteCon(Integer id){
+		System.out.println(id);
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("É¾³ý³É¹¦");
 		try{

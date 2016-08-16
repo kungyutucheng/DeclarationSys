@@ -10,7 +10,7 @@
 <body>
 	<div class="easyui-layout" style="height:1400px;">
 		<div data-options="region:'north',split:true" title="入境进区申报单" style="height:660px;">
-			<form method="post" id="addForm">
+			<form method="post" id="addForm" style="margin:0 auto;">
 				<div class="subTitle">基础信息</div>
 				<hr/>
 				<table class="myTable">
@@ -27,7 +27,7 @@
 						</td>
 						<td>运输工具</td>
 						<td>
-							<select name="tblType" class="easyui-combobox"
+							<input name="tblType" class="easyui-combobox"
 				                    	 data-options="
 				                    	 valueField:'value',
 				                    	textField:'label',
@@ -54,7 +54,6 @@
 				                    		value:'7'
 				                    	}],
 				                    	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
-							</select>
 						</td>
 					</tr>
 					<tr>
@@ -89,7 +88,7 @@
 					<tr>
 						<td>报检类别</td>
 						<td>
-							<select name="tblType" class="easyui-combobox"
+							<input name="tblType" class="easyui-combobox"
 				                    	 data-options="
 				                    	 valueField:'value',
 				                    	textField:'label',
@@ -104,11 +103,10 @@
 				                    		value:'15'
 				                    	}],
 				                    	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
-							</select>
 						</td>
 						<td>报检申报类别</td>
 						<td>
-							<select name="tblReportType" class="easyui-combobox"
+							<input name="tblReportType" class="easyui-combobox"
 				                    	 data-options="
 				                    	 valueField:'value',
 				                    	textField:'label',
@@ -130,7 +128,6 @@
 				                    		value:'09'
 				                    	}],
 				                    	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
-							</select>
 						</td>
 						<td>索赔期（天）</td>
 						<td>
@@ -153,19 +150,15 @@
 				<table class="myTable">
 					<tr>
 						<td>外贸综合服务企业</td>
-						<td>
+						<td colspan="3">
 							<input class="easyui-combobox"
+								style="width:100%;"
 								 name="editId"
 								 data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll',required:true">
 						</td>
 						<td>合同号</td>
 						<td>
 							<input name="bargainNo" class="easyui-textbox"
-							data-options="required:true">
-						</td>
-						<td>提单号</td>
-						<td>
-							<input name="blNo" class="easyui-textbox"
 							data-options="required:true">
 						</td>
 					</tr>
@@ -202,6 +195,11 @@
 						</td>
 					</tr>
 					<tr>
+						<td>提单号</td>
+						<td>
+							<input name="blNo" class="easyui-textbox"
+							data-options="required:true">
+						</td>
 						<td>贸易方式</td>
 						<td>
 							<input name="tradeType" class="easyui-combobox"
@@ -214,13 +212,13 @@
 							data-options="valueField:'code',textField:'name',url:'${basePath }/chargeType/getAll',
 							icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 						</td>
+					</tr>
+					<tr>
 						<td>贸易国别</td>
 						<td>
 							<input name="tradeCode" class="easyui-combobox"
 							data-options="valueField:'code',textField:'name',url:'${basePath }/region/getAll',required:true">
 						</td>
-					</tr>
-					<tr>
 						<td>起运港</td>
 						<td>
 							<input name="portLoad" class="easyui-combobox"
@@ -231,14 +229,14 @@
 						<td>
 							<input name="countryLoad" class="easyui-textbox" disabled>
 						</td>
+					</tr>
+					<tr>
 						<td>经停港</td>
 						<td>
 							<input name="portStop" class="easyui-combobox"
 							data-options="valueField:'code',textField:'name',url:'${basePath }/port/getAll',
 							icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 						</td>
-					</tr>
-					<tr>
 						<td>目的港</td>
 						<td>
 							<input name="portDis" class="easyui-combobox"
@@ -249,14 +247,14 @@
 						<td>
 							<input name="markNo" class="easyui-textbox">
 						</td>
+					</tr>
+					<tr>
 						<td>币种</td>
 						<td>
 							<input name="fCode" class="easyui-combobox"
 							data-options="valueField:'code',textField:'name',url:'${basePath }/currency/getAll',
 							required:true">
 						</td>
-					</tr>
-					<tr>
 						<td>申报类型</td>
 						<td>
 							<input name="reportType" class="easyui-combobox"
@@ -290,11 +288,11 @@
             rownumbers="true">
 		        <thead>
 		            <tr>
-		            	<th field="id" width="50" hidden="true">id</th>
-		                <th field="conNo" width="50">箱号</th>
-		                <th field="conSize" width="50">尺寸</th>
-		                <th field="conType" width="50">柜型</th>
-		                <th field="sealNo" width="50">封条号码</th>
+		            	<th field="id" width="150" hidden="true">id</th>
+		                <th field="conNo" width="150">箱号</th>
+		                <th field="conSize" width="150">尺寸</th>
+		                <th field="conType" width="150">柜型</th>
+		                <th field="sealNo" width="150">封条号码</th>
 		            </tr>
 		        </thead>
 		    </table>
@@ -352,7 +350,7 @@
 		            <div style="margin-bottom:10px">
 		                <input name="sealNo" class="easyui-textbox" label="封条号码:" style="width:100%">
 		            </div>
-		            <input type="text" name="eid" id="eid">
+		            <input type="number" name="eid" id="eid" value="1">
 		        </form>
 		    </div>
 		    <div id="dlg-buttons">
@@ -365,7 +363,7 @@
 	</div>
 	<script>
 	$(function(){
-		$("#eid").val("2");
+		
 	})
 	function resetForm(){
 		$("#addForm").form("reset");
@@ -400,8 +398,9 @@
             }
         });
     }
-    function destroyUser(){
+    function destroyCon(){
         var row = $('#conDg').datagrid('getSelected');
+        console.log(row.id);
         if (row){
             $.messager.confirm('删除','确认删除?',function(r){
                 if (r){

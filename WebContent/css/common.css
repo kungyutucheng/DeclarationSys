@@ -1,19 +1,14 @@
 .myTable{
 	height:auto;
 	font-size:12px;
+	margin:0 auto;
 }
 .myTable tr td:nth-child(odd){
 	text-align:right;
 	padding:10px 10px;
 }
 
-.myTable tr td{
-	width:200px;
-}
-.myTable tr td input,
-.myTable tr td select{
-	width:190px;
-}
+
 
 .subTitle{
 	margin-top:10px;

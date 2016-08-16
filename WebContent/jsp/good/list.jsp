@@ -90,7 +90,7 @@
 		                    </td>
 		                    <td>操作类型</td>
 		                    <td>
-		                    	<select name="operType" class="easyui-combobox"
+		                    	<input name="operType" class="easyui-combobox"
 		                    	 data-options="
 		                    	 valueField:'value',
 		                    	textField:'label',
@@ -105,7 +105,6 @@
 		                    		value:'I'
 		                    	}],
 		                    	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
-								</select>
 							</td>
 		                </tr>
 		                <tr>
