@@ -355,18 +355,128 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyGood()">删除</a>
 		    </div>
 		    
-		    <div id="goodDlg" class="easyui-dialog" style="width:400px"
+		    <div id="goodDlg" class="easyui-dialog" style="width:700px"
 		            closed="true" buttons="#goodDlg-buttons">
 		        <form id="goodForm" method="post" style="margin:0;padding:20px 50px">
 		            <div style="margin-bottom:10px">
-		            	<input name="cbeComId" label="跨境电商企业id" style="width:50%">
-		            	<input name="cbeComId" label="跨境电商企业id" style="width:50%">
+		            	<table class="myTable">
+		            		<tr>
+		            			<td>跨境电商企业</td>
+		            			<td>
+		            				<input class="easyui-combobox" name="cbeComId"  
+		            				data-options="required:true,url:'${basePath }/ent/getAll',valueField:'id',textField:'ename'">
+		            			</td>
+		            			<td>hs码</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="hsCode"
+		            				data-options="required:true">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>商品备案号</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="ciqGoodsCode"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>商品货号</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="gCode"
+		            				data-options="required:true">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>包装方式</td>
+		            			<td>
+		            				<input class="easyui-combobox" name="packType"
+		            				data-options="required:true,url:'${basePath }/package/getAll',valueField:'code;,textField:'name'">
+		            			</td>
+		            			<td>币种</td>
+		            			<td>
+		            				<input class="easyui-combobox" name="fCode"
+		            				data-options="required:true,url:'${basePath }/currency/getAll',valueField:'code',textField:'name'">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>单价</td>
+		            			<td>
+		            				<input class="easyui-numberbox" name="uPric"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>采购城市</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="buyFromCity"
+		            				data-options="required:true">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>数量</td>
+		            			<td>
+		            				<input class="easyui-numberbox" name="qty"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>总价</td>
+		            			<td>
+		            				<input class="easyui-numberbox" name="fcy"
+		            				data-options="required:true,readonly:true">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>第二数量</td>
+		            			<td>
+		            				<input class="easyui-numberbox" name="qtp"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>第二数量单位</td>
+		            			<td>
+		            				<input class="easyui-combobox" name="qtpUnit"
+		            				data-options="required:true,url:'${basePath }/unit/getAll',valueField:'code',textField:'name'">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>毛重</td>
+		            			<td>
+		            				<input class="easyui-numberbox" name="kgs"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>净重</td>
+		            			<td>
+		            				<input class="easyui-numeberbox" name="net"
+		            				data-options="required:true">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>商品批次号</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="goodsBatchNo"
+		            				data-options="required:true">
+		            			</td>
+		            			<td>箱号</td>
+		            			<td>
+		            				<input name="contId" id="contId">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>商品材质</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="goodsMaterial">
+		            			</td>
+		            			<td>单位描述</td>
+		            			<td>
+		            				<input class="easyui-textbox" name="qtyDesc">
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>重量单位</td>
+		            			<td>
+		            			</td>
+		            		</tr>
+		            	</table>
 		            </div>
 		        </form>
 		    </div>
 		    <div id="goodDlg-buttons">
 		        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveGood()" style="width:90px">保存</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#goodDlg').dialog('close')" style="width:90px">取消</a>
 		    </div>
 		</div>
 	</div>

@@ -65,6 +65,27 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 		return this.find(hql);
 	}
 	
+	public Page<T> findPage(final Page<T> page,final String hql){
+		@SuppressWarnings({ "unchecked" })
+		List<T> list = (List<T>) getHibernateTemplate().executeFind(new HibernateCallback() {
+
+			@Override
+			public Object doInHibernate(Session session) 
+					throws HibernateException, SQLException {
+				Query query = session.createQuery(hql);
+				query.setMaxResults(page.getPageSize());
+				query.setFirstResult(page.getPageSize() * (page.getPage() - 1));
+				if(page.isAutoCount()){
+					long totalCount = countHqlResult(hql);
+					page.setTotal(totalCount);
+				}
+				return query.list();
+			}
+		});
+		page.setRows(list);
+		return page;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public Page<T> findPage(final Page<T> page,final String hql,final Object... values){
 		@SuppressWarnings({ "unchecked" })

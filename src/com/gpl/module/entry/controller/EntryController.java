@@ -68,10 +68,6 @@ public class EntryController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@InitBinder(value = {"declarationDate","arrivalDate","uploadDate"})
-	public void initDate(WebDataBinder binder){
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
 	
 	@RequestMapping(path = "/getCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
@@ -143,13 +139,13 @@ public class EntryController extends BaseController{
 		return renderJsonStr(page);
 	}
 	
-	@RequestMapping(path = "/saveCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/saveGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
-	public String saveCon(EntryCon con){
+	public String saveGood(EntryGood entryGood){
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("添加成功");
 		try{
-			entryConBiz.save(con);
+			entryGoodBiz.save(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setMsg("系统出错，添加失败");
@@ -158,13 +154,13 @@ public class EntryController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@RequestMapping(path = "/updateCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/updateGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
-	public String updateCon(EntryCon con){
+	public String updateGood(EntryGood entryGood){
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("修改成功");
 		try{
-			entryConBiz.saveOrUpdate(con);
+			entryGoodBiz.saveOrUpdate(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setMsg("系统出错，修改失败");
@@ -173,18 +169,18 @@ public class EntryController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@RequestMapping(path = "/deleteCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/deleteGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
-	public String deleteCon(String ids){
+	public String deleteGood(String ids){
 		System.out.println(ids.toString());
 		String [] idArray = ids.split(",");
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("删除成功");
 		try{
 			for(String id : idArray){
-				EntryCon con = new EntryCon();
-				con.setId(Integer.valueOf(id));
-				entryConBiz.delete(con);
+				EntryGood entryGood = new EntryGood();
+				entryGood.setId(Integer.valueOf(id));
+				entryGoodBiz.delete(entryGood);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

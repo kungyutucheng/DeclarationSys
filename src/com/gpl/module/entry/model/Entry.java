@@ -109,6 +109,8 @@ public class Entry implements Serializable{
 	private String blNo;
 	/**
 	 * 到货日期
+	 * DateTimeFormat注解用于解决前端传值给后台实体类由于类型不符（前端传过来的实际是string，无法赋值给
+	 * date类型的字段）而引起的400错误
 	 */
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;

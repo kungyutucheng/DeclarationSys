@@ -1,5 +1,6 @@
 package com.gpl.module.entry.biz;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,20 +42,72 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 			hql += " and fCode='" + page.getParams().get("fCode") + "'";
 		}
 		if(page.getParams().get("startUPric") != null){
-			hql += " and uPric>" + page.getParams().get("startUPric");
+			hql += " and uPric>=" + page.getParams().get("startUPric");
 		}
 		if(page.getParams().get("endUPric") != null){
-			hql += " and UPric<" + page.getParams().get("endUPric");
+			hql += " and UPric<=" + page.getParams().get("endUPric");
 		}
 		if(page.getParams().get("buyFromCity") != null){
 			hql += " and buyFromCity like '%" + page.getParams().get("buyFromCity") + "%'";
 		}
 		if(page.getParams().get("startQtp") != null){
-			hql += " and qtp>" + page.getParams().get("startQtp");
+			hql += " and qtp>=" + page.getParams().get("startQtp");
 		}
 		if(page.getParams().get("endQtp") != null){
-			hql += " and qtp<" + page.getParams().get("endQtp");
+			hql += " and qtp<=" + page.getParams().get("endQtp");
 		}
-		return null;
+		if(page.getParams().get("qtpUnit") != null){
+			hql += " and qtpUnit='" + page.getParams().get("qtpUnit") +"'";
+		}
+		if(page.getParams().get("startQty") != null){
+			hql += " and qty>=" + page.getParams().get("startQty");
+		}
+		if(page.getParams().get("endQty") != null){
+			hql += " and qty<=" + page.getParams().get("endQty");
+		}
+		if(page.getParams().get("startKgs") != null){
+			hql += " and kgs>=" + page.getParams().get("kgs");
+		}
+		if(page.getParams().get("endKgs") != null){
+			hql += " and kgs<=" + page.getParams().get("endKgs");
+		}
+		if(page.getParams().get("startNet") != null){
+			hql += " and net>=" + page.getParams().get("startNet");
+		}
+		if(page.getParams().get("endNet") != null){
+			hql += " and net<=" + page.getParams().get("endNet");
+		}
+		if(page.getParams().get("startFcy") != null){
+			hql += " and fcy>=" + page.getParams().get("startFcy");
+		}
+		if(page.getParams().get("endFcy") != null){
+			hql += " and fcy<=" + page.getParams().get("endFcy");
+		}
+		if(page.getParams().get("kgsUnit") != null){
+			hql += " and kgsUnit='" + page.getParams().get("kgsUnit") + "'";
+		}
+		if(page.getParams().get("startPackNum") != null){
+			hql += " and packNum>=" + page.getParams().get("startPackNum");
+		}
+		if(page.getParams().get("endPackNum") != null){
+			hql += " and packNum<=" + page.getParams().get("endPackNum");
+		}
+		if(page.getParams().get("goodsBatchNo") != null){
+			hql += " and goodsBatchNo like '%" + page.getParams().get("goodsBatchNo") + "%'";
+		}
+		if(page.getParams().get("startPackPieceNum") != null){
+			hql += " and packPieceNum>=" + page.getParams().get("startPackPieceNum");
+		}
+		if(page.getParams().get("endPackPieceNum") != null){
+			hql += " and packPieceNum<=" + page.getParams().get("endPackPieceNum");
+		}
+		if(page.getParams().get("startTime") != null){
+			hql += " and createTime >='" + page.getParams().get("startTime") + "'";
+		}
+		if(page.getParams().get("endTime") != null){
+			hql += " and createTime <='" + page.getParams().get("endTime") + "'";
+		}
+		hql += " order by createTime desc";
+		return entryGoodDao.findPage(page, hql);
 	}
 }
