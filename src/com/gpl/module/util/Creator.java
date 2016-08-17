@@ -44,7 +44,19 @@ public class Creator {
 		return messageType + DateFormatUtil.yyyyMMddHHmmssFormat(new Date()) + getRandomNo();
 	}
 	
+	/**
+	 * 生成商品申请编号
+	 * @return
+	 */
 	public static synchronized String createCargobCode(){
+		return DateFormatUtil.yyyyMMddHHmmssFormat(new Date()) + getRandomNo();
+	}
+	
+	/**
+	 * 生成企业内部自编号
+	 * @return
+	 */
+	public static synchronized String createEntInboundNo(){
 		return DateFormatUtil.yyyyMMddHHmmssFormat(new Date()) + getRandomNo();
 	}
 	

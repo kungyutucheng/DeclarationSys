@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "entry")
 public class Entry implements Serializable{
@@ -34,6 +36,7 @@ public class Entry implements Serializable{
 	/**
 	 * 申报日期
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date declarationDate;
 	/**
 	 * 申报机构
@@ -107,10 +110,12 @@ public class Entry implements Serializable{
 	/**
 	 * 到货日期
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;
 	/**
 	 * 卸毕日期
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date uploadDate;
 	/**
 	 * 目的地
@@ -179,7 +184,7 @@ public class Entry implements Serializable{
 	/**
 	 * ICIP平台唯一标识符
 	 */
-	private Integer eportInoundNo;
+	private Integer eportInboundNo;
 	/**
 	 * 状态
 	 */
@@ -453,11 +458,11 @@ public class Entry implements Serializable{
 		this.editId = editId;
 	}
 	@Column
-	public Integer getEportInoundNo() {
-		return eportInoundNo;
+	public Integer getEportInboundNo() {
+		return eportInboundNo;
 	}
-	public void setEportInoundNo(Integer eportInoundNo) {
-		this.eportInoundNo = eportInoundNo;
+	public void setEportInboundNo(Integer eportInboundNo) {
+		this.eportInboundNo = eportInboundNo;
 	}
 	@Column
 	public Integer getStatus() {
@@ -494,7 +499,7 @@ public class Entry implements Serializable{
 				+ ", tradeType=" + tradeType + ", chargeType=" + chargeType + ", tblType=" + tblType
 				+ ", tblReportType=" + tblReportType + ", markNo=" + markNo + ", claimDays=" + claimDays
 				+ ", specRequire=" + specRequire + ", customDeclareNo=" + customDeclareNo + ", reportType=" + reportType
-				+ ", declCode=" + declCode + ", editId=" + editId + ", eportInoundNo=" + eportInoundNo + ", status="
+				+ ", declCode=" + declCode + ", editId=" + editId + ", eportInboundNo=" + eportInboundNo + ", status="
 				+ status + ", regStatusDesc=" + regStatusDesc + ", createTime=" + createTime + "]";
 	}
 	

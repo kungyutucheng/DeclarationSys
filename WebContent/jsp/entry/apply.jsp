@@ -10,7 +10,7 @@
 <body>
 	<div class="easyui-layout" style="height:1400px;">
 		<div data-options="region:'north',split:true" title="入境进区申报单" style="height:660px;">
-			<form method="post" id="addForm" style="margin:0 auto;">
+			<form method="post" id="entryForm" style="margin:0 auto;">
 				<div class="subTitle">基础信息</div>
 				<hr/>
 				<table class="myTable">
@@ -27,7 +27,7 @@
 						</td>
 						<td>运输工具</td>
 						<td>
-							<input name="tblType" class="easyui-combobox"
+							<input name="tool" class="easyui-combobox"
 				                    	 data-options="
 				                    	 valueField:'value',
 				                    	textField:'label',
@@ -227,7 +227,7 @@
 						</td>
 						<td>起运国/地区</td>
 						<td>
-							<input name="countryLoad" class="easyui-textbox" disabled>
+							<input name="countryLoad" class="easyui-textbox" value="中国" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -275,28 +275,15 @@
 					</tr>
 				</table>
 				<div style="width:100%;text-align:center;margin-top:20px;">
-					<button type="button" onclick="submitForm();" class="btn btn-primary myBtn">提交</button>
+					<button type="button" onclick="saveEntry();" class="btn btn-primary myBtn">提交</button>
 					<button type="button" onclick="resetForm();" class="btn btn-primary myBtn">重置</button>
 				</div>
 			</form>
 		</div>
 		<div data-options="region:'center',split:true" title="货柜信息" style="height:200px;">
-			<table id="conDg" class="easyui-datagrid"
-            url="${basePath }/entry/getCon"
-            toolbar="#toolbar" pagination="true"
-            idField="id"
-            rownumbers="true">
-		        <thead>
-		            <tr>
-		            	<th field="id" width="150" hidden="true">id</th>
-		                <th field="conNo" width="150">箱号</th>
-		                <th field="conSize" width="150">尺寸</th>
-		                <th field="conType" width="150">柜型</th>
-		                <th field="sealNo" width="150">封条号码</th>
-		            </tr>
-		        </thead>
+			<table id="conDg">
 		    </table>
-		    <div id="toolbar">
+		    <div id="conToolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newCon()">添加</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCon()">修改</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyCon()">删除</a>
@@ -306,10 +293,11 @@
 		            closed="true" buttons="#dlg-buttons">
 		        <form id="conForm" method="post" style="margin:0;padding:20px 50px">
 		            <div style="margin-bottom:10px">
-		                <input name="conNo" class="easyui-textbox" required="true" label="箱号:" style="width:100%">
+		                <input name="conNo" class="easyui-textbox" required="true" label="箱号:" style="width:100%"
+		                validType="match[/^[a-zA-Z]{3}[Uu][0-9]{7}$/,'请输入11位字符，且前三位为字母，第四位为U，后七位为数字']">
 		            </div>
 		            <div style="margin-bottom:10px">
-		                <input name="conSize" class="easyui-combobox" required="true" label="尺寸:" style="width:100%"
+		                <input name="conSize" class="easyui-combobox" required="true" label="尺寸" style="width:100%"
 		                data-options="valueField:'value',textField:'label',
 							data:[{
 								label:'10:10',
@@ -330,7 +318,7 @@
 							]">
 		            </div>
 		            <div style="margin-bottom:10px">
-		                <input name="conType" class="easyui-combobox" required="true" label="柜型:" style="width:100%"
+		                <input name="conType" class="easyui-combobox" required="true" label="柜型" style="width:100%"
 		                data-options="valueField:'value',textField:'label',
 							data:[{
 								label:'普通箱',
@@ -348,7 +336,7 @@
 							]">
 		            </div>
 		            <div style="margin-bottom:10px">
-		                <input name="sealNo" class="easyui-textbox" label="封条号码:" style="width:100%">
+		                <input name="sealNo" class="easyui-textbox" label="封条号码" style="width:100%">
 		            </div>
 		            <input type="number" name="eid" id="eid" value="1">
 		        </form>
@@ -359,17 +347,107 @@
 		    </div>
 		</div>
 		<div data-options="region:'south',split:true" title="货物清单" style="height:200px;">
+			<table id="goodDg">
+		    </table>
+		    <div id="goodToolbar">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newGood()">添加</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editGood()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyGood()">删除</a>
+		    </div>
+		    
+		    <div id="goodDlg" class="easyui-dialog" style="width:400px"
+		            closed="true" buttons="#goodDlg-buttons">
+		        <form id="goodForm" method="post" style="margin:0;padding:20px 50px">
+		            <div style="margin-bottom:10px">
+		            	<input name="cbeComId" label="跨境电商企业id" style="width:50%">
+		            	<input name="cbeComId" label="跨境电商企业id" style="width:50%">
+		            </div>
+		        </form>
+		    </div>
+		    <div id="goodDlg-buttons">
+		        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveGood()" style="width:90px">保存</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+		    </div>
 		</div>
 	</div>
 	<script>
 	$(function(){
+		$("#conDg").datagrid({
+			url:"${basePath }/entry/getCon",
+	        toolbar:"#conToolbar", 
+	        pagination:true,
+	        idField:"id",
+	        rownumbers:true,
+	        selectOnCheck:$(this).is(":checked"),
+	        checkOnSelect:$(this).is(":checked"),
+	        columns:[[
+	                  {field:"ck",checkbox:true},
+	                  {field:"id",hidden:true,title:"id"},
+	                  {field:"conNo",title:"箱号",width:150},
+	                  {field:"conSize",title:"尺寸",width:150},
+	                  {field:"conType",title:"柜型",width:150,formatter:function conTypeFormatter(value,row,index){
+	              		if(value == "A"){
+	            			return "<font color='blue'>普通箱</font>";
+	            		}
+	            		else if(value == "B"){
+	            			return "<font color='pink'>超高柜</font>";
+	            		}
+	            		else if(value == "C"){
+	            			return "<font color='green'>冷藏</font>";
+	            		}
+	            		else if(value == "D"){
+	            			return "<font color='red'>罐式</font>";
+	            		}
+	            	}},
+	                  {field:"sealNo",title:"封条号码",width:200}
+	                  ]],
+	        
+		});
 		
+		$("#goodDg").datagrid({
+			url:"${basePath }/entry/getGood",
+	        toolbar:"#goodToolbar", 
+	        pagination:true,
+	        idField:"id",
+	        rownumbers:true,
+	        selectOnCheck:$(this).is(":checked"),
+	        checkOnSelect:$(this).is(":checked"),
+	        columns:[[
+	                  {field:"ck",checkbox:true},
+	                  {field:"id",hidden:true,title:"id"},
+	                  {field:"cbeComId",title:"跨境电商企业",width:150},
+	                  {field:"hsCode",title:"hs码",width:150},
+	                  ]],
+	        
+		});
 	})
 	function resetForm(){
-		$("#addForm").form("reset");
+		$("#entryForm").form("reset");
 	}
+	function saveEntry(){
+		console.log($("#entryForm").serializeObject());
+		$("#entryForm").form("submit",{
+			url:"${basePath}/entry/saveEntry",
+			onSubmit:function(){
+				return $(this).form("validate");
+			},
+			success:function(result){
+				console.log(result);
+				var result = eval('('+result+')');
+                layer.msg(result.msg);
+                if (result.success){
+                	$("#eid").val(Number(result.data));
+                }
+			}
+		});
+	}
+	
 	var url;
     function newCon(){
+    	if($("#eid").val() == 0){
+    		layer.msg("请先提交入境进区申报单");
+    		return;
+    	}
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','新增');
         $('#conForm').form('clear');
         url = '${basePath}/entry/saveCon';
@@ -378,7 +456,7 @@
         var row = $('#conDg').datagrid('getSelected');
         if (row){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','修改');
-            $('#fm').form('load',row);
+            $('#conForm').form('load',row);
             url = '${basePath}/entry/updateCon?id='+row.id;
         }
     }
@@ -399,18 +477,78 @@
         });
     }
     function destroyCon(){
-        var row = $('#conDg').datagrid('getSelected');
-        console.log(row.id);
-        if (row){
+        var rows = $('#conDg').datagrid('getChecked');
+        if (rows){
+        	var ids = "";
+        	for(var i = 0 ;i < rows.length;i++){
+        		ids += rows[i].id + ",";
+        	}
+        	ids = ids.substr(0,ids.length-1);
+        	console.log(ids);
             $.messager.confirm('删除','确认删除?',function(r){
                 if (r){
-                    $.post('${basePath}/entry/deleteCon',{id:row.id},function(result){
-                    	var result = eval('('+result+')');
+                    $.post('${basePath}/entry/deleteCon',{ids:ids},function(result){
+                    	console.log(result);
+                    	var result = $.parseJSON(result);
                     	layer.msg(result.msg);
                         if (result.success){
                             $('#conDg').datagrid('reload');    
                         }
-                    },'json');
+                    });
+                }
+            });
+        }
+    }
+    function newGood(){
+    	if($("#eid").val() == 0){
+    		layer.msg("请先提交入境进区申报单");
+    		return;
+    	}
+        $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','新增');
+        $('#goodForm').form('clear');
+        url = '${basePath}/entry/saveGood';
+    }
+    function editGood(){
+        var row = $('#goodDg').datagrid('getSelected');
+        if (row){
+            $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','修改');
+            $('#goodForm').form('load',row);
+            url = '${basePath}/entry/updateGood?id='+row.id;
+        }
+    }
+    function saveGood(){
+        $('#goodForm').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                layer.msg(result.msg);
+                if (result.success){
+                    $('#goodDlg').dialog('close');       
+                    $('#goodDg').datagrid('reload');    
+                }
+            }
+        });
+    }
+    function destroyCon(){
+        var rows = $('#goodDg').datagrid('getChecked');
+        if (rows){
+        	var ids = "";
+        	for(var i = 0 ;i < rows.length;i++){
+        		ids += rows[i].id + ",";
+        	}
+        	ids = ids.substr(0,ids.length-1);
+            $.messager.confirm('删除','确认删除?',function(r){
+                if (r){
+                    $.post('${basePath}/entry/deleteGood',{ids:ids},function(result){
+                    	var result = $.parseJSON(result);
+                    	layer.msg(result.msg);
+                        if (result.success){
+                            $('#goodDg').datagrid('reload');    
+                        }
+                    });
                 }
             });
         }

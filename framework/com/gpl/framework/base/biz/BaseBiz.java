@@ -45,6 +45,10 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 		baseDao.delete(id);
 	}
 	
+	public void delete(T object){
+		baseDao.delete(object);
+	}
+	
 	public void saveOrUpdate(T object){
 		baseDao.saveOrUpdate(object);
 	}

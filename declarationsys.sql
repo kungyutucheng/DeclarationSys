@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-08-16 17:32:45
+Date: 2016-08-17 17:36:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -97,7 +97,7 @@ CREATE TABLE `base_currency_info` (
   `name` varchar(255) DEFAULT NULL COMMENT '货币',
   `note` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of base_currency_info
@@ -8555,11 +8555,12 @@ CREATE TABLE `entry` (
   `regStatusDesc` varchar(256) DEFAULT NULL COMMENT '审核备注',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entry
 -- ----------------------------
+INSERT INTO `entry` VALUES ('1', '20160817155641001', 'A', '2016-08-17 00:00:00', '000064', '23423', '??', '', '', '??', '', '', '11010101', '11010301', 'CNY', null, '', '', '343', '2016-08-18 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '2', null, '1', null, '2016-08-17 15:56:41');
 
 -- ----------------------------
 -- Table structure for entry_con
@@ -8574,11 +8575,12 @@ CREATE TABLE `entry_con` (
   `sealNo` varchar(128) DEFAULT NULL COMMENT '封条号码',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entry_con
 -- ----------------------------
+INSERT INTO `entry_con` VALUES ('8', '1', 'fdsu4545454', '40:40', 'B', '32', '2016-08-17 16:43:54');
 
 -- ----------------------------
 -- Table structure for entry_good

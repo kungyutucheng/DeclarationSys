@@ -1,3 +1,14 @@
+$(function(){
+		$.extend($.fn.validatebox.defaults.rules, {
+		    match: {
+		        validator: function(value,param){
+		            return param[0].test(value);
+		        },
+		        message: '{1}'
+		    }
+		});
+	})
+
 Date.prototype.format = function(format) {  
     /* 
      * 使用例子:format="yyyy-MM-dd hh:mm:ss"; 
