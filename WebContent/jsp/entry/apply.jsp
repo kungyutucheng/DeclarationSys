@@ -352,8 +352,8 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newGood()">添加</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editGood()">修改</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyGood()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="showGoods()">选择备案商品</a>
 		    </div>
-		    
 		    <div id="goodDlg" class="easyui-dialog" style="width:700px"
 		            closed="true" buttons="#goodDlg-buttons">
 		        <form id="goodForm" method="post" style="margin:0;padding:20px 50px">
@@ -483,6 +483,28 @@
 		    <div id="goodDlg-buttons">
 		        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveGood()" style="width:90px">保存</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#goodDlg').dialog('close')" style="width:90px">取消</a>
+		    </div>
+		    <div id="addGoodDlg" class="easyui-dialog" style="width:700px"
+		            closed="true" buttons="#addGoodDlg-buttons">
+		            <div style="margin-bottom:10px;">
+		            	<form method="post" id="searchGoodForm">
+		            		<div>
+		            			<input class="easyui-textbox" name="ciqGoodsNo" label="商品备案号" style="display:inline-block;">
+		            			<input class="easyui-textbox" name="gCode" label="商品货号" style="display:inline-block;">
+		            			<input class="easyui-textbox" name="gname" label="商品名称" style="display:inline-block;">
+		            		</div>
+		            		<div>
+		            			<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="loadGoodData()" style="width:90px">查询</a>
+		        				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="resetGoodForm()" style="width:90px">重置</a>
+		            		</div>
+		            	</form>
+		            	<table id="addGoodDg">
+		            	</table>
+		            </div>
+		    </div>
+		    <div id="addGoodDlg-buttons">
+		        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="addGood()" style="width:90px">添加</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#addGoodDlg').dialog('close')" style="width:90px">取消</a>
 		    </div>
 		</div>
 	<script>
@@ -718,6 +740,19 @@
     		valueField:"id",
     		textField:"conNo"
     	});
+    }
+    
+    function showGoods(){
+    	$('#addGoodDlg').dialog('open').dialog('center').dialog('setTitle','选择备案商品');
+    	$('#goodForm').form('clear');
+    	$("addGoodDg").datagrid({
+    		url:"${basePath}/good/searchgrid",
+    		queryParams:$("#searchGoodForm").serializeObject(),
+    		rownumbers:true,
+    		columns:[[
+    			{field:"ciqGoodsNo",width:100}
+    		]]
+    	})
     }
 	</script>
 </body>
