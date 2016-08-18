@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.module.base.biz.PackageBiz;
+import com.gpl.module.base.model.Package;
 
 @Controller
 @RequestMapping(path = "/package")

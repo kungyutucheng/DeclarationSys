@@ -78,6 +78,13 @@ public class EntryController extends BaseController{
 		return renderJsonStr(page);
 	}
 	
+	@RequestMapping(path = "/getConByEid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String getConByEid(){
+		String hql = "from EntryCon where eid=" + getString("eid");
+		return renderJsonStr(entryConBiz.find(hql, null));
+	}
+	
 	@RequestMapping(path = "/saveCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String saveCon(EntryCon con){
@@ -145,6 +152,7 @@ public class EntryController extends BaseController{
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("添加成功");
 		try{
+			entryGood.setFcy(entryGood.getQty().multiply(entryGood.getuPric()));
 			entryGoodBiz.save(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -160,6 +168,7 @@ public class EntryController extends BaseController{
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("修改成功");
 		try{
+			entryGood.setFcy(entryGood.getQty().multiply(entryGood.getuPric()));
 			entryGoodBiz.saveOrUpdate(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();

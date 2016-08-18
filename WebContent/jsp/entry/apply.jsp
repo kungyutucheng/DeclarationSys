@@ -7,9 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>入境进区申请</title>
 </head>
-<body>
-	<div class="easyui-layout" style="height:1400px;">
-		<div data-options="region:'north',split:true" title="入境进区申报单" style="height:660px;">
+<body class="easyui-layout">
+		<div data-options="region:'north',split:true" title="入境进区申报单" style="height:32%;">
 			<form method="post" id="entryForm" style="margin:0 auto;">
 				<div class="subTitle">基础信息</div>
 				<hr/>
@@ -280,7 +279,7 @@
 				</div>
 			</form>
 		</div>
-		<div data-options="region:'center',split:true" title="货柜信息" style="height:200px;">
+		<div data-options="region:'center',split:true" title="货柜信息" style="height:32%;">
 			<table id="conDg">
 		    </table>
 		    <div id="conToolbar">
@@ -338,7 +337,7 @@
 		            <div style="margin-bottom:10px">
 		                <input name="sealNo" class="easyui-textbox" label="封条号码" style="width:100%">
 		            </div>
-		            <input type="number" name="eid" id="eid" value="1">
+		            <input type="number" name="eid" id="eid1" value="0">
 		        </form>
 		    </div>
 		    <div id="dlg-buttons">
@@ -346,8 +345,8 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 		    </div>
 		</div>
-		<div data-options="region:'south',split:true" title="货物清单" style="height:200px;">
-			<table id="goodDg">
+		<div data-options="region:'south',split:true" title="货物清单" style="height:32%;">
+			<table id="entryGoodDg">
 		    </table>
 		    <div id="goodToolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newGood()">添加</a>
@@ -388,7 +387,7 @@
 		            			<td>包装方式</td>
 		            			<td>
 		            				<input class="easyui-combobox" name="packType"
-		            				data-options="required:true,url:'${basePath }/package/getAll',valueField:'code;,textField:'name'">
+		            				data-options="required:true,url:'${basePath }/package/getAll',valueField:'code',textField:'name'">
 		            			</td>
 		            			<td>币种</td>
 		            			<td>
@@ -414,10 +413,10 @@
 		            				<input class="easyui-numberbox" name="qty"
 		            				data-options="required:true">
 		            			</td>
-		            			<td>总价</td>
+		            			<td>商品批次号</td>
 		            			<td>
-		            				<input class="easyui-numberbox" name="fcy"
-		            				data-options="required:true,readonly:true">
+		            				<input class="easyui-textbox" name="goodsBatchNo"
+		            				data-options="required:true">
 		            			</td>
 		            		</tr>
 		            		<tr>
@@ -440,15 +439,14 @@
 		            			</td>
 		            			<td>净重</td>
 		            			<td>
-		            				<input class="easyui-numeberbox" name="net"
+		            				<input class="easyui-numberbox" name="net"
 		            				data-options="required:true">
 		            			</td>
 		            		</tr>
 		            		<tr>
-		            			<td>商品批次号</td>
+		            			<td>包装件数</td>
 		            			<td>
-		            				<input class="easyui-textbox" name="goodsBatchNo"
-		            				data-options="required:true">
+		            				<input class="easyui-textbox" name="packPieceNum"> 
 		            			</td>
 		            			<td>箱号</td>
 		            			<td>
@@ -468,7 +466,15 @@
 		            		<tr>
 		            			<td>重量单位</td>
 		            			<td>
+		            				<input class="easyui-textbox" name="kgsUnit">
 		            			</td>
+		            			<td>包装数量</td>
+								<td>
+									<input class="easyui-numberbox" name="packNum">
+								</td>		            			
+		            		</tr>
+		            		<tr>
+		            			<td><input type="number" name="eid" id="eid2" value="0"></td>
 		            		</tr>
 		            	</table>
 		            </div>
@@ -479,17 +485,17 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#goodDlg').dialog('close')" style="width:90px">取消</a>
 		    </div>
 		</div>
-	</div>
 	<script>
 	$(function(){
 		$("#conDg").datagrid({
 			url:"${basePath }/entry/getCon",
+			queryParams:{
+				eid:$("#eid1").val()
+			},
 	        toolbar:"#conToolbar", 
 	        pagination:true,
 	        idField:"id",
 	        rownumbers:true,
-	        selectOnCheck:$(this).is(":checked"),
-	        checkOnSelect:$(this).is(":checked"),
 	        columns:[[
 	                  {field:"ck",checkbox:true},
 	                  {field:"id",hidden:true,title:"id"},
@@ -514,19 +520,41 @@
 	        
 		});
 		
-		$("#goodDg").datagrid({
+		$("#entryGoodDg").datagrid({
 			url:"${basePath }/entry/getGood",
+			queryParams:{
+				eid:$("#eid2").val()
+			},
 	        toolbar:"#goodToolbar", 
 	        pagination:true,
 	        idField:"id",
 	        rownumbers:true,
-	        selectOnCheck:$(this).is(":checked"),
-	        checkOnSelect:$(this).is(":checked"),
 	        columns:[[
 	                  {field:"ck",checkbox:true},
 	                  {field:"id",hidden:true,title:"id"},
-	                  {field:"cbeComId",title:"跨境电商企业",width:150},
-	                  {field:"hsCode",title:"hs码",width:150},
+	                  {field:"cbeComName",title:"跨境电商企业",width:300},
+	                  {field:"hsCode",title:"hs码",width:80},
+	                  {field:"ciqGoodsCode",title:"商品备案号",width:100},
+	                  {field:"gCode",title:"商品货号",width:100},
+	                  {field:"goodsMaterial",title:"商品材质",width:200},
+	                  {field:"packTypeName",title:"包装类型",width:200},
+	                  {field:"fName",title:"货币",width:100},
+	                  {field:"uPric",title:"单价",width:100},
+	                  {field:"buyFromCity",title:"采购城市",width:100},
+	                  {field:"qty",title:"数量",width:100},
+	                  {field:"qtyDesc",title:"单位描述",width:100},
+	                  {field:"qtp",title:"第二数量",width:100},
+	                  {field:"qtpUnitName",title:"第二数量单位",width:100},
+	                  {field:"kgs",title:"毛重",width:100},
+	                  {field:"fcy",title:"净重",width:100},
+	                  {field:"conNo",title:"箱号",width:100},
+	                  {field:"kgsUnit",title:"重量单位",width:100},
+	                  {field:"packNum",title:"包装数量",width:100},
+	                  {field:"goodsBatchNo",title:"商品批次号",width:100},
+	                  {field:"packPieceNum",title:"包装件数",width:100},
+	                  {field:"createTime",title:"创建时间",width:200,formatter:function(value,row,index){
+	                	  return (new Date(value)).format("yyyy-MM-dd hh:mm:ss");
+	                  }},
 	                  ]],
 	        
 		});
@@ -535,18 +563,17 @@
 		$("#entryForm").form("reset");
 	}
 	function saveEntry(){
-		console.log($("#entryForm").serializeObject());
 		$("#entryForm").form("submit",{
 			url:"${basePath}/entry/saveEntry",
 			onSubmit:function(){
 				return $(this).form("validate");
 			},
 			success:function(result){
-				console.log(result);
 				var result = eval('('+result+')');
                 layer.msg(result.msg);
                 if (result.success){
-                	$("#eid").val(Number(result.data));
+                	$("#eid1").val(Number(result.data));
+                	$("#eid2").val(Number(result.data));
                 }
 			}
 		});
@@ -554,7 +581,7 @@
 	
 	var url;
     function newCon(){
-    	if($("#eid").val() == 0){
+    	if($("#eid1").val() == 0){
     		layer.msg("请先提交入境进区申报单");
     		return;
     	}
@@ -581,28 +608,35 @@
                 layer.msg(result.msg);
                 if (result.success){
                     $('#dlg').dialog('close');       
-                    $('#conDg').datagrid('reload');    
+                    $('#conDg').datagrid('reload',{
+        				eid:$("#eid1").val()
+        			});  
                 }
             }
         });
     }
     function destroyCon(){
         var rows = $('#conDg').datagrid('getChecked');
+        if(rows.length == 0){
+        	layer.msg("请先选择一条数据");
+        	return;
+        }
         if (rows){
         	var ids = "";
         	for(var i = 0 ;i < rows.length;i++){
         		ids += rows[i].id + ",";
         	}
         	ids = ids.substr(0,ids.length-1);
-        	console.log(ids);
             $.messager.confirm('删除','确认删除?',function(r){
                 if (r){
                     $.post('${basePath}/entry/deleteCon',{ids:ids},function(result){
-                    	console.log(result);
                     	var result = $.parseJSON(result);
                     	layer.msg(result.msg);
                         if (result.success){
-                            $('#conDg').datagrid('reload');    
+                            $('#conDg').datagrid('reload',{
+                				eid:$("#eid1").val()
+                			});    
+                            $("#conDg").datagrid("uncheckAll");
                         }
                     });
                 }
@@ -610,20 +644,22 @@
         }
     }
     function newGood(){
-    	if($("#eid").val() == 0){
+    	if($("#eid2").val() == 0){
     		layer.msg("请先提交入境进区申报单");
     		return;
     	}
         $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','新增');
         $('#goodForm').form('clear');
         url = '${basePath}/entry/saveGood';
+        loadCon();
     }
     function editGood(){
-        var row = $('#goodDg').datagrid('getSelected');
+        var row = $('#entryGoodDg').datagrid('getSelected');
         if (row){
             $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','修改');
             $('#goodForm').form('load',row);
             url = '${basePath}/entry/updateGood?id='+row.id;
+            loadCon();
         }
     }
     function saveGood(){
@@ -637,13 +673,19 @@
                 layer.msg(result.msg);
                 if (result.success){
                     $('#goodDlg').dialog('close');       
-                    $('#goodDg').datagrid('reload');    
+                    $('#entryGoodDg').datagrid('reload',{
+        				eid:$("#eid2").val()
+        			});    
                 }
             }
         });
     }
-    function destroyCon(){
-        var rows = $('#goodDg').datagrid('getChecked');
+    function destroyGood(){
+        var rows = $('#entryGoodDg').datagrid('getSelections');
+        if(rows.length == 0){
+        	layer.msg("请先选择一条数据");
+        	return;
+        }
         if (rows){
         	var ids = "";
         	for(var i = 0 ;i < rows.length;i++){
@@ -656,12 +698,26 @@
                     	var result = $.parseJSON(result);
                     	layer.msg(result.msg);
                         if (result.success){
-                            $('#goodDg').datagrid('reload');    
+                            $('#entryGoodDg').datagrid('reload',{
+                				eid:$("#eid2").val()
+                			});    
+                            $("#entryGoodDg").datagrid("uncheckAll");
                         }
                     });
                 }
             });
         }
+    }
+    
+    function loadCon(){
+    	$("#contId").combobox({
+    		url:"${basePath}/entry/getConByEid",
+    		queryParams:{
+    			eid:$("#eid2").val()
+    		},
+    		valueField:"id",
+    		textField:"conNo"
+    	});
     }
 	</script>
 </body>

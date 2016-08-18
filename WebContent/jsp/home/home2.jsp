@@ -180,9 +180,12 @@ $(function(){
 		}
 		var url = data.id;
 		var mname = data.title;
+		var href = "${basePath}/"+url;
+		//直接使用href会导致同时打开的标签页共用id，导致id冲突，所以要使用iframed的方式来避免
+		var content = "<iframe frameborder='0' src='" + href +"' style='width:100%;height:100%;'></iframe>";
 		$("#tabs").tabs("add",{
 			id:mname,
-			href:"${basePath}/"+url,
+			content:content,
 			title:mname,
 			closable:true
 		});

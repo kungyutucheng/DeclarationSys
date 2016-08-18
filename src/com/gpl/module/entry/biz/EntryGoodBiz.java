@@ -16,7 +16,35 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 	private EntryGoodDao entryGoodDao;
 
 	public Page queryPage(Page page) {
-		String hql = "from EntryGood where 1=1";
+		String hql = "select new EntryGoodVO(id,"
+				+ "eid,"
+				+ "contId,"
+				+ "(select conNo from EntryCon ec where ec.id=contId),"
+				+ "cbeComId,"
+				+ "(select ename from Enterprise ent where ent.id=cbeComId),"
+				+ "hsCode,"
+				+ "ciqGoodsCode,"
+				+ "gCode,"
+				+ "goodsMaterial,"
+				+ "packType,"
+				+ "(select name from Package p where p.code=packType),"
+				+ "fCode,"
+				+ "(select name from Currency c where c.code=fCode),"
+				+ "uPric,"
+				+ "buyFromCity,"
+				+ "qtp,"
+				+ "qtpUnit,"
+				+ "(select name from Unit u where u.code=qtpUnit),"
+				+ "qty,"
+				+ "qtyDesc,"
+				+ "kgs,"
+				+ "net,"
+				+ "fcy,"
+				+ "kgsUnit,"
+				+ "packNum,"
+				+ "goodsBatchNo,"
+				+ "packPieceNum,"
+				+ "createTime) from EntryGood where 1=1";
 		if(page.getParams().get("eid") != null){
 			hql += " and eid=" + page.getParams().get("eid");
 		}
