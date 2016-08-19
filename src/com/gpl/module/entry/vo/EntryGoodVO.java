@@ -51,7 +51,7 @@ public class EntryGoodVO implements Serializable{
 	/**
 	 * 商品备案号
 	 */
-	private String ciqGoodsCode;
+	private String ciqGoodsNo;
 	/**
 	 * 商品货号
 	 */
@@ -137,13 +137,6 @@ public class EntryGoodVO implements Serializable{
 	 */
 	private Date createTime;
 	
-	public EntryGoodVO(Integer id, Integer eid, Integer contId, String conNo){
-		super();
-		this.id = id;
-		this.eid = eid;
-		this.contId = contId;
-		this.conNo = conNo;
-	}
 	public EntryGoodVO(Integer id, Integer eid, Integer contId, String conNo, Integer cbeComId, String cbeComName,
 			String hsCode, String ciqGoodsCode, String gCode, String goodsMaterial, String packType,
 			String packTypeName, String fCode, String fName, BigDecimal uPric, String buyFromCity, BigDecimal qtp,
@@ -157,7 +150,7 @@ public class EntryGoodVO implements Serializable{
 		this.cbeComId = cbeComId;
 		this.cbeComName = cbeComName;
 		this.hsCode = hsCode;
-		this.ciqGoodsCode = ciqGoodsCode;
+		this.ciqGoodsNo = ciqGoodsCode;
 		this.gCode = gCode;
 		this.goodsMaterial = goodsMaterial;
 		this.packType = packType;
@@ -224,11 +217,11 @@ public class EntryGoodVO implements Serializable{
 	public void setHsCode(String hsCode) {
 		this.hsCode = hsCode;
 	}
-	public String getCiqGoodsCode() {
-		return ciqGoodsCode;
+	public String getCiqGoodsNo() {
+		return ciqGoodsNo;
 	}
-	public void setCiqGoodsCode(String ciqGoodsCode) {
-		this.ciqGoodsCode = ciqGoodsCode;
+	public void setCiqGoodsNo(String ciqGoodsNo) {
+		this.ciqGoodsNo = ciqGoodsNo;
 	}
 	public String getgCode() {
 		return gCode;
@@ -359,7 +352,7 @@ public class EntryGoodVO implements Serializable{
 	@Override
 	public String toString() {
 		return "EntryGood [id=" + id + ", eid=" + eid + ", contId=" + contId + ", conNo=" + conNo + ", cbeComId="
-				+ cbeComId + ", cbeComName=" + cbeComName + ", hsCode=" + hsCode + ", ciqGoodsCode=" + ciqGoodsCode
+				+ cbeComId + ", cbeComName=" + cbeComName + ", hsCode=" + hsCode + ", ciqGoodsNo=" + ciqGoodsNo
 				+ ", gCode=" + gCode + ", goodsMaterial=" + goodsMaterial + ", packType=" + packType + ", packTypeName="
 				+ packTypeName + ", fCode=" + fCode + ", fName=" + fName + ", uPric=" + uPric + ", buyFromCity="
 				+ buyFromCity + ", qtp=" + qtp + ", qtpUnit=" + qtpUnit + ", qty=" + qty + ", qtyDesc=" + qtyDesc

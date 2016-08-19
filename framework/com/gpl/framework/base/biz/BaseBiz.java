@@ -22,8 +22,8 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 		this.baseDao = baseDao;
 	}
 	
-	public T get(Serializable id){
-		return baseDao.get(id);
+	public T get(Serializable id,String className){
+		return baseDao.get(id,className);
 	}
 	
 	public T load(Serializable id){
@@ -34,15 +34,15 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 		return baseDao.getAll(className);
 	}
 	
-	public void deleteIds(String ids){
+	public void deleteIds(String ids,String className){
 		String [] idArray = ids.split(",");
 		for(String id : idArray){
-			baseDao.delete(new Long(id));
+			baseDao.delete(new Long(id),className);
 		}
 	}
 	
-	public void delete(Serializable id){
-		baseDao.delete(id);
+	public void delete(Serializable id,String className){
+		baseDao.delete(id,className);
 	}
 	
 	public void delete(T object){

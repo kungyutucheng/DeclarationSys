@@ -337,7 +337,7 @@
 		            <div style="margin-bottom:10px">
 		                <input name="sealNo" class="easyui-textbox" label="封条号码" style="width:100%">
 		            </div>
-		            <input type="number" name="eid" id="eid1" value="0">
+		            <input type="hidden" name="eid" id="eid1" value="0">
 		        </form>
 		    </div>
 		    <div id="dlg-buttons">
@@ -362,24 +362,24 @@
 		            		<tr>
 		            			<td>跨境电商企业</td>
 		            			<td>
-		            				<input class="easyui-combobox" name="cbeComId"  
+		            				<input class="easyui-combobox" name="cbeComId" id="cbeComId"  
 		            				data-options="required:true,url:'${basePath }/ent/getAll',valueField:'id',textField:'ename'">
 		            			</td>
 		            			<td>hs码</td>
 		            			<td>
-		            				<input class="easyui-textbox" name="hsCode"
+		            				<input class="easyui-textbox" name="hsCode" id="hsCode"
 		            				data-options="required:true">
 		            			</td>
 		            		</tr>
 		            		<tr>
 		            			<td>商品备案号</td>
 		            			<td>
-		            				<input class="easyui-textbox" name="ciqGoodsCode"
+		            				<input class="easyui-textbox" name="ciqGoodsNo" id="ciqGoodsNo"
 		            				data-options="required:true">
 		            			</td>
 		            			<td>商品货号</td>
 		            			<td>
-		            				<input class="easyui-textbox" name="gCode"
+		            				<input class="easyui-textbox" name="gCode" id="gCode"
 		            				data-options="required:true">
 		            			</td>
 		            		</tr>
@@ -391,7 +391,7 @@
 		            			</td>
 		            			<td>币种</td>
 		            			<td>
-		            				<input class="easyui-combobox" name="fCode"
+		            				<input class="easyui-combobox" name="fCode" id="fCode"
 		            				data-options="required:true,url:'${basePath }/currency/getAll',valueField:'code',textField:'name'">
 		            			</td>
 		            		</tr>
@@ -474,7 +474,7 @@
 								</td>		            			
 		            		</tr>
 		            		<tr>
-		            			<td><input type="number" name="eid" id="eid2" value="0"></td>
+		            			<td><input type="hidden" name="eid" id="eid2" value="0"></td>
 		            		</tr>
 		            	</table>
 		            </div>
@@ -486,14 +486,15 @@
 		    </div>
 		    <div id="addGoodDlg" class="easyui-dialog" style="width:700px"
 		            closed="true" buttons="#addGoodDlg-buttons">
-		            <div style="margin-bottom:10px;">
-		            	<form method="post" id="searchGoodForm">
-		            		<div>
+		            <div style="margin-bottom:10px;text-align:center;width:100%;">
+		            	<form method="post" id="searchGoodForm" style="text-align:center;width:100%;">
+		            		<div style="margin:10px 0;">
 		            			<input class="easyui-textbox" name="ciqGoodsNo" label="商品备案号" style="display:inline-block;">
 		            			<input class="easyui-textbox" name="gCode" label="商品货号" style="display:inline-block;">
 		            			<input class="easyui-textbox" name="gname" label="商品名称" style="display:inline-block;">
+		            			<input type="hidden" name="noNotNull" value="1" id="noNotNull">
 		            		</div>
-		            		<div>
+		            		<div style="margin:10px 0;">
 		            			<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="loadGoodData()" style="width:90px">查询</a>
 		        				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="resetGoodForm()" style="width:90px">重置</a>
 		            		</div>
@@ -508,6 +509,9 @@
 		    </div>
 		</div>
 	<script>
+	
+	//记录入境进区提交后的id
+	var eid = 0;
 	$(function(){
 		$("#conDg").datagrid({
 			url:"${basePath }/entry/getCon",
@@ -556,7 +560,7 @@
 	                  {field:"id",hidden:true,title:"id"},
 	                  {field:"cbeComName",title:"跨境电商企业",width:300},
 	                  {field:"hsCode",title:"hs码",width:80},
-	                  {field:"ciqGoodsCode",title:"商品备案号",width:100},
+	                  {field:"ciqGoodsNo",title:"商品备案号",width:100},
 	                  {field:"gCode",title:"商品货号",width:100},
 	                  {field:"goodsMaterial",title:"商品材质",width:200},
 	                  {field:"packTypeName",title:"包装类型",width:200},
@@ -594,8 +598,9 @@
 				var result = eval('('+result+')');
                 layer.msg(result.msg);
                 if (result.success){
-                	$("#eid1").val(Number(result.data));
-                	$("#eid2").val(Number(result.data));
+                	//$("#eid1").val(Number(result.data));
+                	//$("#eid2").val(Number(result.data));
+                	eid = Number(result.data);
                 }
 			}
 		});
@@ -603,12 +608,13 @@
 	
 	var url;
     function newCon(){
-    	if($("#eid1").val() == 0){
+    	if(eid == 0){
     		layer.msg("请先提交入境进区申报单");
     		return;
     	}
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','新增');
-        $('#conForm').form('clear');
+        $('#conForm').form('reset');
+        $("#eid1").val(eid);
         url = '${basePath}/entry/saveCon';
     }
     function editCon(){
@@ -666,12 +672,16 @@
         }
     }
     function newGood(){
-    	if($("#eid2").val() == 0){
+    	if(eid == 0){
     		layer.msg("请先提交入境进区申报单");
     		return;
     	}
         $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','新增');
-        $('#goodForm').form('clear');
+        $('#goodForm').form('reset');
+        $("#eid2").val(eid);
+        $("#gCode").textbox("readonly",false);
+    	$("#hsCode").textbox("readonly",false);
+    	$("#ciqGoodsNo").textbox("readonly",false);
         url = '${basePath}/entry/saveGood';
         loadCon();
     }
@@ -679,6 +689,9 @@
         var row = $('#entryGoodDg').datagrid('getSelected');
         if (row){
             $('#goodDlg').dialog('open').dialog('center').dialog('setTitle','修改');
+            $("#gCode").textbox("readonly",false);
+        	$("#hsCode").textbox("readonly",false);
+        	$("#ciqGoodsNo").textbox("readonly",false);
             $('#goodForm').form('load',row);
             url = '${basePath}/entry/updateGood?id='+row.id;
             loadCon();
@@ -743,17 +756,51 @@
     }
     
     function showGoods(){
+    	if(eid == 0){
+    		layer.msg("请先提交入境进区申报单");
+    		return;
+    	}
+    	$('#searchGoodForm').form('reset');
+    	$("#eid2").val(eid);
     	$('#addGoodDlg').dialog('open').dialog('center').dialog('setTitle','选择备案商品');
-    	$('#goodForm').form('clear');
-    	$("addGoodDg").datagrid({
+    	loadGoodData();
+    }
+    
+    function loadGoodData(){
+    	$("#addGoodDg").datagrid({
     		url:"${basePath}/good/searchgrid",
     		queryParams:$("#searchGoodForm").serializeObject(),
     		rownumbers:true,
+    		singleSelect:true,
+    		pagination:true,
     		columns:[[
-    			{field:"ciqGoodsNo",width:100}
+    			{field:"id",hidden:true},
+    			{field:"ciqGoodsNo",width:100,title:"商品备案号"},
+    			{field:"gCode",width:100,title:"商品货号"},
+    			{field:"gname",width:100,title:"商品名称"}
     		]]
-    	})
+    	});
     }
+    function resetGoodForm(){
+    	$("#searchGoodForm").form("reset");
+    }
+    function addGood(){
+    	var row = $("#addGoodDg").datagrid("getSelected");
+    	console.log(row);
+    	if(row){
+	    	$('#goodForm').form('reset');
+	    	$('#goodForm').form('load',row);
+	    	$("#gCode").textbox("readonly",true);
+	    	$("#hsCode").textbox("readonly",true);
+	    	$("#ciqGoodsNo").textbox("readonly",true);
+	    	$('#goodDlg').dialog('open').dialog('center').dialog('setTitle','新增');
+	    	url = '${basePath}/entry/saveGood';
+	    	loadCon();
+    	}else{
+    		layer.msg("请先选择一条记录");
+    	}
+    }
+    
 	</script>
 </body>
 </html>

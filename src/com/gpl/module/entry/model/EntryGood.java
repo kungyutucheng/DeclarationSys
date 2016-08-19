@@ -44,7 +44,7 @@ public class EntryGood implements Serializable{
 	/**
 	 * 商品备案号
 	 */
-	private String ciqGoodsCode;
+	private String ciqGoodsNo;
 	/**
 	 * 商品货号
 	 */
@@ -160,11 +160,11 @@ public class EntryGood implements Serializable{
 		this.hsCode = hsCode;
 	}
 	@Column
-	public String getCiqGoodsCode() {
-		return ciqGoodsCode;
+	public String getCiqGoodsNo() {
+		return ciqGoodsNo;
 	}
-	public void setCiqGoodsCode(String ciqGoodsCode) {
-		this.ciqGoodsCode = ciqGoodsCode;
+	public void setCiqGoodsNo(String ciqGoodsNo) {
+		this.ciqGoodsNo = ciqGoodsNo;
 	}
 	@Column
 	public String getgCode() {
@@ -295,7 +295,7 @@ public class EntryGood implements Serializable{
 	@Override
 	public String toString() {
 		return "EntryGood [id=" + id + ", eid=" + eid + ", contId=" + contId + ", cbeComId=" + cbeComId + ", hsCode="
-				+ hsCode + ", ciqGoodsCode=" + ciqGoodsCode + ", gCode=" + gCode + ", goodsMaterial=" + goodsMaterial
+				+ hsCode + ", ciqGoodsNo=" + ciqGoodsNo + ", gCode=" + gCode + ", goodsMaterial=" + goodsMaterial
 				+ ", packType=" + packType + ", fCode=" + fCode + ", uPric=" + uPric + ", buyFromCity=" + buyFromCity
 				+ ", qtp=" + qtp + ", qtpUnit=" + qtpUnit + ", qty=" + qty + ", qtyDesc=" + qtyDesc + ", kgs=" + kgs
 				+ ", net=" + net + ", fcy=" + fcy + ", kgsUnit=" + kgsUnit + ", packNum=" + packNum + ", goodsBatchNo="

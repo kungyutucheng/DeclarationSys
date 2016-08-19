@@ -113,6 +113,9 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 			if(page.getParams().get("endTime") != null){
 				hql += " and g.createTime <='" + page.getParams().get("endTime") +"'";
 			}
+			if(page.getParams().get("noNotNull") != null){
+				hql += " and g.ciqGoodsNo is not null";
+			}
 			hql	+= " order by g.createTime desc";
 		return goodDao.findPage(page, hql, new HashMap<String,Object>());
 	}

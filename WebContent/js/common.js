@@ -1,14 +1,19 @@
 $(function(){
-		$.extend($.fn.validatebox.defaults.rules, {
-		    match: {
-		        validator: function(value,param){
-		            return param[0].test(value);
-		        },
-		        message: '{1}'
-		    }
-		});
-	})
+	//validatebox正则表达式校验
+	$.extend($.fn.validatebox.defaults.rules, {
+		match: {
+			validator: function(value,param){
+				return param[0].test(value);
+			},
+			message: '{1}'
+		}
+	});
+});
 
+var gpl = {
+		TIME_OUT:5000
+};
+//日期格式化
 Date.prototype.format = function(format) {  
     /* 
      * 使用例子:format="yyyy-MM-dd hh:mm:ss"; 
@@ -38,6 +43,7 @@ Date.prototype.format = function(format) {
     }  
     return format;  
 }
+//表单参数序列化
 $.fn.serializeObject = function()    
 {    
    var o = {};    

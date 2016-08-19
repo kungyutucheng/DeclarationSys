@@ -131,8 +131,8 @@ public class SimpleHibernateDao<T,PK extends Serializable> extends HibernateDaoS
 	 * °´idÉ¾³ý¶ÔÏó
 	 * @param id
 	 */
-	public void delete(final PK id){
-		delete(get(id));
+	public void delete(final PK id,String className){
+		delete(get(id,className));
 	}
 	
 	/**
@@ -140,8 +140,8 @@ public class SimpleHibernateDao<T,PK extends Serializable> extends HibernateDaoS
 	 * @param id
 	 * @return
 	 */
-	public T get(final PK id){
-		return this.getHibernateTemplate().get(entityClass, id);
+	public T get(final PK id,String className){
+		return (T) this.getHibernateTemplate().get(className, id);
 	}
 	
 	/**

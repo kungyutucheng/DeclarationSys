@@ -108,4 +108,10 @@ public class GoodController extends BaseController{
 		page = goodBiz.queryPage(page);
 		return renderJsonStr(page);
 	}
+	
+	@RequestMapping(path = "/getGoodById",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String getGoodById(){
+		return renderJsonStr(goodBiz.get(getInt("id"),Good.class.getName()));
+	}
 }

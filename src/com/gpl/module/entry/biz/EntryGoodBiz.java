@@ -23,7 +23,7 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 				+ "cbeComId,"
 				+ "(select ename from Enterprise ent where ent.id=cbeComId),"
 				+ "hsCode,"
-				+ "ciqGoodsCode,"
+				+ "ciqGoodsNo,"
 				+ "gCode,"
 				+ "goodsMaterial,"
 				+ "packType,"
@@ -54,8 +54,8 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 		if(page.getParams().get("hsCode") != null){
 			hql += " and hsCode like '%" + page.getParams().get("hsCode") + "%'";
 		}
-		if(page.getParams().get("ciqGoodsCode") != null){
-			hql += " and ciqGoodsCode like '%" + page.getParams().get("ciqGoodsCode") + "%'";
+		if(page.getParams().get("ciqGoodsNo") != null){
+			hql += " and ciqGoodsNo like '%" + page.getParams().get("ciqGoodsNo") + "%'";
 		}
 		if(page.getParams().get("gCode") != null){
 			hql += " and gCode like '%" + page.getParams().get("gCode") + "%'";
