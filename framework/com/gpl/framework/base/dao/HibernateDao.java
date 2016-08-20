@@ -62,7 +62,6 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	
 	public List<T> getAll(String className){
 		String hql = " from " + className;
-		System.out.println(className);
 		return this.find(hql);
 	}
 	

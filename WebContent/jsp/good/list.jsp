@@ -144,22 +144,21 @@
 				          {field:"ciqGoodsNo",title:"商品备案号",width:100},
 				          {field:"status",title:"审核状态",width:100,formatter:function(value,row,index){
 				        	  if(value == 0){
-				        		  return "<font color='pink'>新增</font>";
-				        	  }
-				          	  else if(value == 1){
-				        		  return "<font color='orange'>待发送</font>";
-				        	  }
-				        	  else if(value == 2){
-				        		  return "<font color='blue'>待审核</font>";
-				        	  }
-				        	  else if(value == 3){
-				        		  return "<font color='purple'>接收失败</font>";
-				        	  }
-				        	  else if(value == 4){
+				        		  return "<font color='blue'>新增</font>";
+				        	  }else if(value == 1){
+				        		  return "<font color='purple'>待发送</font>";
+				        	  }else if(value == 2){
+				        		  return "<font color='orange'>已发送</font>";
+				        	  }else if(value == 3){
+				        		  return "<font color='pink'>待审核</font>";
+				        	  }else if(value == 4){
+				        		  return "<font color='brown'>接收失败</font>";
+				        	  }else if(value == 5){
 				        		  return "<font color='green'>通过</font>";
-				        	  }
-				        	  else if(value == 5){
+				        	  }else if(value == 6){
 				        		  return "<font color='red'>不通过</font>";
+				        	  }else{
+				        		  return value;
 				        	  }
 				          }},
 				          {field:"num",title:"库存",width:100,sortable:true},

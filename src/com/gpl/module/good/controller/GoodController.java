@@ -103,7 +103,6 @@ public class GoodController extends BaseController{
 	@ResponseBody
 	public String searchGrid(){
 		Page page = getPage();
-		System.out.println(getAllParams().toString());
 		page.setParams(getAllParams());
 		page = goodBiz.queryPage(page);
 		return renderJsonStr(page);

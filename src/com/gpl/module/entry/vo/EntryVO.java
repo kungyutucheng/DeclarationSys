@@ -1,4 +1,4 @@
-package com.gpl.module.entry.model;
+package com.gpl.module.entry.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,8 +12,7 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "entry")
-public class Entry implements Serializable{
+public class EntryVO implements Serializable{
 
 	/**
 	 * 
@@ -36,12 +35,15 @@ public class Entry implements Serializable{
 	/**
 	 * 申报日期
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date declarationDate;
 	/**
 	 * 申报机构
 	 */
 	private String ciqbCode;
+	/**
+	 * 申报机构名称
+	 */
+	private String ciqbName;
 	/**
 	 * 合同号
 	 */
@@ -75,13 +77,25 @@ public class Entry implements Serializable{
 	 */
 	private String portLoad;
 	/**
+	 * 起运港名称
+	 */
+	private String portLoadName;
+	/**
 	 * 目的港
 	 */
 	private String portDis;
 	/**
+	 * 目的港名称
+	 */
+	private String portDisName;
+	/**
 	 * 币种
 	 */
 	private String fCode;
+	/**
+	 * 币种名称
+	 */
+	private String fName;
 	/**
 	 * 运输工具
 	 * 0-默认
@@ -109,15 +123,11 @@ public class Entry implements Serializable{
 	private String blNo;
 	/**
 	 * 到货日期
-	 * DateTimeFormat注解用于解决前端传值给后台实体类由于类型不符（前端传过来的实际是string，无法赋值给
-	 * date类型的字段）而引起的400错误
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;
 	/**
 	 * 卸毕日期
 	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date uploadDate;
 	/**
 	 * 目的地
@@ -132,6 +142,10 @@ public class Entry implements Serializable{
 	 */
 	private String tradeCode;
 	/**
+	 * 贸易国别名称
+	 */
+	private String tradeName;
+	/**
 	 * 起运国
 	 */
 	private String countryLoad;
@@ -140,27 +154,31 @@ public class Entry implements Serializable{
 	 */
 	private String portStop;
 	/**
+	 * 经停港港口编码
+	 */
+	private String portStopName;
+	/**
 	 * 贸易方式
 	 */
 	private String tradeType;
+	/**
+	 * 贸易方式名称
+	 */
+	private String tradeTypeName;
 	/**
 	 * 监管方式
 	 */
 	private String chargeType;
 	/**
+	 * 监管方式名称
+	 */
+	private String chargeTypeName;
+	/**
 	 * 报检类别
-	 * 13-入境检验检疫
-	 * 14-入境流向
-	 * 15-入境验证
 	 */
 	private String tblType;
 	/**
 	 * 报检申报类别
-	 * 01-一般进口
-	 * 03-出区进口
-	 * 05-境外进口
-	 * 07-进境集装箱重箱
-	 * 09-进境集装箱空箱
 	 */
 	private String tblReportType;
 	/**
@@ -181,8 +199,6 @@ public class Entry implements Serializable{
 	private String customDeclareNo;
 	/**
 	 * 申报类别
-	 * 10-预申报
-	 * 20-入仓申报
 	 */
 	private String reportType;
 	/**
@@ -193,6 +209,10 @@ public class Entry implements Serializable{
 	 * 外贸综合服务企业id
 	 */
 	private Integer editId;
+	/**
+	 * 外贸综合服务企业名称
+	 */
+	private String editName; 
 	/**
 	 * ICIP平台唯一标识符
 	 */
@@ -209,6 +229,126 @@ public class Entry implements Serializable{
 	 * 创建时间
 	 */
 	private Date createTime;
+	
+	
+	public EntryVO(Integer id, String entInboundNo, String operType, Date declarationDate, String ciqbCode,
+			String ciqbName, String bargainNo, String shipperName, String shipperNameEn, String shipperAddr,
+			String consigneeName, String consigneeNameEn, String consigneeAddr, String portLoad, String portLoadName,
+			String portDis, String portDisName, String fCode, String fName, Integer tool, String toolName,
+			String toolNo, String blNo, Date arrivalDate, Date uploadDate, String destination, String stockLocation,
+			String tradeCode, String tradeName, String countryLoad, String portStop, String portStopName,
+			String tradeType, String tradeTypeName, String chargeType, String chargeTypeName, String tblType,
+			String tblReportType, String markNo, Integer claimDays, String specRequire, String customDeclareNo,
+			String reportType, String declCode, Integer editId,String editName, Integer eportInboundNo, Integer status,
+			String regStatusDesc, Date createTime) {
+		super();
+		this.id = id;
+		this.entInboundNo = entInboundNo;
+		this.operType = operType;
+		this.declarationDate = declarationDate;
+		this.ciqbCode = ciqbCode;
+		this.ciqbName = ciqbName;
+		this.bargainNo = bargainNo;
+		this.shipperName = shipperName;
+		this.shipperNameEn = shipperNameEn;
+		this.shipperAddr = shipperAddr;
+		this.consigneeName = consigneeName;
+		this.consigneeNameEn = consigneeNameEn;
+		this.consigneeAddr = consigneeAddr;
+		this.portLoad = portLoad;
+		this.portLoadName = portLoadName;
+		this.portDis = portDis;
+		this.portDisName = portDisName;
+		this.fCode = fCode;
+		this.fName = fName;
+		this.tool = tool;
+		this.toolName = toolName;
+		this.toolNo = toolNo;
+		this.blNo = blNo;
+		this.arrivalDate = arrivalDate;
+		this.uploadDate = uploadDate;
+		this.destination = destination;
+		this.stockLocation = stockLocation;
+		this.tradeCode = tradeCode;
+		this.tradeName = tradeName;
+		this.countryLoad = countryLoad;
+		this.portStop = portStop;
+		this.portStopName = portStopName;
+		this.tradeType = tradeType;
+		this.tradeTypeName = tradeTypeName;
+		this.chargeType = chargeType;
+		this.chargeTypeName = chargeTypeName;
+		this.tblType = tblType;
+		this.tblReportType = tblReportType;
+		this.markNo = markNo;
+		this.claimDays = claimDays;
+		this.specRequire = specRequire;
+		this.customDeclareNo = customDeclareNo;
+		this.reportType = reportType;
+		this.declCode = declCode;
+		this.editId = editId;
+		this.editName = editName;
+		this.eportInboundNo = eportInboundNo;
+		this.status = status;
+		this.regStatusDesc = regStatusDesc;
+		this.createTime = createTime;
+	}
+	
+	public EntryVO(Integer id, String entInboundNo, String operType, Date declarationDate, String ciqbCode,
+			 String bargainNo, String shipperName, String shipperNameEn, String shipperAddr,
+			String consigneeName, String consigneeNameEn, String consigneeAddr, String portLoad,
+			String portDis, String portDisName, String fCode, Integer tool, String toolName,
+			String toolNo, String blNo, Date arrivalDate, Date uploadDate, String destination, String stockLocation,
+			String tradeCode, String countryLoad, String portStop,
+			String tradeType, String chargeType, String tblType,
+			String tblReportType, String markNo, Integer claimDays, String specRequire, String customDeclareNo,
+			String reportType, String declCode, Integer editId,Integer eportInboundNo, Integer status,
+			String regStatusDesc, Date createTime) {
+		super();
+		this.id = id;
+		this.entInboundNo = entInboundNo;
+		this.operType = operType;
+		this.declarationDate = declarationDate;
+		this.ciqbCode = ciqbCode;
+		this.bargainNo = bargainNo;
+		this.shipperName = shipperName;
+		this.shipperNameEn = shipperNameEn;
+		this.shipperAddr = shipperAddr;
+		this.consigneeName = consigneeName;
+		this.consigneeNameEn = consigneeNameEn;
+		this.consigneeAddr = consigneeAddr;
+		this.portLoad = portLoad;
+		this.portDis = portDis;
+		this.portDisName = portDisName;
+		this.fCode = fCode;
+		this.tool = tool;
+		this.toolName = toolName;
+		this.toolNo = toolNo;
+		this.blNo = blNo;
+		this.arrivalDate = arrivalDate;
+		this.uploadDate = uploadDate;
+		this.destination = destination;
+		this.stockLocation = stockLocation;
+		this.tradeCode = tradeCode;
+		this.countryLoad = countryLoad;
+		this.portStop = portStop;
+		this.tradeType = tradeType;
+		this.chargeType = chargeType;
+		this.tblType = tblType;
+		this.tblReportType = tblReportType;
+		this.markNo = markNo;
+		this.claimDays = claimDays;
+		this.specRequire = specRequire;
+		this.customDeclareNo = customDeclareNo;
+		this.reportType = reportType;
+		this.declCode = declCode;
+		this.editId = editId;
+		this.eportInboundNo = eportInboundNo;
+		this.status = status;
+		this.regStatusDesc = regStatusDesc;
+		this.createTime = createTime;
+	}
+	
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -217,305 +357,319 @@ public class Entry implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column
 	public String getEntInboundNo() {
 		return entInboundNo;
 	}
 	public void setEntInboundNo(String entInboundNo) {
 		this.entInboundNo = entInboundNo;
 	}
-	@Column
 	public String getOperType() {
 		return operType;
 	}
 	public void setOperType(String operType) {
 		this.operType = operType;
 	}
-	@Column
 	public Date getDeclarationDate() {
 		return declarationDate;
 	}
 	public void setDeclarationDate(Date declarationDate) {
 		this.declarationDate = declarationDate;
 	}
-	@Column
 	public String getCiqbCode() {
 		return ciqbCode;
 	}
 	public void setCiqbCode(String ciqbCode) {
 		this.ciqbCode = ciqbCode;
 	}
-	@Column
+	public String getCiqbName() {
+		return ciqbName;
+	}
+	public void setCiqbName(String ciqbName) {
+		this.ciqbName = ciqbName;
+	}
 	public String getBargainNo() {
 		return bargainNo;
 	}
 	public void setBargainNo(String bargainNo) {
 		this.bargainNo = bargainNo;
 	}
-	@Column
 	public String getShipperName() {
 		return shipperName;
 	}
 	public void setShipperName(String shipperName) {
 		this.shipperName = shipperName;
 	}
-	@Column
 	public String getShipperNameEn() {
 		return shipperNameEn;
 	}
 	public void setShipperNameEn(String shipperNameEn) {
 		this.shipperNameEn = shipperNameEn;
 	}
-	@Column
 	public String getShipperAddr() {
 		return shipperAddr;
 	}
 	public void setShipperAddr(String shipperAddr) {
 		this.shipperAddr = shipperAddr;
 	}
-	@Column
 	public String getConsigneeName() {
 		return consigneeName;
 	}
 	public void setConsigneeName(String consigneeName) {
 		this.consigneeName = consigneeName;
 	}
-	@Column
 	public String getConsigneeNameEn() {
 		return consigneeNameEn;
 	}
 	public void setConsigneeNameEn(String consigneeNameEn) {
 		this.consigneeNameEn = consigneeNameEn;
 	}
-	@Column
 	public String getConsigneeAddr() {
 		return consigneeAddr;
 	}
 	public void setConsigneeAddr(String consigneeAddr) {
 		this.consigneeAddr = consigneeAddr;
 	}
-	@Column
 	public String getPortLoad() {
 		return portLoad;
 	}
 	public void setPortLoad(String portLoad) {
 		this.portLoad = portLoad;
 	}
-	@Column
+	public String getPortLoadName() {
+		return portLoadName;
+	}
+	public void setPortLoadName(String portLoadName) {
+		this.portLoadName = portLoadName;
+	}
 	public String getPortDis() {
 		return portDis;
 	}
 	public void setPortDis(String portDis) {
 		this.portDis = portDis;
 	}
-	@Column
+	public String getPortDisName() {
+		return portDisName;
+	}
+	public void setPortDisName(String portDisName) {
+		this.portDisName = portDisName;
+	}
 	public String getfCode() {
 		return fCode;
 	}
 	public void setfCode(String fCode) {
 		this.fCode = fCode;
 	}
-	@Column
+	public String getfName() {
+		return fName;
+	}
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
 	public Integer getTool() {
 		return tool;
 	}
 	public void setTool(Integer tool) {
 		this.tool = tool;
 	}
-	@Column
 	public String getToolName() {
 		return toolName;
 	}
 	public void setToolName(String toolName) {
 		this.toolName = toolName;
 	}
-	@Column
 	public String getToolNo() {
 		return toolNo;
 	}
 	public void setToolNo(String toolNo) {
 		this.toolNo = toolNo;
 	}
-	@Column
 	public String getBlNo() {
 		return blNo;
 	}
 	public void setBlNo(String blNo) {
 		this.blNo = blNo;
 	}
-	@Column
 	public Date getArrivalDate() {
 		return arrivalDate;
 	}
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
-	@Column
 	public Date getUploadDate() {
 		return uploadDate;
 	}
 	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-	@Column
 	public String getDestination() {
 		return destination;
 	}
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	@Column
 	public String getStockLocation() {
 		return stockLocation;
 	}
 	public void setStockLocation(String stockLocation) {
 		this.stockLocation = stockLocation;
 	}
-	@Column
 	public String getTradeCode() {
 		return tradeCode;
 	}
 	public void setTradeCode(String tradeCode) {
 		this.tradeCode = tradeCode;
 	}
-	@Column
+	public String getTradeName() {
+		return tradeName;
+	}
+	public void setTradeName(String tradeName) {
+		this.tradeName = tradeName;
+	}
 	public String getCountryLoad() {
 		return countryLoad;
 	}
 	public void setCountryLoad(String countryLoad) {
 		this.countryLoad = countryLoad;
 	}
-	@Column
 	public String getPortStop() {
 		return portStop;
 	}
 	public void setPortStop(String portStop) {
 		this.portStop = portStop;
 	}
-	@Column
+	public String getPortStopName() {
+		return portStopName;
+	}
+	public void setPortStopName(String portStopName) {
+		this.portStopName = portStopName;
+	}
 	public String getTradeType() {
 		return tradeType;
 	}
 	public void setTradeType(String tradeType) {
 		this.tradeType = tradeType;
 	}
-	@Column
+	public String getTradeTypeName() {
+		return tradeTypeName;
+	}
+	public void setTradeTypeName(String tradeTypeName) {
+		this.tradeTypeName = tradeTypeName;
+	}
 	public String getChargeType() {
 		return chargeType;
 	}
 	public void setChargeType(String chargeType) {
 		this.chargeType = chargeType;
 	}
-	@Column
+	public String getChargeTypeName() {
+		return chargeTypeName;
+	}
+	public void setChargeTypeName(String chargeTypeName) {
+		this.chargeTypeName = chargeTypeName;
+	}
 	public String getTblType() {
 		return tblType;
 	}
 	public void setTblType(String tblType) {
 		this.tblType = tblType;
 	}
-	@Column
 	public String getTblReportType() {
 		return tblReportType;
 	}
 	public void setTblReportType(String tblReportType) {
 		this.tblReportType = tblReportType;
 	}
-	@Column
 	public String getMarkNo() {
 		return markNo;
 	}
 	public void setMarkNo(String markNo) {
 		this.markNo = markNo;
 	}
-	@Column
 	public Integer getClaimDays() {
 		return claimDays;
 	}
 	public void setClaimDays(Integer claimDays) {
 		this.claimDays = claimDays;
 	}
-	@Column
 	public String getSpecRequire() {
 		return specRequire;
 	}
 	public void setSpecRequire(String specRequire) {
 		this.specRequire = specRequire;
 	}
-	@Column
 	public String getCustomDeclareNo() {
 		return customDeclareNo;
 	}
 	public void setCustomDeclareNo(String customDeclareNo) {
 		this.customDeclareNo = customDeclareNo;
 	}
-	@Column
 	public String getReportType() {
 		return reportType;
 	}
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
 	}
-	@Column
 	public String getDeclCode() {
 		return declCode;
 	}
 	public void setDeclCode(String declCode) {
 		this.declCode = declCode;
 	}
-	@Column
 	public Integer getEditId() {
 		return editId;
 	}
 	public void setEditId(Integer editId) {
 		this.editId = editId;
 	}
-	@Column
+	public String getEditName() {
+		return editName;
+	}
+	public void setEditName(String editName) {
+		this.editName = editName;
+	}
 	public Integer getEportInboundNo() {
 		return eportInboundNo;
 	}
 	public void setEportInboundNo(Integer eportInboundNo) {
 		this.eportInboundNo = eportInboundNo;
 	}
-	@Column
 	public Integer getStatus() {
 		return status;
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	@Column
 	public String getRegStatusDesc() {
 		return regStatusDesc;
 	}
 	public void setRegStatusDesc(String regStatusDesc) {
 		this.regStatusDesc = regStatusDesc;
 	}
-	@Column(insertable = false,updatable = false)
 	public Date getCreateTime() {
 		return createTime;
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
 	@Override
 	public String toString() {
-		return "Entry [id=" + id + ", entInboundNo=" + entInboundNo + ", operType=" + operType + ", declarationDate="
-				+ declarationDate + ", ciqbCode=" + ciqbCode + ", bargainNo=" + bargainNo + ", shipperName="
-				+ shipperName + ", shipperNameEn=" + shipperNameEn + ", shipperAddr=" + shipperAddr + ", consigneeName="
-				+ consigneeName + ", consigneeNameEn=" + consigneeNameEn + ", consigneeAddr=" + consigneeAddr
-				+ ", portLoad=" + portLoad + ", portDis=" + portDis + ", fCode=" + fCode + ", tool=" + tool
+		return "EntryVO [id=" + id + ", entInboundNo=" + entInboundNo + ", operType=" + operType + ", declarationDate="
+				+ declarationDate + ", ciqbCode=" + ciqbCode + ", ciqbName=" + ciqbName + ", bargainNo=" + bargainNo
+				+ ", shipperName=" + shipperName + ", shipperNameEn=" + shipperNameEn + ", shipperAddr=" + shipperAddr
+				+ ", consigneeName=" + consigneeName + ", consigneeNameEn=" + consigneeNameEn + ", consigneeAddr="
+				+ consigneeAddr + ", portLoad=" + portLoad + ", portLoadName=" + portLoadName + ", portDis=" + portDis
+				+ ", portDisName=" + portDisName + ", fCode=" + fCode + ", fName=" + fName + ", tool=" + tool
 				+ ", toolName=" + toolName + ", toolNo=" + toolNo + ", blNo=" + blNo + ", arrivalDate=" + arrivalDate
 				+ ", uploadDate=" + uploadDate + ", destination=" + destination + ", stockLocation=" + stockLocation
-				+ ", tradeCode=" + tradeCode + ", countryLoad=" + countryLoad + ", portStop=" + portStop
-				+ ", tradeType=" + tradeType + ", chargeType=" + chargeType + ", tblType=" + tblType
-				+ ", tblReportType=" + tblReportType + ", markNo=" + markNo + ", claimDays=" + claimDays
-				+ ", specRequire=" + specRequire + ", customDeclareNo=" + customDeclareNo + ", reportType=" + reportType
-				+ ", declCode=" + declCode + ", editId=" + editId + ", eportInboundNo=" + eportInboundNo + ", status="
-				+ status + ", regStatusDesc=" + regStatusDesc + ", createTime=" + createTime + "]";
+				+ ", tradeCode=" + tradeCode + ", tradeName=" + tradeName + ", countryLoad=" + countryLoad
+				+ ", portStop=" + portStop + ", portStopName=" + portStopName + ", tradeType=" + tradeType
+				+ ", tradeTypeName=" + tradeTypeName + ", chargeType=" + chargeType + ", chargeTypeName="
+				+ chargeTypeName + ", tblType=" + tblType + ", tblReportType=" + tblReportType + ", markNo=" + markNo
+				+ ", claimDays=" + claimDays + ", specRequire=" + specRequire + ", customDeclareNo=" + customDeclareNo
+				+ ", reportType=" + reportType + ", declCode=" + declCode + ", editId=" + editId + ", eportInboundNo="
+				+ eportInboundNo + ", status=" + status + ", regStatusDesc=" + regStatusDesc + ", createTime="
+				+ createTime + "]";
 	}
 	
 	
-	
-
 }

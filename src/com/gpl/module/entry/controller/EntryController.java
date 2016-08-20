@@ -48,11 +48,18 @@ public class EntryController extends BaseController{
 		return new ModelAndView("entry/apply");
 	}
 	
+	@RequestMapping(path = "/getEntry",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String getEntry(){
+		Page page = new Page();
+		page.setParams(getAllParams());
+		return renderJsonStr(entryBiz.queryPage(page));
+	
+	}
+	
 	@RequestMapping(path = "/saveEntry",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String saveEntry(Entry entry){
-		System.out.println("bargainNo:" + getString("bargainNo"));
-		System.out.println(entry.toString());
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("添加成功");
 		try{
@@ -118,7 +125,6 @@ public class EntryController extends BaseController{
 	@RequestMapping(path = "/deleteCon",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String deleteCon(String ids){
-		System.out.println(ids.toString());
 		String [] idArray = ids.split(",");
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("删除成功");
@@ -181,7 +187,6 @@ public class EntryController extends BaseController{
 	@RequestMapping(path = "/deleteGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String deleteGood(String ids){
-		System.out.println(ids.toString());
 		String [] idArray = ids.split(",");
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("删除成功");
