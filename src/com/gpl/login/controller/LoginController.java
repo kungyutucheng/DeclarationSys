@@ -33,7 +33,7 @@ public class LoginController {
 			return new ModelAndView("home/home2");
 		}else{
 			ModelAndView modelAndView = new ModelAndView("login/login");
-			modelAndView.addObject("errorMsg", "用户名或密码错误");
+			modelAndView.addObject("errorMsg", "鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 			return modelAndView;
 		}
 	}

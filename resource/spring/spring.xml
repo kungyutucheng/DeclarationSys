@@ -47,6 +47,9 @@
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.connection.release_mode">${hibernate.connection.release_mode}</prop>
 				<prop key="jdbc.fetch_size">${jdbc.fetch_size}</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+				<prop key="hibernate.connection.charSet">UTF-8</prop>
 		    </props>
 		</property>
     </beans:bean>
@@ -94,5 +97,6 @@
 			expression="execution(* com.gpl.**.*.biz.*Biz.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
 	</aop:config>
+
 
 </beans:beans>

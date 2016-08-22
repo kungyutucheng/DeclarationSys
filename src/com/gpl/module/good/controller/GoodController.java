@@ -50,16 +50,45 @@ public class GoodController extends BaseController{
 	
 	@RequestMapping(path = "/apply", method = RequestMethod.GET)
 	public ModelAndView apply(){
-		return new ModelAndView("good/apply");
+		return new ModelAndView("good/apply2");
 	}
 
+	@RequestMapping(path = "/saveGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String saveGoodMain(GoodMain goodMain){
+		AjaxModel model = new AjaxModel(true);
+		model.setMsg("添加成功");
+		try{
+			goodMainBiz.save(goodMain);
+		}catch(Exception e){
+			e.printStackTrace();
+			model.setMsg("添加失败");
+			model.setSuccess(false);
+		}
+		return renderJsonStr(model);
+	}
+	
+	@RequestMapping(path = "/updateGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String updateGoodMain(GoodMain goodMain){
+		AjaxModel model = new AjaxModel(true);
+		model.setMsg("修改成功");
+		try{
+			goodMainBiz.update(goodMain);
+		}catch(Exception e){
+			e.printStackTrace();
+			model.setMsg("修改失败");
+			model.setSuccess(false);
+		}
+		return renderJsonStr(model);
+	}
 
 	@RequestMapping(path = "/save",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	@Transactional
 	public String save(){
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("���ӳɹ�");
+		model.setMsg("添加成功");
 		try{
 			GoodMain goodMain = new GoodMain();
 			goodMain.setCargobCode(Creator.createCargobCode());
@@ -81,7 +110,7 @@ public class GoodController extends BaseController{
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setSuccess(false);
-			model.setMsg("ϵͳ����������ʧ��");
+			model.setMsg("系统出错，添加失败");
 		}
 		
 		return renderJsonStr(model);

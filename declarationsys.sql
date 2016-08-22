@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-08-17 17:36:08
+Date: 2016-08-22 17:30:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -8514,53 +8514,84 @@ INSERT INTO `enterprise` VALUES ('30', '厦门欧淘电子商务有限公司', '
 DROP TABLE IF EXISTS `entry`;
 CREATE TABLE `entry` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `entInboundNo` varchar(100) NOT NULL COMMENT '企业自编号',
-  `operType` varchar(10) NOT NULL DEFAULT 'A' COMMENT '操作类型，A-新增，M-变更',
+  `entInboundNo` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT '企业自编号',
+  `operType` varchar(10) CHARACTER SET utf8 NOT NULL DEFAULT 'A' COMMENT '操作类型，A-新增，M-变更',
   `declarationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '申报日期',
-  `ciqbCode` varchar(255) NOT NULL COMMENT '申报机构',
-  `bargainNo` varchar(250) NOT NULL COMMENT '合同号',
-  `shipperName` varchar(250) NOT NULL COMMENT '发货人姓名',
-  `shipperNameEn` varchar(250) DEFAULT NULL COMMENT '发货人英文名',
-  `shipperAddr` varchar(250) DEFAULT NULL COMMENT '发货人地址',
-  `consigneeName` varchar(250) NOT NULL COMMENT '收货人姓名',
-  `consigneeNameEn` varchar(250) DEFAULT NULL COMMENT '收货人英文名',
-  `consigneeAddr` varchar(100) DEFAULT NULL COMMENT '收货人地址',
-  `portLoad` varchar(255) NOT NULL COMMENT '起运港',
-  `portDis` varchar(255) NOT NULL COMMENT '目的港',
-  `fCode` varchar(255) NOT NULL COMMENT '币种',
+  `ciqbCode` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '申报机构',
+  `bargainNo` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT '合同号',
+  `shipperName` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT '发货人姓名',
+  `shipperNameEn` varchar(250) CHARACTER SET utf8 DEFAULT NULL COMMENT '发货人英文名',
+  `shipperAddr` varchar(250) CHARACTER SET utf8 DEFAULT NULL COMMENT '发货人地址',
+  `consigneeName` varchar(250) CHARACTER SET utf8 NOT NULL COMMENT '收货人姓名',
+  `consigneeNameEn` varchar(250) CHARACTER SET utf8 DEFAULT NULL COMMENT '收货人英文名',
+  `consigneeAddr` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '收货人地址',
+  `portLoad` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '起运港',
+  `portDis` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '目的港',
+  `fCode` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '币种',
   `tool` tinyint(4) DEFAULT NULL COMMENT '运输工具',
-  `toolName` varchar(256) DEFAULT NULL COMMENT '运输工具名称',
-  `toolNo` varchar(256) DEFAULT NULL COMMENT '运输工具号',
-  `blNo` varchar(256) NOT NULL COMMENT '提单号',
+  `toolName` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '运输工具名称',
+  `toolNo` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '运输工具号',
+  `blNo` varchar(256) CHARACTER SET utf8 NOT NULL COMMENT '提单号',
   `arrivalDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '到货日期',
   `uploadDate` timestamp NULL DEFAULT NULL COMMENT '卸毕日期',
-  `destination` varchar(256) DEFAULT NULL COMMENT '目的地',
-  `stockLocation` varchar(256) DEFAULT NULL COMMENT '存货地点',
-  `tradeCode` varchar(255) NOT NULL COMMENT '贸易国别',
-  `countryLoad` varchar(255) NOT NULL COMMENT '起运国',
-  `portStop` varchar(32) DEFAULT NULL COMMENT '经停港港口编码',
-  `tradeType` varchar(20) DEFAULT NULL COMMENT '贸易方式',
-  `chargeType` varchar(20) DEFAULT NULL COMMENT '监管方式',
-  `tblType` varchar(20) DEFAULT NULL COMMENT '报检类别',
-  `tblReportType` varchar(20) DEFAULT NULL COMMENT '报检申报类别',
-  `markNo` varchar(256) DEFAULT NULL COMMENT '唛头',
+  `destination` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '目的地',
+  `stockLocation` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '存货地点',
+  `tradeCode` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '贸易国别',
+  `countryLoad` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '起运国',
+  `portStop` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '经停港港口编码',
+  `tradeType` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '贸易方式',
+  `chargeType` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '监管方式',
+  `tblType` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '报检类别',
+  `tblReportType` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '报检申报类别',
+  `markNo` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '唛头',
   `claimDays` int(11) DEFAULT NULL COMMENT '索赔期',
-  `specRequire` varchar(256) DEFAULT NULL COMMENT '特殊要求',
-  `customDeclareNo` varchar(128) DEFAULT NULL COMMENT '报关单号',
-  `reportType` varchar(10) DEFAULT NULL COMMENT '申报类型',
-  `declCode` varchar(100) DEFAULT NULL COMMENT '预申报编码',
+  `specRequire` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '特殊要求',
+  `customDeclareNo` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '报关单号',
+  `reportType` varchar(10) CHARACTER SET utf8 DEFAULT NULL COMMENT '申报类型',
+  `declCode` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '预申报编码',
   `editId` int(11) NOT NULL COMMENT '外贸综合服务企业id',
-  `eportInboundNo` varchar(50) DEFAULT NULL COMMENT 'ICIP平台唯一标识',
+  `eportInboundNo` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT 'ICIP平台唯一标识',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
-  `regStatusDesc` varchar(256) DEFAULT NULL COMMENT '审核备注',
+  `regStatusDesc` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '审核备注',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of entry
 -- ----------------------------
-INSERT INTO `entry` VALUES ('1', '20160817155641001', 'A', '2016-08-17 00:00:00', '000064', '23423', '??', '', '', '??', '', '', '11010101', '11010301', 'CNY', null, '', '', '343', '2016-08-18 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '2', null, '1', null, '2016-08-17 15:56:41');
+INSERT INTO `entry` VALUES ('1', '20160817155641001', 'A', '2016-08-22 09:45:15', '000064', '23423', '发给谁', '', '', '??', '', '', '11010101', '11010301', 'CNY', null, '', '', '343', '2016-08-18 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '2', null, '1', null, '2016-08-22 09:45:15');
+INSERT INTO `entry` VALUES ('2', '20160818163339001', 'A', '2016-08-18 00:00:00', '000020', '532', '??', '', '', '???', '', '', '12010001', '11015001', 'CNY', null, '', '', '435', '2016-08-19 00:00:00', null, '', '', '110102', '??', '', '', '', '', '', '', null, '', '', '', '', '6', null, '1', null, '2016-08-18 16:33:39');
+INSERT INTO `entry` VALUES ('3', '20160818163604002', 'A', '2016-08-18 00:00:00', '000064', '4234', '??', '', '', '??', '', '', '11015001', '11010101', 'USD', null, '', '', '432', '2016-08-19 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-18 16:36:04');
+INSERT INTO `entry` VALUES ('4', '20160818163836003', 'A', '2016-08-18 00:00:00', '000064', '322', '????', '', '', '?', '', '', '11010101', '11010301', 'CNY', null, '', '', '23', '2016-08-19 00:00:00', null, '', '', '110000', '??', '', '', '', '14', '05', '', null, '', '', '', '', '2', null, '1', null, '2016-08-18 16:38:36');
+INSERT INTO `entry` VALUES ('5', '20160818164141004', 'A', '2016-08-18 00:00:00', '000064', '432', '????', '', '', '?', '', '', '12010003', '12010002', 'HKD', null, '', '', '32', '2016-08-18 00:00:00', null, '', '', '110113', '??', '', '', '', '', '', '', null, '', '', '', '', '5', null, '1', null, '2016-08-18 16:41:41');
+INSERT INTO `entry` VALUES ('6', '20160818165226005', 'A', '2016-08-18 00:00:00', '000065', '464', '654', '', '', '645', '', '', '11010301', '11010101', 'CNY', null, '', '', '64', '2016-08-19 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-18 16:52:26');
+INSERT INTO `entry` VALUES ('7', '20160818165836006', 'A', '2016-08-18 00:00:00', '000065', '767', '?', '', '', 'u', '', '', '12010001', '11010301', 'JPY', null, '', '', '567', '2016-08-19 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-18 16:58:36');
+INSERT INTO `entry` VALUES ('8', '20160818170218007', 'A', '2016-08-18 00:00:00', '000066', '43', '?', '', '', '?', '', '', '11015001', '12010001', 'CNY', null, '', '', '43', '2016-08-19 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '5', null, '1', null, '2016-08-18 17:02:18');
+INSERT INTO `entry` VALUES ('9', '20160819104014001', 'A', '2016-08-19 00:00:00', '000065', '534', '????', '', '', '??', '', '', '11010301', '11010301', 'JPY', null, '', '', '32', '2016-08-20 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '5', null, '1', null, '2016-08-19 10:40:14');
+INSERT INTO `entry` VALUES ('10', '20160819104131002', 'A', '2016-08-19 00:00:00', '000066', '45', '7?', '', '', '??', '', '', '11010301', '12010002', 'HKD', '6', '', '', '534', '2016-08-20 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-19 10:41:31');
+INSERT INTO `entry` VALUES ('11', '20160819104955003', 'A', '2016-08-10 00:00:00', '000065', '324', '???', '', '', '??', '', '', '11010101', '11015001', 'JPY', '5', '', '', '3242', '2016-08-04 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-19 10:49:55');
+INSERT INTO `entry` VALUES ('12', '20160819105122004', 'A', '2016-08-20 00:00:00', '000068', '43543', '???', '', '', '????', '', '', '11010301', '12010002', 'JPY', '2', '', '', '543', '2016-08-10 00:00:00', null, '', '', '110000', '??', '', '', '', '', '', '', null, '', '', '', '', '19', null, '1', null, '2016-08-19 10:51:22');
+INSERT INTO `entry` VALUES ('13', '20160819105805001', 'A', '2016-08-19 00:00:00', '000066', '42432', '????', '', '', '???', '', '', '11010101', '12010002', 'HKD', null, '', '', '323', '2016-08-20 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-19 10:58:05');
+INSERT INTO `entry` VALUES ('14', '20160822090921001', 'A', '2016-08-17 00:00:00', '000065', '454', '???', '', '', '???', '', '', '12010001', '12010001', 'EUR', null, '', '', '46', '2016-08-18 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '5', null, '1', null, '2016-08-22 09:09:21');
+INSERT INTO `entry` VALUES ('15', '20160822095033001', 'A', '2016-08-22 11:43:43', '000065', '54', '高浮雕', '', '', '???', '', '', '11010301', '11015001', 'EUR', null, '', '', '42', '2016-08-19 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 11:43:43');
+INSERT INTO `entry` VALUES ('16', '20160822095227001', 'A', '2016-08-24 00:00:00', '000067', '21321', '???', '', '', '???', '', '', '11015001', '11015001', 'EUR', null, '', '', '321', '2016-08-08 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 09:52:27');
+INSERT INTO `entry` VALUES ('17', '20160822095352002', 'A', '2016-08-24 00:00:00', '000067', '21321', '???', '', '', '???', '', '', '11015001', '11015001', 'EUR', null, '', '', '321', '2016-08-08 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 09:53:52');
+INSERT INTO `entry` VALUES ('18', '20160822100518001', 'A', '2016-08-22 00:00:00', '000065', '432', '??', '', '', '???', '', '', '11010301', '12010002', 'USD', null, '', '', '34', '2016-08-23 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-22 10:05:18');
+INSERT INTO `entry` VALUES ('19', '20160822101023001', 'A', '2016-08-22 00:00:00', '000066', '21', '32??', '', '', '????', '', '', '11015001', '12010001', 'JPY', null, '', '', '21', '2016-08-23 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '7', null, '1', null, '2016-08-22 10:10:23');
+INSERT INTO `entry` VALUES ('20', '20160822101023051', 'A', '2016-08-22 10:13:25', '000066', '21', '附近多撒垃圾费', '', '', '范德萨发', '', '', '11015001', '12010001', 'JPY', null, '', '', '21', '2016-08-23 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '7', null, '1', null, '2016-08-22 10:13:25');
+INSERT INTO `entry` VALUES ('21', '20160822101751001', 'A', '2016-08-22 00:00:00', '000065', '234', '???', '', '', '?', '', '', '11010301', '11010101', 'HKD', null, '', '', '543', '2016-08-22 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-22 10:17:51');
+INSERT INTO `entry` VALUES ('22', '20160822102840001', 'A', '2016-08-22 00:00:00', '000066', '646', '???', '', '', '??', '', '', '12010001', '12010004', 'EUR', null, '', '', '543', '2016-08-23 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:28:41');
+INSERT INTO `entry` VALUES ('23', '20160822103122001', 'A', '2016-08-25 00:00:00', '000066', '346', '??', '', '', '??', '', '', '11015001', '11015001', 'HKD', null, '', '', '534', '2016-08-26 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:31:22');
+INSERT INTO `entry` VALUES ('24', '20160822103217002', 'A', '2016-08-25 00:00:00', '000066', '346', '??', '', '', '??', '', '', '11015001', '11015001', 'HKD', null, '', '', '534', '2016-08-26 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:32:17');
+INSERT INTO `entry` VALUES ('25', '20160822103248003', 'A', '2016-09-01 00:00:00', '000065', '43254', '????', '', '', '??', '', '', '13020101', '11015001', 'JPY', null, '', '', '43', '2016-08-12 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:32:48');
+INSERT INTO `entry` VALUES ('26', '20160822103951001', 'A', '2016-08-05 00:00:00', '000065', '321', '???', '', '', '??', '', '', '12010003', '12010004', 'USD', null, '', '', '21', '2016-08-17 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:39:52');
+INSERT INTO `entry` VALUES ('27', '20160822103951001', 'A', '2016-08-05 00:00:00', '000065', '321', '法规尽快', '', '', '??', '', '', '12010003', '12010004', 'USD', null, '', '', '21', '2016-08-17 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '4', null, '1', null, '2016-08-22 10:39:52');
+INSERT INTO `entry` VALUES ('28', '20160822105543001', 'A', '2016-08-22 00:00:00', '000067', '4324', '???', '', '', '????', '', '', '12010002', '12010201', 'USD', null, '', '', '32', '2016-09-01 00:00:00', null, '', '', '110100', '??', '', '', '', '', '', '', null, '', '', '', '', '6', null, '1', null, '2016-08-22 10:55:43');
+INSERT INTO `entry` VALUES ('29', '20160822110546001', 'A', '2016-08-22 00:00:00', '000066', '453', '???', '', '', '???', '', '', '13020001', '12010201', 'HKD', null, '', '', '543', '2016-08-23 00:00:00', null, '', '', '110102', '??', '', '', '', '', '', '', null, '', '', '', '', '3', null, '1', null, '2016-08-22 11:05:46');
+INSERT INTO `entry` VALUES ('30', '20160822113632001', 'A', '2016-08-22 00:00:00', '000067', '423', '???', '', '', '??SF', '', '', '13020101', '12010004', 'HKD', null, '', '', '23', '2016-08-23 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '6', null, '1', null, '2016-08-22 11:36:32');
+INSERT INTO `entry` VALUES ('31', '20160822113905001', 'A', '2016-08-22 00:00:00', '443412', '6546', '????', '', '', '?????', '', '', '12010001', '12010002', 'JPY', null, '', '', '534', '2016-08-23 00:00:00', null, '', '', '110101', '??', '', '', '', '', '', '', null, '', '', '', '', '7', null, '1', null, '2016-08-22 11:39:05');
+INSERT INTO `entry` VALUES ('32', '20160822153750001', 'A', '2016-08-22 00:00:00', '000066', '4234', 'gfdsg ', '', '', 'fsd ', '', '', '11010101', '11010301', 'EUR', null, '', '', '32', '2016-08-24 00:00:00', null, '', '', '110102', '??', '', '', '', '', '', '', null, '', '', '', '', '6', null, '1', null, '2016-08-22 15:37:50');
 
 -- ----------------------------
 -- Table structure for entry_con
@@ -8575,12 +8606,19 @@ CREATE TABLE `entry_con` (
   `sealNo` varchar(128) DEFAULT NULL COMMENT '封条号码',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entry_con
 -- ----------------------------
 INSERT INTO `entry_con` VALUES ('8', '1', 'fdsu4545454', '40:40', 'B', '32', '2016-08-17 16:43:54');
+INSERT INTO `entry_con` VALUES ('9', '2', 'srtu4561233', '20:20', 'B', '432', '2016-08-18 16:34:02');
+INSERT INTO `entry_con` VALUES ('10', '3', 'fsfu4561233', '25:25', 'B', '432', '2016-08-18 16:36:18');
+INSERT INTO `entry_con` VALUES ('11', '4', 'asdu4644545', '25:25', 'C', '32', '2016-08-18 16:38:49');
+INSERT INTO `entry_con` VALUES ('14', '11', 'secu5465454', '20:20', 'B', '32', '2016-08-19 10:50:12');
+INSERT INTO `entry_con` VALUES ('15', '12', 'dghu4545454', '25:25', 'C', '543', '2016-08-19 10:51:35');
+INSERT INTO `entry_con` VALUES ('16', '32', 'sdfu4454554', '20:20', 'C', '', '2016-08-22 15:38:11');
+INSERT INTO `entry_con` VALUES ('17', '32', 'sdfu4454554', '45:45', 'C', '', '2016-08-22 15:38:20');
 
 -- ----------------------------
 -- Table structure for entry_good
@@ -8592,7 +8630,7 @@ CREATE TABLE `entry_good` (
   `contId` int(11) DEFAULT NULL COMMENT '箱号id',
   `cbeComId` int(11) NOT NULL COMMENT '跨境电商企业id',
   `hsCode` varchar(32) NOT NULL COMMENT 'hs编码',
-  `ciqGoodsCode` varchar(50) NOT NULL COMMENT '商品备案号',
+  `ciqGoodsNo` varchar(50) NOT NULL COMMENT '商品备案号',
   `gCode` varchar(30) NOT NULL COMMENT '商品货号',
   `goodsMaterial` varchar(256) DEFAULT NULL COMMENT '商品材质',
   `packType` varchar(255) NOT NULL COMMENT '包装方式',
@@ -8612,11 +8650,27 @@ CREATE TABLE `entry_good` (
   `packPieceNum` int(11) DEFAULT NULL COMMENT '包装件数',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entry_good
 -- ----------------------------
+INSERT INTO `entry_good` VALUES ('2', '4', '11', '2', '432', '42', '432', '', '3B2', 'EUR', '432', '432', '43', '001', '43', '', '43', '43', '18576', '', null, '43', null, '2016-08-18 16:39:13');
+INSERT INTO `entry_good` VALUES ('3', '5', null, '32', '32', '32', '32', '', '4B', 'USD', '32', '32', '32', '003', '32', '', '32', '32', '1024', '', null, '32', null, '2016-08-18 16:42:03');
+INSERT INTO `entry_good` VALUES ('4', '5', null, '5', '323', '323', '32', '', '3H1', 'CNY', '32', '43', '43', '006', '43', '', '43', '43', '1376', '', null, '43', null, '2016-08-18 16:43:08');
+INSERT INTO `entry_good` VALUES ('5', '5', null, '4', '978', '765', '87', '', '4H', 'EUR', '87', '87', '87', '018', '87', '', '87', '87', '7569', '', null, '87', null, '2016-08-18 16:45:51');
+INSERT INTO `entry_good` VALUES ('7', '6', null, '2', '645', '564', '64', '', '490', 'EUR', '654', '654', '54', '002', '654', '', '65', '65', '427716', '', null, '654', null, '2016-08-18 16:53:25');
+INSERT INTO `entry_good` VALUES ('8', '6', null, '5', '65', '65', '65', '', '3B1', 'CNY', '65', '65', '65', '001', '65', '', '65', '65', '4225', '', null, '65', null, '2016-08-18 16:53:41');
+INSERT INTO `entry_good` VALUES ('9', '6', null, '18', '65', '65', '65', '', '5M1', 'JPY', '65', '65', '65', '006', '65', '', '65', '65', '4225', '', null, '65', null, '2016-08-18 16:54:03');
+INSERT INTO `entry_good` VALUES ('10', '7', null, '4', '7', '765', '76', '', '3H2', 'EUR', '765', '76', '765', '004', '57', '', '765', '765', '43605', '', null, '76', null, '2016-08-18 16:58:58');
+INSERT INTO `entry_good` VALUES ('14', '8', null, '5', '32', '32', '32', '', '3H1', 'EUR', '32', '32', '32', '007', '32', '', '32', '32', '1024', '', null, '32', null, '2016-08-18 17:03:06');
+INSERT INTO `entry_good` VALUES ('18', '1', null, '4', '654', '654', '65', '', '3B2', 'HKD', '654', '654', '654', '003', '654', '', '654', '645', '427716', '', null, '64', null, '2016-08-18 17:20:32');
+INSERT INTO `entry_good` VALUES ('19', '1', null, '2', '1', '1', '1', '', '3H1', 'HKD', '32', '32', '32', '003', '32', '', '32', '32', '1024', '', null, '32', null, '2016-08-19 10:37:56');
+INSERT INTO `entry_good` VALUES ('20', '12', null, '4', '543', '543', '53', '', '3B2', 'EUR', '54', '54', '54', '002', '543', '', '54', '54', '29322', '', null, '54', null, '2016-08-19 10:51:52');
+INSERT INTO `entry_good` VALUES ('22', '13', null, '4', '21', '2123', '212', '', '3B2', 'EUR', '21', '21', '21', '032', '21', '', '21', '21', '441', '', null, '21', null, '2016-08-19 10:59:15');
+INSERT INTO `entry_good` VALUES ('23', '13', null, '2', '22', '22', '2', '', '4A', 'EUR', '21', '21', '21', '029', '21', '', '21', '21', '441', '', null, '21', null, '2016-08-19 10:59:04');
+INSERT INTO `entry_good` VALUES ('24', '32', null, '4', '54', '54235', '54', '', '3H1', 'HKD', '54', '54', '54', '002', '54', '', '54', '54', '2916', '', null, '54', null, '2016-08-22 15:38:39');
+INSERT INTO `entry_good` VALUES ('25', '32', null, '16', '32', '232', '32', '', '3B2', 'JPY', '32', '32', '32', '003', '32', '', '32', '32', '1024', '', null, '32', null, '2016-08-22 15:39:01');
 
 -- ----------------------------
 -- Table structure for good
@@ -8646,7 +8700,7 @@ CREATE TABLE `good` (
   `gmid` int(11) NOT NULL COMMENT '商品备案申请主表ID',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
@@ -8673,6 +8727,7 @@ INSERT INTO `good` VALUES ('37', '7', '7', '7', '77', '7', '7', '77', '7', '', '
 INSERT INTO `good` VALUES ('38', '8', '8', '88', '8', '8', '88', '8', '8', '88', '8', '8', '8', '8', '88', '8', '8', null, '0', null, '21', '2016-08-14 21:27:25');
 INSERT INTO `good` VALUES ('39', '5', '5', '5', '5', '5', '', '', '', '', '', '5', '5', '', '', '', '0', null, '1', null, '22', '2016-08-15 14:06:38');
 INSERT INTO `good` VALUES ('40', '6', '6', '6', '66', '6', '6', '6', '6', '6', '6', '6', '6', '', '', '', '0', null, '1', null, '22', '2016-08-15 14:06:38');
+INSERT INTO `good` VALUES ('41', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', null, '1', null, '23', '2016-08-22 10:58:51');
 
 -- ----------------------------
 -- Table structure for good_main
@@ -8687,7 +8742,7 @@ CREATE TABLE `good_main` (
   `editId` int(11) NOT NULL COMMENT '制单企业id',
   `operType` varchar(10) DEFAULT 'A' COMMENT '操作类型（默认为A）\r\nA:新增;\r\nM:修改;\r\nI:自动引用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good_main
@@ -8714,6 +8769,7 @@ INSERT INTO `good_main` VALUES ('19', '123', '000020', '3', 'dfsaf', '2', 'A');
 INSERT INTO `good_main` VALUES ('20', '123', '000020', '3', 'dfsaf', '2', 'A');
 INSERT INTO `good_main` VALUES ('21', '123', '000020', '3', 'dfsaf', '2', 'A');
 INSERT INTO `good_main` VALUES ('22', '123', '000020', '14', '', '29', 'A');
+INSERT INTO `good_main` VALUES ('23', '20160822105851002', '000064', '5', '?????', '5', 'A');
 
 -- ----------------------------
 -- Table structure for module
@@ -8747,7 +8803,7 @@ CREATE TABLE `role_module` (
   `rname` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '角色名称',
   `mid` int(11) NOT NULL COMMENT '模块id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of role_module
@@ -8757,6 +8813,7 @@ INSERT INTO `role_module` VALUES ('2', 'ROLE_USER', '2');
 INSERT INTO `role_module` VALUES ('3', 'ROLE_USER', '3');
 INSERT INTO `role_module` VALUES ('4', 'ROLE_USER', '4');
 INSERT INTO `role_module` VALUES ('5', 'ROLE_USER', '5');
+INSERT INTO `role_module` VALUES ('6', 'ROLE_USER', '6');
 
 -- ----------------------------
 -- Table structure for _user

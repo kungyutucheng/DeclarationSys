@@ -137,7 +137,6 @@
 				method:"post",
 				pagination:true,
 				rownumbers:true,
-				loadMsg:"加载中，请稍后...",
 				ctrlSelect:true,
 				queryParams:queryParams,
 				columns:[[
@@ -197,14 +196,6 @@
 				        	  return (new Date(value)).format("yyyy-MM-dd hh:mm:ss");
 				          }},
 				          ]]
-			});
-			
-			
-			var pager = $("#goodDg").datagrid("getPager");
-			pager.pagination({
-				loading:true,
-				displayMsg:"从第{from}条数据到第{to}条数据，共{total}条数据"
-				
 			});
 			
 		});

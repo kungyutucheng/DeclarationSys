@@ -29,7 +29,7 @@ public class Test{
 	@org.junit.Test
 	public void test(){
 		try {
-			mockmvc.perform(post("/entry/getEntry").param("pageSize", "10").param("pageNumber", "1")).andExpect(status().isOk()).andDo(print());
+			mockmvc.perform(post("/good/searchgrid").param("row", "10").param("page", "1")).andExpect(status().isOk()).andDo(print());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

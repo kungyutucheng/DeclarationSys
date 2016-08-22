@@ -4,13 +4,15 @@
 <%@ include file="/common/taglibs.jsp"%>
 <html>
 <head>
+<script type="text/javascript" src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>入境进区查询</title>
 </head>
-<body class="easyui-layout">
-	<div class="easyui-layout" data-options="region:'north',split:true" title="查询条件">
+<body>
+	<fieldset>
+		<legend>查询条件</legend>
 		<form id="searchForm" method="post">
-			<div class="subTitle"></div>
+			<div class="subTitle">基础信息</div>
 			<hr/>
 			<table class="myTable">
 				<tr>
@@ -20,13 +22,50 @@
 				        data-options="valueField:'code',textField:'name',url:'${basePath }/org/getAll',
 				        icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
-					<td>申报日期</td>
-					<td colspan="3">
-						<input name="startDeclarationDate" class="easyui-datebox"
-						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">&nbsp;-
-						<input name="endDeclarationDate" class="easyui-datebox"
-						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+					<td>报检类别</td>
+					<td>
+						<input name="tblType" class="easyui-combobox"
+			                    	 data-options="
+			                    	 valueField:'value',
+			                    	textField:'label',
+			                    	data:[{
+			                    		label:'入境检验检疫',
+			                    		value:'13'
+			                    	},{
+				                   		label:'入境流向',
+				                   		value:'14'
+				                   	},{
+				                   		label:'入境验证',
+				                   		value:'15'
+				                   	}],
+				                   	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
+					<td>报检申报类别</td>
+					<td>
+						<input name="tblReportType" class="easyui-combobox"
+			                    	 data-options="
+			                    	 valueField:'value',
+			                    	textField:'label',
+			                    	data:[{
+				                    	label:'一般进口',
+				                    	value:'01'
+				                   	},{
+				                   		label:'出去进口',
+				                   		value:'03'
+				                   	},{
+				                   		label:'境外进口',
+				                   		value:'05'
+				                   	},
+				                   	{
+				                   		label:'进境集装箱重箱',
+				                   		value:'07'
+				                   	},{
+				                   		label:'进境集装箱空箱',
+				                   		value:'09'
+				                   	}],
+				                   	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+					</td>
+					
 				</tr>
 				<tr>
 					<td>运输工具</td>
@@ -76,9 +115,33 @@
 						<input name="endArrivalDate" class="easyui-datebox"
 						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
-					<td>目的地</td>
+					<td>状态</td>
 					<td>
-						<input name="destination" class="easyui-textbox">
+						<input name="status" class="easyui-combobox"
+						data-options="valueField:'value',textField:'label',
+						data:[{
+			                   label:'待发送',
+			                   value:1
+			                  },{
+				               label:'已发送',
+				               value:2
+				              },{
+				               label:'待审核',
+				               value:3
+				              },{
+				               label:'接收失败',
+				               value:4
+				              },{
+				               label:'审核成功',
+				               value:5
+				              },{
+				               label:'审核查验',
+				               value:6
+				              },{
+				               label:'审核失败',
+				               value:7
+				              }],
+				             icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
 				</tr>
 				<tr>
@@ -91,56 +154,21 @@
 					</td>
 					<td>目的地</td>
 					<td>
-						<input name="stockLocation" class="easyui-textbox">
+						<input name="destination" class="easyui-textbox">
 					</td>
+					
 				</tr>
 				<tr>
-					<td>报检类别</td>
-					<td>
-						<input name="tblType" class="easyui-combobox"
-			                    	 data-options="
-			                    	 valueField:'value',
-			                    	textField:'label',
-			                    	data:[{
-			                    		label:'入境检验检疫',
-			                    		value:'13'
-			                    	},{
-				                   		label:'入境流向',
-				                   		value:'14'
-				                   	},{
-				                   		label:'入境验证',
-				                   		value:'15'
-				                   	}],
-				                   	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
+					<td>申报日期</td>
+					<td colspan="3">
+						<input name="startDeclarationDate" class="easyui-datebox"
+						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">&nbsp;-
+						<input name="endDeclarationDate" class="easyui-datebox"
+						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
-					<td>报检申报类别</td>
+					<td>存货地点</td>
 					<td>
-						<input name="tblReportType" class="easyui-combobox"
-			                    	 data-options="
-			                    	 valueField:'value',
-			                    	textField:'label',
-			                    	data:[{
-				                    	label:'一般进口',
-				                    	value:'01'
-				                   	},{
-				                   		label:'出去进口',
-				                   		value:'03'
-				                   	},{
-				                   		label:'境外进口',
-				                   		value:'05'
-				                   	},
-				                   	{
-				                   		label:'进境集装箱重箱',
-				                   		value:'07'
-				                   	},{
-				                   		label:'进境集装箱空箱',
-				                   		value:'09'
-				                   	}],
-				                   	 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
-					</td>
-					<td>特殊要求</td>
-					<td>
-						<input name="specRequire" class="easyui-textbox">
+						<input name="stockLocation" class="easyui-textbox">
 					</td>
 				</tr>
 				<tr>
@@ -281,23 +309,56 @@
 					</td>
 				</tr>
 			</table>
-		</form>		
-	</div>
-	<div class="easyui-layout" data-options="region:'center',split:true" title="查询结果">
-		<table id="entryDg"></table>
-	</div>
+			<div style="width:100%;text-align:center;">
+				<button type="button" class="btn btn-primary myBtn" onclick="search();">查询</button>
+				<button type="button" class="btn btn-primary myBtn" onclick="resetForm();">重置</button>
+			</div>
+		</form>
+	</fieldset>
+	<fieldset>
+		<legend>查询结果</legend>
+		<table id="entryDg" style="width:100%;"></table>
+	</fieldset>
 	<script>
 	$(function(){
 		$("#entryDg").datagrid({
 			url:"${basePath}/entry/getEntry",
 			pagination:true,
 			rownumbers:true,
-			loadMsg:"加载中，请稍后...",
 			queryParams:$("#searchForm").serializeObject(),
 			columns:[[
 			          {field:"id",hidden:true},
 			          {field:"entInBoundNo",title:"企业自编号",width:100},
-			          {field:"operType",title:"操作类型",width:50},
+			          {field:"status",title:"状态",width:50,formatter:function(value,row,index){
+			        	  if(value == 0){
+			        		  return "<font color='blue'>新增</font>";
+			        	  }else if(value == 1){
+			        		  return "<font color='purple'>待发送</font>";
+			        	  }else if(value == 2){
+			        		  return "<font color='orange'>已发送</font>";
+			        	  }else if(value == 3){
+			        		  return "<font color='pink'>待审核</font>";
+			        	  }else if(value == 4){
+			        		  return "<font color='brown'>接收失败</font>";
+			        	  }else if(value == 5){
+			        		  return "<font color='green'>审核成功</font>";
+			        	  }else if(value == 6){
+			        		  return "<font color='yellow'>审核查验</font>";
+			        	  }else if(value == 7){
+			        		  return "<font color='red'>审核失败</font>";
+			        	  }else{
+			        		  return value;
+			        	  }
+			          }},
+			          {field:"operType",title:"操作类型",width:50,formatter:function(value,row,index){
+			        	  if(value == "A"){
+			        		  return "<font color='blue'>新增</font>";
+			        	  }else if(value == "M"){
+			        		  return "<font color='purple'>变更</font>";
+			        	  }else{
+			        		  return value;
+			        	  }
+			          }},
 			          {field:"declarationDate",title:"申报日期",width:100,formatter:function(value,row,index){
 			        	  return (new Date(value)).format("yyyy-MM-dd");
 			          }},
@@ -392,35 +453,110 @@
 			          {field:"declCode",title:"预申报编码",width:100},
 			          {field:"editName",title:"跨境电商企业",width:200},
 			          {field:"eportInboundNo",title:"ICIP平台标识",width:100},
-			          {field:"status",title:"跨境电商企业",width:50,formatter:function(value,row,index){
-			        	  if(value == 0){
-			        		  return "<font color='blue'>新增</font>";
-			        	  }else if(value == 1){
-			        		  return "<font color='purple'>待发送</font>";
-			        	  }else if(value == 2){
-			        		  return "<font color='orange'>已发送</font>";
-			        	  }else if(value == 3){
-			        		  return "<font color='pink'>待审核</font>";
-			        	  }else if(value == 4){
-			        		  return "<font color='brown'>接收失败</font>";
-			        	  }else if(value == 5){
-			        		  return "<font color='green'>审核成功</font>";
-			        	  }else if(value == 6){
-			        		  return "<font color='yellow'>审核查验</font>";
-			        	  }else if(value == 7){
-			        		  return "<font color='red'>审核失败</font>";
-			        	  }else{
-			        		  return value;
-			        	  }
-			          }},
 			          {field:"regStatusDesc",title:"审核备注",width:100},
 			          {field:"createTime",title:"创建时间",width:150,formatter:function(value,row,index){
 			        	  return (new Date(value)).format("yyyy-MM-dd hh:mm:ss");
 			          }}
-			     ]]
+			     ]],
+			     view:detailview,
+			     detailFormatter:function(index , row){
+			    	 return "<table id='goodDg'></table>"+
+				     "<table id='conDg' style='width:auto;'></table>";
+			     },
+			     onExpandRow:function(index,row){
+			    	 var goodDg = $(this).datagrid("getRowDetail",index).find("#goodDg");
+			    	 goodDg.datagrid({
+			    		 url:"${basePath}/entry/getGood?eid=" + row.id,
+			    		 cache:true,
+			    		 singleSelect:true,
+			    		 rownumebrs:true,
+			    		 height:"auto",
+			    		 pagination:true,
+			    		 columns:[[
+			 	                  {field:"id",hidden:true,title:"id"},
+			 	                  {field:"cbeComName",title:"跨境电商企业",width:300},
+			 	                  {field:"hsCode",title:"hs码",width:80},
+			 	                  {field:"ciqGoodsNo",title:"商品备案号",width:100},
+			 	                  {field:"gCode",title:"商品货号",width:100},
+			 	                  {field:"goodsMaterial",title:"商品材质",width:200},
+			 	                  {field:"packTypeName",title:"包装类型",width:200},
+			 	                  {field:"fName",title:"货币",width:100},
+			 	                  {field:"uPric",title:"单价",width:100},
+			 	                  {field:"buyFromCity",title:"采购城市",width:100},
+			 	                  {field:"qty",title:"数量",width:100},
+			 	                  {field:"qtyDesc",title:"单位描述",width:100},
+			 	                  {field:"qtp",title:"第二数量",width:100},
+			 	                  {field:"qtpUnitName",title:"第二数量单位",width:100},
+			 	                  {field:"kgs",title:"毛重",width:100},
+			 	                  {field:"fcy",title:"净重",width:100},
+			 	                  {field:"conNo",title:"箱号",width:100},
+			 	                  {field:"kgsUnit",title:"重量单位",width:100},
+			 	                  {field:"packNum",title:"包装数量",width:100},
+			 	                  {field:"goodsBatchNo",title:"商品批次号",width:100},
+			 	                  {field:"packPieceNum",title:"包装件数",width:100},
+			 	                  {field:"createTime",title:"创建时间",width:200,formatter:function(value,row,index){
+			 	                	  return (new Date(value)).format("yyyy-MM-dd hh:mm:ss");
+			 	                  }},
+			 	                  ]],
+			 	     	 onResize:function(){
+			 	     		 $("#entryDg").datagrid("fixDetailRowHeight",index);
+			 	     	 },
+			 	     	 onLoadSuccess:function(){
+			 	     		 setTimeout(function(){
+			 	     			 $("#entryDg").datagrid("fixDetailRowHeight",index);
+			 	     		 },0);
+			 	     	 }
+			    	 });
+			    	 var goodDg = $(this).datagrid("getRowDetail",index).find("#conDg");
+			    	 goodDg.datagrid({
+			    		 url:"${basePath}/entry/getCon?eid=" + row.id,
+			    		 cache:true,
+			    		 singleSelect:true,
+			    		 rownumebrs:true,
+			    		 height:"auto",
+			    		 pagination:true,
+			    		 columns:[[
+							{field:"id",hidden:true,title:"id"},
+							{field:"conNo",title:"箱号",width:150},
+							{field:"conSize",title:"尺寸",width:150},
+							{field:"conType",title:"柜型",width:150,formatter:function conTypeFormatter(value,row,index){
+								if(value == "A"){
+									return "<font color='blue'>普通箱</font>";
+								}
+								else if(value == "B"){
+									return "<font color='pink'>超高柜</font>";
+								}
+								else if(value == "C"){
+									return "<font color='green'>冷藏</font>";
+								}
+								else if(value == "D"){
+									return "<font color='red'>罐式</font>";
+								}
+							}},
+							{field:"sealNo",title:"封条号码",width:200}
+			 	         ]],
+			 	     	 onResize:function(){
+			 	     		 $("#entryDg").datagrid("fixDetailRowHeight",index);
+			 	     	 },
+			 	     	 onLoadSuccess:function(){
+			 	     		 setTimeout(function(){
+			 	     			 $("#entryDg").datagrid("fixDetailRowHeight",index);
+			 	     		 },0);
+			 	     	 }
+			    	 });
+			    	 $("#entryDg").datagrid("fixDetailRowHeight",index);
+			   	}
 			});
 		}
-	)
+	);
+	
+	function resetForm(){
+		$("#searchForm").form("reset");
+	}
+	
+	function search(){
+		$("#entryDg").datagrid("reload",$("#searchForm").serializeObject());
+	}
 	</script>
 </body>
 </html>

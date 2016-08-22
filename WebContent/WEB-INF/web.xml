@@ -7,11 +7,23 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:/spring/spring.xml</param-value>
   </context-param>
+   <filter>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>utf-8</param-value>
+	</init-param>
+   </filter>
    
   <filter>
   	<filter-name>loginFilter</filter-name>
   	<filter-class>com.gpl.framework.filter.LoginFilter</filter-class>
   </filter>
+  <filter-mapping>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+   </filter-mapping>
   <filter-mapping>
   	<filter-name>loginFilter</filter-name>
   	<url-pattern>/*</url-pattern>

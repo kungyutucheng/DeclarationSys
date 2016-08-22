@@ -51,7 +51,7 @@ public class EntryController extends BaseController{
 	@RequestMapping(path = "/getEntry",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getEntry(){
-		Page page = new Page();
+		Page page = getPage();
 		page.setParams(getAllParams());
 		return renderJsonStr(entryBiz.queryPage(page));
 	
@@ -60,8 +60,9 @@ public class EntryController extends BaseController{
 	@RequestMapping(path = "/saveEntry",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String saveEntry(Entry entry){
+		System.out.println(entry);
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("Ìí¼Ó³É¹¦");
+		model.setMsg("æ·»åŠ æˆåŠŸ");
 		try{
 			entry.setEntInboundNo(Creator.createEntInboundNo());
 			entry.setStatus(1);
@@ -69,7 +70,7 @@ public class EntryController extends BaseController{
 			model.setData(entryBiz.save(entry));
 		}catch(Exception e){
 			e.printStackTrace();
-			model.setMsg("ÏµÍ³³ö´í£¬Ìí¼ÓÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œæ·»åŠ å¤±è´¥");
 			model.setSuccess(false);
 		}
 		return renderJsonStr(model);
@@ -96,12 +97,12 @@ public class EntryController extends BaseController{
 	@ResponseBody
 	public String saveCon(EntryCon con){
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("Ìí¼Ó³É¹¦");
+		model.setMsg("æ·»åŠ æˆåŠŸ");
 		try{
 			entryConBiz.save(con);
 		}catch(Exception e){
 			e.printStackTrace();
-			model.setMsg("ÏµÍ³³ö´í£¬Ìí¼ÓÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œæ·»åŠ å¤±è´¥");
 			model.setSuccess(false);
 		}
 		return renderJsonStr(model);
@@ -111,12 +112,12 @@ public class EntryController extends BaseController{
 	@ResponseBody
 	public String updateCon(EntryCon con){
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("ĞŞ¸Ä³É¹¦");
+		model.setMsg("æ·»åŠ æˆåŠŸ");
 		try{
 			entryConBiz.saveOrUpdate(con);
 		}catch(Exception e){
 			e.printStackTrace();
-			model.setMsg("ÏµÍ³³ö´í£¬ĞŞ¸ÄÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œæ·»åŠ å¤±è´¥");
 			model.setSuccess(false);
 		}
 		return renderJsonStr(model);
@@ -127,7 +128,7 @@ public class EntryController extends BaseController{
 	public String deleteCon(String ids){
 		String [] idArray = ids.split(",");
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("É¾³ı³É¹¦");
+		model.setMsg("åˆ é™¤æˆåŠŸ");
 		try{
 			for(String id : idArray){
 				EntryCon con = new EntryCon();
@@ -137,7 +138,7 @@ public class EntryController extends BaseController{
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setSuccess(false);
-			model.setMsg("ÏµÍ³³ö´í£¬É¾³ıÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œåˆ é™¤å¤±è´¥");
 		}
 		
 		return renderJsonStr(model);
@@ -156,13 +157,13 @@ public class EntryController extends BaseController{
 	@ResponseBody
 	public String saveGood(EntryGood entryGood){
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("Ìí¼Ó³É¹¦");
+		model.setMsg("æ·»åŠ æˆåŠŸ");
 		try{
 			entryGood.setFcy(entryGood.getQty().multiply(entryGood.getuPric()));
 			entryGoodBiz.save(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();
-			model.setMsg("ÏµÍ³³ö´í£¬Ìí¼ÓÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œæ·»åŠ å¤±è´¥");
 			model.setSuccess(false);
 		}
 		return renderJsonStr(model);
@@ -172,13 +173,13 @@ public class EntryController extends BaseController{
 	@ResponseBody
 	public String updateGood(EntryGood entryGood){
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("ĞŞ¸Ä³É¹¦");
+		model.setMsg("æ›´æ–°æˆåŠŸ");
 		try{
 			entryGood.setFcy(entryGood.getQty().multiply(entryGood.getuPric()));
 			entryGoodBiz.saveOrUpdate(entryGood);
 		}catch(Exception e){
 			e.printStackTrace();
-			model.setMsg("ÏµÍ³³ö´í£¬ĞŞ¸ÄÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œæ›´æ–°å¤±è´¥");
 			model.setSuccess(false);
 		}
 		return renderJsonStr(model);
@@ -189,7 +190,7 @@ public class EntryController extends BaseController{
 	public String deleteGood(String ids){
 		String [] idArray = ids.split(",");
 		AjaxModel model = new AjaxModel(true);
-		model.setMsg("É¾³ı³É¹¦");
+		model.setMsg("åˆ é™¤æˆåŠŸ");
 		try{
 			for(String id : idArray){
 				EntryGood entryGood = new EntryGood();
@@ -199,7 +200,7 @@ public class EntryController extends BaseController{
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setSuccess(false);
-			model.setMsg("ÏµÍ³³ö´í£¬É¾³ıÊ§°Ü");
+			model.setMsg("ç³»ç»Ÿå‡ºé”™ï¼Œåˆ é™¤å¤±è´¥");
 		}
 		
 		return renderJsonStr(model);
