@@ -276,6 +276,7 @@
 				<div style="width:100%;text-align:center;margin-top:20px;">
 					<button type="button" onclick="saveEntry();" class="btn btn-primary myBtn">提交</button>
 					<button type="button" onclick="resetForm();" class="btn btn-primary myBtn">重置</button>
+					<button type="button" onclick="commit();" class="btn btn-primary myBtn">提交备案</button>
 				</div>
 			</form>
 		</div>
@@ -292,7 +293,7 @@
 		            closed="true" buttons="#dlg-buttons">
 		        <form id="conForm" method="post" style="margin:0;padding:20px 50px">
 		            <div style="margin-bottom:10px">
-		                <input name="conNo" class="easyui-textbox" required="true" label="箱号:" style="width:100%"
+		                <input name="conNo" class="easyui-textbox" required="true" label="箱号" style="width:100%"
 		                validType="match[/^[a-zA-Z]{3}[Uu][0-9]{7}$/,'请输入11位字符，且前三位为字母，第四位为U，后七位为数字']">
 		            </div>
 		            <div style="margin-bottom:10px">
@@ -786,7 +787,6 @@
     }
     function addGood(){
     	var row = $("#addGoodDg").datagrid("getSelected");
-    	console.log(row);
     	if(row){
 	    	$('#goodForm').form('reset');
 	    	$('#goodForm').form('load',row);
@@ -801,6 +801,25 @@
     	}
     }
     
+    function commit(){
+    	if(eid == 0){
+    		layer.msg("请先提交入境进区申报单");
+    		return;
+    	}
+    	var row = $("#entryGoodDg").datagrid("getRows"); 
+    	if(!row || row.length == 0){
+    		layer.msg("请添加货物");
+    		return;
+    	}
+    	$.messager.confirm("提交备案","确认提交？",function(r){
+			if(r){
+				$.post("${basePath}/entry/commit",{id:eid},function(result){
+					var result = $.parseJSON(result);
+					layer.msg(result.msg);
+				});
+			}
+		});
+    }
 	</script>
 </body>
 </html>

@@ -37,7 +37,7 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 	public void deleteIds(String ids,String className){
 		String [] idArray = ids.split(",");
 		for(String id : idArray){
-			baseDao.delete(new Long(id),className);
+			baseDao.delete(new Integer(id),className);
 		}
 	}
 	
@@ -78,7 +78,7 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 	}
 	
 	/**
-	 * ²éÑ¯·ÖÒ³Ò³Êý
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Ò³Ò³ï¿½ï¿½
 	 * @param sql
 	 * @return
 	 */
@@ -87,7 +87,7 @@ public abstract class BaseBiz<T,PK extends Serializable> {
 	}
 	
 	/**
-	 * Ö´ÐÐhql½øÐÐÅúÁ¿ÐÞ¸Ä/É¾³ý²Ù×÷
+	 * Ö´ï¿½ï¿½hqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½/É¾ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param hql
 	 * @param values
 	 * @return

@@ -127,6 +127,9 @@
 		</div>
 		<div data-options="region:'center',split:true" title="查询结果" style="height:auto;">
 			<table id="goodDg"></table>
+			<div id="toolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="commit()">提交备案</a>
+			</div>
 		</div>
 	</div>
     <script type="text/javascript">
@@ -138,10 +141,11 @@
 				pagination:true,
 				rownumbers:true,
 				ctrlSelect:true,
+				toolbar:"#toolbar",
 				queryParams:queryParams,
 				columns:[[
 				          {field:"ciqGoodsNo",title:"商品备案号",width:100},
-				          {field:"status",title:"审核状态",width:100,formatter:function(value,row,index){
+				          {field:"status",title:"状态",width:100,formatter:function(value,row,index){
 				        	  if(value == 0){
 				        		  return "<font color='blue'>新增</font>";
 				        	  }else if(value == 1){
@@ -209,6 +213,24 @@
 			$("#searchForm").form("reset");
 		}
 		
+		function commit(){
+			var row = $("#goodDg").datagrid("getSelected");
+			if(row && row.status == 0){
+				$.messager.confirm("提交备案","确认提交？",function(r){
+					if(r){
+						$.post("${basePath}/good/commitGood",{id:row.id},function(result){
+							var result = $.parseJSON(result);
+							layer.msg(result.msg);
+							if(result.success){
+								$("#goodDg").datagrid("reload",$("#searchForm").serializeObject());
+							}
+						});
+					}
+				});
+			}else{
+				layer.msg("请选择一条状态为新增的数据");
+			}
+		}
 		</script>
 	
 </body>

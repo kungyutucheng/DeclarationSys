@@ -318,6 +318,9 @@
 	<fieldset>
 		<legend>查询结果</legend>
 		<table id="entryDg" style="width:100%;"></table>
+		<div id="toolbar">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="commit()">提交备案</a>
+		</div>
 	</fieldset>
 	<script>
 	$(function(){
@@ -325,6 +328,7 @@
 			url:"${basePath}/entry/getEntry",
 			pagination:true,
 			rownumbers:true,
+			toolbar:"#toolbar",
 			queryParams:$("#searchForm").serializeObject(),
 			columns:[[
 			          {field:"id",hidden:true},
@@ -556,6 +560,25 @@
 	
 	function search(){
 		$("#entryDg").datagrid("reload",$("#searchForm").serializeObject());
+	}
+	
+	function commit(){
+		var row = $("#entryDg").datagrid("getSelected");
+		if(row && row.status == 0){
+			$.messager.confirm("提交备案","确认提交？",function(r){
+				if(r){
+					$.post("${basePath}/entry/commit",{id:row.id},function(result){
+						var result = $.parseJSON(result);
+						layer.msg(result.msg);
+						if(result.success){
+							$("#entryDg").datagrid("reload",$("#searchForm").serializeObject());
+						}
+					});
+				}
+			});
+		}else{
+			layer.msg("请选择一条状态为新增的数据");
+		}
 	}
 	</script>
 </body>

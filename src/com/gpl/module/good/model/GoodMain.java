@@ -19,41 +19,36 @@ public class GoodMain implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 主键
+	 * 涓婚敭
 	 */
 	private Integer id;
 	/**
-	 * 商品申请编号
+	 * 鍟嗗搧鐢宠缂栧彿
 	 */
 	private String cargobCode;
 	/**
-	 * 国检组织机构代码
+	 * 鍥芥鏈烘瀯浠ｇ爜
 	 */
 	private String ciqbCode;
 	/**
-	 * 跨境电商企业id
+	 * 璺ㄥ鐢靛晢浼佷笟id
 	 */
 	private Integer cbeComId;
 	/**
-	 * 备注
+	 * 澶囨敞
 	 */
 	private String remark;
 	/**
-	 * 制单企业id
+	 * 鍒跺崟浼佷笟id
 	 */
 	private Integer editId;
 	/**
-	 * 操作类型
-	 * 默认为A
-	 * A-新增
-	 * M-修改
-	 * I:自动引用
+	 * 鎿嶄綔绫诲瀷
+	 * A-鏂板锛堥粯璁わ級
+	 * M-淇敼
+	 * I-鑷姩寮曠敤
 	 */
 	private String operType;
-	/**
-	 * 相对应的商品列表
-	 */
-	private List<Good> goodList;
 	
 	public GoodMain(){
 		
@@ -117,13 +112,6 @@ public class GoodMain implements Serializable{
 	}
 	public void setOperType(String operType) {
 		this.operType = operType;
-	}
-	@Transient
-	public List<Good> getGoodList() {
-		return goodList;
-	}
-	public void setGoodList(List<Good> goodList) {
-		this.goodList = goodList;
 	}
 	@Override
 	public String toString() {

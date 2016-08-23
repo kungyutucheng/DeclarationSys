@@ -1,33 +1,25 @@
 package com.gpl.framework.base.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
 
 import com.gpl.framework.util.Page;
 
 public class BaseController {
 
 	/**
-	 * Ä¬ÈÏÃ¿Ò³¼ÇÂ¼Êı
+	 * 
 	 */
 	private static final int DEFAULT_PAGE_SIZE = 20;
 	private static final Logger LOGGER = Logger.getLogger(BaseController.class);
@@ -38,9 +30,7 @@ public class BaseController {
 	
 
 	/**
-	 * ModelAttribute×¢½âµÄ×÷ÓÃ£º
-	 * 1¡¢·ÅÔÚ·½·¨µÄĞÎ²ÎÉÏ±íÊ¾ÒıÓÃModelÖĞµÄÊı¾İ£»
-	 * 2¡¢·ÅÔÚ·½·¨ÉÏÃæ£¬±íÊ¾ÇëÇó¸ÃÀàµÄ Ã¿¸öcontrollerÇ°¶¼»áÖ´ĞĞËü£¬Ò²¿ÉÒÔ½«Ò»Ğ©×¼±¸Êı¾İµÄ²Ù×÷·ÅÔÚ¸Ã·½·¨ÀïÃæ
+	 * ModelAttributeå±æ€§ä¼šåœ¨æ­¤controllerçš„æ¯ä¸ªæ–¹æ³•æ‰§è¡Œå‰è¢«æ‰§è¡Œ
 	 * 
 	 * @param request
 	 * @param response
@@ -59,16 +49,17 @@ public class BaseController {
 	}
 	
 	/**
-	 * ÉÏÊö·½·¨Ò²¿ÉÒÔÕâÑùÊµÏÖ
+	 * å¦ä¸€ç§å®ç°æ–¹å¼
 	 * request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	 * response = ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
-	 * ¸ÃÖÖ·½·¨ÉĞÎ´²âÊÔ¹ı
-	 * ÒÔÉÏÁ©ÖĞ·½·¨À´Ô´£º
+	 * ç„¶åweb.xmlä¸­éœ€è¦é…ç½®å¦‚ä¸‹listener
+	 * <listener-class>org.springframework.web.context.request.RequestContentListener</listener-class> 
+	 * æ¥æº
 	 * http://blog.csdn.net/sonnet123/article/details/12168265
 	 */
 	
 	/**
-	 * ÒÔString·½Ê½·µ»ØkeyÖµÎªnameµÄ²ÎÊıÖµ£¬Èç¹ûname¶ÔÓ¦µÄÖµ²»´æÔÚ£¬Ôò·µ»Ønull
+	 * è·å–stringç±»å‹çš„å‚æ•°
 	 * @param name
 	 * @return
 	 */
@@ -81,7 +72,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * ÒÔInteger·½Ê½·µ»ØkeyÖµÎªnameµÄ²ÎÊıÖµ£¬Èç¹ûname¶ÔÓ¦µÄÖµ²»´æÔÚ£¬·µ»Ønull
+	 * è·å–intç±»å‹çš„å‚æ•°
 	 * @param name
 	 * @return
 	 */
@@ -94,7 +85,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * ÒÔFloat·½Ê½·µ»ØkeyÖµÎªnameµÄ²ÎÊı£¬Èç¹ûname¶ÔÓ¦µÄÖµ²»´æÔÚ£¬·µ»Ønull
+	 * è·å–floatç±»å‹çš„å‚æ•°
 	 * @param name
 	 * @return
 	 */
@@ -107,7 +98,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * ÒÔDouble·½Ê½·µ»ØkeyÖµÎªnameµÄ²ÎÊıÖµ£¬Èç¹ûname¶ÔÓ¦µÄÊôĞÔ²»´æÔÚ£¬·µ»Ønull
+	 * è·å–doubleç±»å‹çš„å‚æ•°
 	 * @param name
 	 * @return
 	 */
@@ -120,7 +111,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * ÒÔBoolean·½Ê½·µ»ØkeyÖµÎªnameµÄ²ÎÊıÖµ£¬Èç¹ûname¶ÔÓ¦µÄÊôĞÔ²»´æÔÚ£¬·µ»Ønull
+	 * è·å–boolç±»å‹çš„å‚æ•°
 	 * @param name
 	 * @return
 	 */
@@ -133,7 +124,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * »ñÈ¡requestÇëÇóÖĞµÄËùÓĞ²ÎÊı
+	 * è·å–å…¨éƒ¨å‚æ•°
 	 * @return
 	 */
 	public Map<String, Object> getAllParams(){
@@ -160,7 +151,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * Í¨¹ırequestÖĞµÄ²ÎÊı¹¹Ôìpage¶ÔÏó
+	 * æ ¹æ®å‚æ•°ç»„å»ºåˆ†é¡µç±» 
 	 * @return
 	 */
 	public Page getPage(){
@@ -184,20 +175,6 @@ public class BaseController {
 		return page;
 	}
 
-	/**
-	 * ÖØ¶¨Ïò
-	 * @param path
-	 *//*
-	public void redirect(String path){
-		try {
-			response.getOutputStream().print("<script type='text/javascript'>window.location = \"" + 
-		request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() 
-		+ request.getContextPath() + "/" + path +"\"</script>");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -211,7 +188,7 @@ public class BaseController {
 	}
 	
 	/**
-	 * ½«object¶ÔÏó×ª»»³ÉjsonÊı¾İ
+	 * å°†objectè½¬æ¢ä¸ºjson
 	 * @param value
 	 * @return
 	 */

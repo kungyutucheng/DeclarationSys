@@ -116,7 +116,15 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 			if(page.getParams().get("noNotNull") != null){
 				hql += " and g.ciqGoodsNo is not null";
 			}
+			if(page.getParams().get("gmid") != null){
+				hql += " and gmid=" + page.getParams().get("gmid");
+			}
 			hql	+= " order by g.createTime desc";
 		return goodDao.findPage(page, hql, new HashMap<String,Object>());
+	}
+	
+	public void batchUpdate(Integer gmid){
+		String hql = "update Good set status=1 where gmid=" + gmid;
+		goodDao.batchExecute(hql, new HashMap<String,Object>());
 	}
 }

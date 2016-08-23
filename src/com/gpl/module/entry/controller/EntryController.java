@@ -25,6 +25,14 @@ import com.gpl.module.entry.model.EntryCon;
 import com.gpl.module.entry.model.EntryGood;
 import com.gpl.module.util.Creator;
 
+import static com.gpl.framework.model.AjaxModel.SAVE_SUCCESS;
+import static com.gpl.framework.model.AjaxModel.SAVE_FAILURE;
+import static com.gpl.framework.model.AjaxModel.UPDATE_SUCCESS;
+import static com.gpl.framework.model.AjaxModel.UPDATE_FAILURE;
+import static com.gpl.framework.model.AjaxModel.DELETE_SUCCESS;
+import static com.gpl.framework.model.AjaxModel.DELETE_FAILURE;
+import static com.gpl.framework.model.AjaxModel.RECORD_SUCCESS;
+import static com.gpl.framework.model.AjaxModel.RECORD_FAILURE;
 @Controller
 @RequestMapping(path = "/entry")
 public class EntryController extends BaseController{
@@ -65,7 +73,7 @@ public class EntryController extends BaseController{
 		model.setMsg("添加成功");
 		try{
 			entry.setEntInboundNo(Creator.createEntInboundNo());
-			entry.setStatus(1);
+			entry.setStatus(0);
 			entry.setOperType("A");
 			model.setData(entryBiz.save(entry));
 		}catch(Exception e){
@@ -203,6 +211,23 @@ public class EntryController extends BaseController{
 			model.setMsg("系统出错，删除失败");
 		}
 		
+		return renderJsonStr(model);
+	}
+	
+	@RequestMapping(path = "/commit", method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@ResponseBody
+	public String commit(Integer id){
+		AjaxModel model = new AjaxModel(true);
+		model.setMsg(RECORD_SUCCESS);
+		try{
+			Entry entry = entryBiz.get(id, Entry.class.getName());
+			entry.setStatus(1);
+			entryBiz.update(entry);
+		}catch(Exception e){
+			e.printStackTrace();
+			model.setSuccess(false);
+			model.setMsg(RECORD_FAILURE);
+		}
 		return renderJsonStr(model);
 	}
 }
