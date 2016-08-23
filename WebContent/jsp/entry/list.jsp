@@ -332,8 +332,8 @@
 			queryParams:$("#searchForm").serializeObject(),
 			columns:[[
 			          {field:"id",hidden:true},
-			          {field:"entInBoundNo",title:"企业自编号",width:100},
-			          {field:"status",title:"状态",width:50,formatter:function(value,row,index){
+			          {field:"entInboundNo",title:"企业自编号",width:150},
+			          {field:"status",title:"状态",width:80,formatter:function(value,row,index){
 			        	  if(value == 0){
 			        		  return "<font color='blue'>新增</font>";
 			        	  }else if(value == 1){
@@ -354,7 +354,7 @@
 			        		  return value;
 			        	  }
 			          }},
-			          {field:"operType",title:"操作类型",width:50,formatter:function(value,row,index){
+			          {field:"operType",title:"操作类型",width:80,formatter:function(value,row,index){
 			        	  if(value == "A"){
 			        		  return "<font color='blue'>新增</font>";
 			        	  }else if(value == "M"){
@@ -366,17 +366,17 @@
 			          {field:"declarationDate",title:"申报日期",width:100,formatter:function(value,row,index){
 			        	  return (new Date(value)).format("yyyy-MM-dd");
 			          }},
-			          {field:"ciqbName",title:"审核机构名称",width:150},
+			          {field:"ciqbName",title:"审核机构名称",width:200},
 			          {field:"bargainNo",title:"合同号",width:100},
-			          {field:"shipperName",title:"发货人姓名",width:100},
-			          {field:"shipperNameEn",title:"发货人英文名",width:100},
-			          {field:"shipperAddr",title:"发货人地址",width:200},
-			          {field:"consigneeName",title:"收货人姓名",width:100},
-			          {field:"consigneeNameEn",title:"收货人英文名",width:100},
-			          {field:"consigneeAddr",title:"收货人地址",width:200},
-			          {field:"portLoadName",title:"起运港",width:100},
-			          {field:"portDisName",title:"目的港",width:100},
-			          {field:"fName",title:"币种",width:50},
+			          {field:"shipperName",title:"发货人姓名",width:150},
+			          {field:"shipperNameEn",title:"发货人英文名",width:150},
+			          {field:"shipperAddr",title:"发货人地址",width:300},
+			          {field:"consigneeName",title:"收货人姓名",width:150},
+			          {field:"consigneeNameEn",title:"收货人英文名",width:150},
+			          {field:"consigneeAddr",title:"收货人地址",width:300},
+			          {field:"portLoadName",title:"起运港",width:200},
+			          {field:"portDisName",title:"目的港",width:200},
+			          {field:"fName",title:"币种",width:80},
 			          {field:"tool",title:"运输工具",width:100,formatter:function(value,row,index){
 			        	  if(value == 1){
 			        		  return "<font color='blue'>飞机</font>";
@@ -442,10 +442,10 @@
 			        	  }
 			          }},
 			          {field:"markNo",title:"唛头",width:100},
-			          {field:"claimDays",title:"索赔期（天）",width:50},
+			          {field:"claimDays",title:"索赔期（天）",width:80},
 			          {field:"specRequire",title:"特殊要求",width:150},
 			          {field:"customDeclareNo",title:"报关单号",width:100},
-			          {field:"reportType",title:"申报类型",width:50,formatter:function(value,row,index){
+			          {field:"reportType",title:"申报类型",width:80,formatter:function(value,row,index){
 			        	  if(value == "10"){
 			        		  return "<font color='blue'>预申报</font>";
 			        	  }else if(value == "20"){
@@ -455,7 +455,7 @@
 			        	  }
 			          }},
 			          {field:"declCode",title:"预申报编码",width:100},
-			          {field:"editName",title:"跨境电商企业",width:200},
+			          {field:"editName",title:"跨境电商企业",width:300},
 			          {field:"eportInboundNo",title:"ICIP平台标识",width:100},
 			          {field:"regStatusDesc",title:"审核备注",width:100},
 			          {field:"createTime",title:"创建时间",width:150,formatter:function(value,row,index){
