@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gpl.framework.base.controller.BaseController;
+import com.gpl.framework.context.UserContext;
 import com.gpl.framework.model.AjaxModel;
 import com.gpl.framework.util.Page;
 import com.gpl.module.entry.biz.EntryBiz;
@@ -73,6 +74,7 @@ public class EntryController extends BaseController{
 		model.setMsg("添加成功");
 		try{
 			entry.setEntInboundNo(Creator.createEntInboundNo());
+			entry.setApplicant(UserContext.getContext().getUser().getAccount());
 			entry.setStatus(0);
 			entry.setOperType("A");
 			model.setData(entryBiz.save(entry));

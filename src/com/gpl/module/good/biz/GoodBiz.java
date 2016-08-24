@@ -1,21 +1,19 @@
 package com.gpl.module.good.biz;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
 import com.gpl.module.good.dao.GoodDao;
 import com.gpl.module.good.model.Good;
-import com.gpl.module.good.vo.GoodVO;
 
 @Service
+
 public class GoodBiz extends BaseBiz<Good, Integer>{
 	
 	@Autowired
@@ -25,7 +23,7 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 		String hql = "from Good";
 		return goodDao.find(hql);
 	}
-	
+	@Cacheable("orderAutoComplete")
 	public Page queryPage(Page page){
 		String hql = "select new GoodVO(g.id ,"
 				+ "g.gCode,"
@@ -53,7 +51,8 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 				+ "gm.remark,"
 				+ "(select ename from Enterprise e where e.id = gm.editId),"
 				+ "gm.operType,"
-				+ "g.createTime"
+				+ "g.createTime,"
+				+ "gm.applicant"
 				+ ")"
 				+ " from Good g,GoodMain gm where g.gmid = gm.id";
 			if(page.getParams().get("id") != null){
@@ -118,6 +117,9 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 			}
 			if(page.getParams().get("gmid") != null){
 				hql += " and gmid=" + page.getParams().get("gmid");
+			}
+			if(page.getParams().get("applicant") != null){
+				hql += " and gm.applicant like '%" + page.getParams().get("applicant") + "%'";
 			}
 			hql	+= " order by g.createTime desc";
 		return goodDao.findPage(page, hql, new HashMap<String,Object>());

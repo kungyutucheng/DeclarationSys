@@ -113,15 +113,16 @@
 		                    	<input name="startTime" class="easyui-datetimebox" data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).datetimebox('clear');}}]">&nbsp;-
 		                    	<input name="endTime" class="easyui-datetimebox" data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).datetimebox('clear');}}]">
 		                    </td>
-		                </tr>
-		                <tr>
-		                    <td></td>
+		                    <td>录入者</td>
 		                    <td>
-		                    	<input type="button" class="btn btn-primary myBtn" value="查询" onclick="searchgrid();" style="display:inline-block;width:auto;">
-		                    	<input type="button" class="btn btn-primary myBtn" value="重置" onclick="resetForm();" style="display:inline-block;width:auto;">
+		                    	<input name="applicant" class="easyui-textbox">
 		                    </td>
 		                </tr>
 		            </table>
+		            <div style="width:100%;text-align:center;margin:10px 0;">
+		            	<input type="button" class="btn btn-primary myBtn" value="查询" onclick="searchgrid();" style="display:inline-block;width:auto;">
+		                <input type="button" class="btn btn-primary myBtn" value="重置" onclick="resetForm();" style="display:inline-block;width:auto;">
+		            </div>
 		        </form>
 			</div> 
 		</div>
@@ -169,6 +170,7 @@
 				          {field:"gname",title:"商品名称",width:300},
 				          {field:"spec",title:"规格描述",width:100},
 				          {field:"hsCode",title:"hs码",width:100},
+				          {field:"applicant",title:"录入者",width:100},
 				          {field:"unit",title:"计量单位",width:100},
 				          {field:"goodsDesc",title:"商品描述",width:300},
 				          {field:"gRemark",title:"商品备注",width:100},

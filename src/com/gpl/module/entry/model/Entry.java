@@ -20,195 +20,197 @@ public class Entry implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	private Integer id;
 	/**
-	 * ÆóÒµ×Ô±àºÅ
+	 * ä¼ä¸šè‡ªç¼–å·
 	 */
 	private String entInboundNo;
 	/**
-	 * ²Ù×÷ÀàĞÍ
-	 * A-ĞÂÔö
-	 * M-±ä¸ü
+	 * æ“ä½œç±»å‹
+	 * A-æ–°å¢ï¼ˆé»˜è®¤ï¼‰
+	 * M-ä¿®æ”¹
 	 */
 	private String operType;
 	/**
-	 * Éê±¨ÈÕÆÚ
+	 * ç”³æŠ¥æ—¥æœŸ
 	 */
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date declarationDate;
 	/**
-	 * Éê±¨»ú¹¹
+	 * ç”³æŠ¥æœºæ„
 	 */
 	private String ciqbCode;
 	/**
-	 * ºÏÍ¬ºÅ
+	 * åˆåŒå·
 	 */
 	private String bargainNo;
 	/**
-	 * ·¢»õÈËĞÕÃû
+	 * å‘è´§äººå§“å
 	 */
 	private String shipperName;
 	/**
-	 * ·¢»õÈËÓ¢ÎÄÃû
+	 * å‘è´§äººè‹±æ–‡å
 	 */
 	private String shipperNameEn;
 	/**
-	 * ·¢»õÈËµØÖ·
+	 * å‘è´§äººåœ°å€Ö·
 	 */
 	private String shipperAddr;
 	/**
-	 * ÊÕ»õÈËĞÕÃû
+	 * æ”¶è´§äººå§“å
 	 */
 	private String consigneeName;
 	/**
-	 * ÊÕ»õÈËÓ¢ÎÄÃû
+	 * æ”¶è´§äººè‹±æ–‡å
 	 */
 	private String consigneeNameEn;
 	/**
-	 * ÊÕ»õÈËµØÖ·
+	 * æ”¶è´§äººåœ°å€Ö·
 	 */
 	private String consigneeAddr;
 	/**
-	 * ÆğÔË¸Û
+	 * èµ·è¿æ¸¯
 	 */
 	private String portLoad;
 	/**
-	 * Ä¿µÄ¸Û
+	 * ç›®çš„æ¸¯
 	 */
 	private String portDis;
 	/**
-	 * ±ÒÖÖ
+	 * å¸ç§
 	 */
 	private String fCode;
 	/**
-	 * ÔËÊä¹¤¾ß
-	 * 0-Ä¬ÈÏ
-	 * 1-·É»ú
-	 * 2-¿¨³µ
-	 * 3-»ğ³µ
-	 * 4-´¬
-	 * 5-ÆäËû
-	 * 6-º£ÔË¼¯×°Ïä
-	 * 7-Â½ÔË¼¯×°Ïä
-	 * 8-¿ÕÔË¼¯×°Ïä
+	 * è¿è¾“å·¥å…·
+	 * 0-é»˜è®¤
+	 * 1-é£æœº
+	 * 2-å¡è½¦
+	 * 3-ç«è½¦
+	 * 4-å…¶ä»–
+	 * 5-æµ·è¿é›†è£…ç®±
+	 * 6-é™†è¿é›†è£…ç®±
+	 * 7-ç©ºè¿é›†è£…ç®±
 	 */
 	private Integer tool;
 	/**
-	 * ÔËÊä¹¤¾ßÃû³Æ
+	 * è¿è¾“å·¥å…·åç§°
 	 */
 	private String toolName;
 	/**
-	 * ÔËÊä¹¤¾ßºÅ
+	 * è¿è¾“å·¥å…·å·
 	 */
 	private String toolNo;
 	/**
-	 * Ìáµ¥ºÅ
+	 * æå•å·
 	 */
 	private String blNo;
 	/**
-	 * µ½»õÈÕÆÚ
-	 * DateTimeFormat×¢½âÓÃÓÚ½â¾öÇ°¶Ë´«Öµ¸øºóÌ¨ÊµÌåÀàÓÉÓÚÀàĞÍ²»·û£¨Ç°¶Ë´«¹ıÀ´µÄÊµ¼ÊÊÇstring£¬ÎŞ·¨¸³Öµ¸ø
-	 * dateÀàĞÍµÄ×Ö¶Î£©¶øÒıÆğµÄ400´íÎó
+	 * åˆ°è´§æ—¥æœŸ
+	 * DateTimeFormat ç”¨äºè§£å†³å‰ç«¯ä¼ å€¼ï¼ˆå­—ç¬¦ä¸²ç±»å‹ï¼Œè€Œæ­¤æ—¶æˆ‘ä»¬éœ€è¦çš„æ˜¯Dateç±»å‹ï¼‰è¿‡æ¥ä¸èƒ½æ­£å¸¸èµ‹å€¼çš„é—®é¢˜
 	 */
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;
 	/**
-	 * Ğ¶±ÏÈÕÆÚ
+	 * å¸æ¯•æ—¥æœŸ
 	 */
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date uploadDate;
 	/**
-	 * Ä¿µÄµØ
+	 * ç›®çš„åœ°
 	 */
 	private String destination;
 	/**
-	 * ´æ»õµØµã
+	 * å­˜è´§åœ°ç‚¹
 	 */
 	private String stockLocation;
 	/**
-	 * Ã³Ò×¹ú±ğ
+	 * è´¸æ˜“å›½åˆ«
 	 */
 	private String tradeCode;
 	/**
-	 * ÆğÔË¹ú
+	 * èµ·è¿å›½
 	 */
 	private String countryLoad;
 	/**
-	 * ¾­Í£¸Û¸Û¿Ú±àÂë
+	 * ç»åœæ¸¯
 	 */
 	private String portStop;
 	/**
-	 * Ã³Ò×·½Ê½
+	 * è´¸æ˜“æ–¹å¼
 	 */
 	private String tradeType;
 	/**
-	 * ¼à¹Ü·½Ê½
+	 * ç›‘ç®¡æ–¹å¼
 	 */
 	private String chargeType;
 	/**
-	 * ±¨¼ìÀà±ğ
-	 * 13-Èë¾³¼ìÑé¼ìÒß
-	 * 14-Èë¾³Á÷Ïò
-	 * 15-Èë¾³ÑéÖ¤
+	 * æŠ¥æ£€ç±»åˆ«
+	 * 13-å…¥å¢ƒæ£€éªŒæ£€ç–«
+	 * 14-å…¥å¢ƒæµå‘
+	 * 15-å…¥å¢ƒéªŒè¯Ö¤
 	 */
 	private String tblType;
 	/**
-	 * ±¨¼ìÉê±¨Àà±ğ
-	 * 01-Ò»°ã½ø¿Ú
-	 * 03-³öÇø½ø¿Ú
-	 * 05-¾³Íâ½ø¿Ú
-	 * 07-½ø¾³¼¯×°ÏäÖØÏä
-	 * 09-½ø¾³¼¯×°Ïä¿ÕÏä
+	 * æŠ¥æ£€ç”³æŠ¥ç±»åˆ«
+	 * 01-ä¸€èˆ¬è¿›å£
+	 * 03-å‡ºåŒºè¿›å£
+	 * 05-å¢ƒå¤–è¿›å£
+	 * 07-è¿›å¢ƒé›†è£…ç®±é‡ç®±
+	 * 09-è¿›å¢ƒé›†è£…ç®±ç©ºç®±
 	 */
 	private String tblReportType;
 	/**
-	 * ßéÍ·
+	 * å”›å¤´
 	 */
 	private String markNo;
 	/**
-	 * Ë÷ÅâÆÚ
+	 * ç´¢èµ”æœŸ
 	 */
 	private Integer claimDays;
 	/**
-	 * ÌØÊâÒªÇó
+	 * ç‰¹æ®Šè¦æ±‚
 	 */
 	private String specRequire;
 	/**
-	 * ±¨¹Øµ¥ºÅ
+	 * æŠ¥å…³å•å·
 	 */
 	private String customDeclareNo;
 	/**
-	 * Éê±¨Àà±ğ
-	 * 10-Ô¤Éê±¨
-	 * 20-Èë²ÖÉê±¨
+	 * ç”³æŠ¥ç±»å‹
+	 * 10-é¢„ç”³æŠ¥
+	 * 20-å…¥ä»“ç”³æŠ¥
 	 */
 	private String reportType;
 	/**
-	 * Ô¤Éê±¨±àÂë
+	 * é¢„ç”³æŠ¥ç¼–ç 
 	 */
 	private String declCode;
 	/**
-	 * ÍâÃ³×ÛºÏ·şÎñÆóÒµid
+	 * å¤–è´¸ç»¼åˆæœåŠ¡ä¼ä¸šid
 	 */
 	private Integer editId;
 	/**
-	 * ICIPÆ½Ì¨Î¨Ò»±êÊ¶·û
+	 * ICIPå¹³å°å”¯ä¸€æ ‡è¯†
 	 */
 	private Integer eportInboundNo;
 	/**
-	 * ×´Ì¬
+	 * çŠ¶æ€
 	 */
 	private Integer status;
 	/**
-	 * ÉóºË±¸×¢
+	 * å®¡æ ¸å¤‡æ³¨
 	 */
 	private String regStatusDesc;
 	/**
-	 * ´´½¨Ê±¼ä
+	 * åˆ›å»ºæ—¶é—´
 	 */
 	private Date createTime;
+	/**
+	 * å½•å…¥è€…
+	 */
+	private String applicant;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -498,6 +500,12 @@ public class Entry implements Serializable{
 		this.createTime = createTime;
 	}
 	
+	public String getApplicant() {
+		return applicant;
+	}
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
+	}
 	@Override
 	public String toString() {
 		return "Entry [id=" + id + ", entInboundNo=" + entInboundNo + ", operType=" + operType + ", declarationDate="
@@ -512,7 +520,7 @@ public class Entry implements Serializable{
 				+ ", tblReportType=" + tblReportType + ", markNo=" + markNo + ", claimDays=" + claimDays
 				+ ", specRequire=" + specRequire + ", customDeclareNo=" + customDeclareNo + ", reportType=" + reportType
 				+ ", declCode=" + declCode + ", editId=" + editId + ", eportInboundNo=" + eportInboundNo + ", status="
-				+ status + ", regStatusDesc=" + regStatusDesc + ", createTime=" + createTime + "]";
+				+ status + ", regStatusDesc=" + regStatusDesc + ", createTime=" + createTime + ", applicant=" + applicant + "]";
 	}
 	
 	

@@ -21,19 +21,19 @@ public class Organization implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 主键
+	 * 涓婚敭
 	 */
 	private Integer id;
 	/**
-	 * 名称
+	 * 鍚嶇О
 	 */
 	private String name;
 	/**
-	 * 备案号
+	 * 浠ｇ爜
 	 */
 	private String code;
 	/**
-	 * 备注
+	 * 澶囨敞
 	 */
 	private String note;
 	@Id

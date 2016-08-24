@@ -22,105 +22,105 @@ public class EntryGood implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	private Integer id;
 	/**
-	 * Èë¾³±íid
+	 * å…¥å¢ƒè¿›åŒºid
 	 */
 	private Integer eid;
 	/**
-	 * ÏäºÅid
+	 * ç®±å·id
 	 */
 	private Integer contId;
 	/**
-	 * ¿ç¾³µçÉÌÆóÒµid
+	 * è·¨å¢ƒç”µå•†ä¼ä¸šid
 	 */
 	private Integer cbeComId;
 	/**
-	 * hs±àÂë
+	 * hsç 
 	 */
 	private String hsCode;
 	/**
-	 * ÉÌÆ·±¸°¸ºÅ
+	 * å•†å“å¤‡æ¡ˆå·
 	 */
 	private String ciqGoodsNo;
 	/**
-	 * ÉÌÆ·»õºÅ
+	 * å•†å“è´§å·
 	 */
 	private String gCode;
 	/**
-	 * ÉÌÆ·²ÄÖÊ
+	 * å•†å“æè´¨
 	 */
 	private String goodsMaterial;
 	/**
-	 * °ü×°·½Ê½
+	 * åŒ…è£…æ–¹å¼
 	 */
 	private String packType;
 	/**
-	 * ±ÒÖÖ
+	 * å¸ç§
 	 */
 	private String fCode;
 	/**
-	 * µ¥¼Û
+	 * å•ä»·
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal uPric;
 	/**
-	 * ²É¹º³ÇÊĞ
+	 * é‡‡è´­åŸå¸‚
 	 */
 	private String buyFromCity;
 	/**
-	 * µÚ¶şÊıÁ¿
+	 * ç¬¬äºŒæ•°é‡
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal qtp;
 	/**
-	 * µÚ¶şÊıÁ¿µ¥Î»
+	 * ç¬¬äºŒæ•°é‡å•ä½
 	 */
 	private String qtpUnit;
 	/**
-	 * ÊıÁ¿
+	 * æ•°é‡
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal qty;
 	/**
-	 * µ¥Î»ÃèÊö
+	 * å•ä½æè¿°
 	 */
 	private String qtyDesc;
 	/**
-	 * Ã«ÖØ
+	 * æ¯›é‡
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal kgs;
 	/**
-	 * ¾»ÖØ
+	 * å‡€é‡
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal net;
 	/**
-	 * ×Ü¼Û
+	 * æ€»ä»·
 	 */
 	private BigDecimal fcy;
 	/**
-	 * ÖØÁ¿µ¥Î»
+	 * é‡é‡å•ä½
 	 */
 	private String kgsUnit;
 	/**
-	 * °ü×°ÊıÁ¿
+	 * åŒ…è£…æ•°é‡
 	 */
 	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal packNum;
 	/**
-	 * ÉÌÆ·Åú´ÎºÅ
+	 * å•†å“æ‰¹æ¬¡å·
 	 */
 	private String goodsBatchNo;
 	/**
-	 * °ü×°¼şÊı
+	 * åŒ…è£…ä»¶æ•°
 	 */
 	private Integer packPieceNum;
 	/**
-	 * ´´½¨Ê±¼ä
+	 * åˆ›å»ºæ—¥æœŸ
 	 */
 	private Date createTime;
 	@Id

@@ -49,12 +49,16 @@ public class GoodMain implements Serializable{
 	 * I-自动引用
 	 */
 	private String operType;
+	/**
+	 * 申请人
+	 */
+	private String applicant;
 	
 	public GoodMain(){
 		
 	}
 	
-	public GoodMain(Integer id, String cargobCode, String ciqbCode, Integer cbeComId, String remark, Integer editId) {
+	public GoodMain(Integer id, String cargobCode, String ciqbCode, Integer cbeComId, String remark, Integer editId,String applicant) {
 		super();
 		this.id = id;
 		this.cargobCode = cargobCode;
@@ -62,6 +66,7 @@ public class GoodMain implements Serializable{
 		this.cbeComId = cbeComId;
 		this.remark = remark;
 		this.editId = editId;
+		this.applicant = applicant;
 	}
 	@Id
 	@GeneratedValue
@@ -113,11 +118,21 @@ public class GoodMain implements Serializable{
 	public void setOperType(String operType) {
 		this.operType = operType;
 	}
+	@Column
+	public String getApplicant() {
+		return applicant;
+	}
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
+	}
+
 	@Override
 	public String toString() {
 		return "GoodMain [id=" + id + ", cargobCode=" + cargobCode + ", ciqbCode=" + ciqbCode + ", cbeComId=" + cbeComId
-				+ ", remark=" + remark + ", editId=" + editId + ", operType=" + operType + "]";
+				+ ", remark=" + remark + ", editId=" + editId + ", operType=" + operType + ", applicant=" + applicant
+				+ "]";
 	}
+
 	
 	
 	

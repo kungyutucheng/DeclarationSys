@@ -113,7 +113,7 @@
 				                    		label:'一般进口',
 				                    		value:'01'
 				                    	},{
-				                    		label:'出去进口',
+				                    		label:'出区进口',
 				                    		value:'03'
 				                    	},{
 				                    		label:'境外进口',

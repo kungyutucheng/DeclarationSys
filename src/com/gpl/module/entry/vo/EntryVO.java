@@ -19,202 +19,202 @@ public class EntryVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Ö÷¼ü
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Integer id;
 	/**
-	 * ÆóÒµ×Ô±àºÅ
+	 * ï¿½ï¿½Òµï¿½Ô±ï¿½ï¿½
 	 */
 	private String entInboundNo;
 	/**
-	 * ²Ù×÷ÀàÐÍ
-	 * A-ÐÂÔö
-	 * M-±ä¸ü
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * A-ï¿½ï¿½ï¿½ï¿½
+	 * M-ï¿½ï¿½ï¿½
 	 */
 	private String operType;
 	/**
-	 * Éê±¨ÈÕÆÚ
+	 * ï¿½ê±¨ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Date declarationDate;
 	/**
-	 * Éê±¨»ú¹¹
+	 * ï¿½ê±¨ï¿½ï¿½
 	 */
 	private String ciqbCode;
 	/**
-	 * Éê±¨»ú¹¹Ãû³Æ
+	 * ï¿½ê±¨ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String ciqbName;
 	/**
-	 * ºÏÍ¬ºÅ
+	 * ï¿½ï¿½Í¬ï¿½ï¿½
 	 */
 	private String bargainNo;
 	/**
-	 * ·¢»õÈËÐÕÃû
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String shipperName;
 	/**
-	 * ·¢»õÈËÓ¢ÎÄÃû
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String shipperNameEn;
 	/**
-	 * ·¢»õÈËµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½Ö·
 	 */
 	private String shipperAddr;
 	/**
-	 * ÊÕ»õÈËÐÕÃû
+	 * ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String consigneeName;
 	/**
-	 * ÊÕ»õÈËÓ¢ÎÄÃû
+	 * ï¿½Õ»ï¿½ï¿½ï¿½Ó¢ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String consigneeNameEn;
 	/**
-	 * ÊÕ»õÈËµØÖ·
+	 * ï¿½Õ»ï¿½ï¿½Ëµï¿½Ö·
 	 */
 	private String consigneeAddr;
 	/**
-	 * ÆðÔË¸Û
+	 * ï¿½ï¿½ï¿½Ë¸ï¿½
 	 */
 	private String portLoad;
 	/**
-	 * ÆðÔË¸ÛÃû³Æ
+	 * ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String portLoadName;
 	/**
-	 * Ä¿µÄ¸Û
+	 * Ä¿ï¿½Ä¸ï¿½
 	 */
 	private String portDis;
 	/**
-	 * Ä¿µÄ¸ÛÃû³Æ
+	 * Ä¿ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String portDisName;
 	/**
-	 * ±ÒÖÖ
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String fCode;
 	/**
-	 * ±ÒÖÖÃû³Æ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String fName;
 	/**
-	 * ÔËÊä¹¤¾ß
-	 * 0-Ä¬ÈÏ
-	 * 1-·É»ú
-	 * 2-¿¨³µ
-	 * 3-»ð³µ
-	 * 4-´¬
-	 * 5-ÆäËû
-	 * 6-º£ÔË¼¯×°Ïä
-	 * 7-Â½ÔË¼¯×°Ïä
-	 * 8-¿ÕÔË¼¯×°Ïä
+	 * ï¿½ï¿½ï¿½ä¹¤ï¿½ï¿½
+	 * 0-Ä¬ï¿½ï¿½
+	 * 1-ï¿½É»ï¿½
+	 * 2-ï¿½ï¿½ï¿½ï¿½
+	 * 3-ï¿½ï¿½
+	 * 4-ï¿½ï¿½
+	 * 5-ï¿½ï¿½ï¿½ï¿½
+	 * 6-ï¿½ï¿½ï¿½Ë¼ï¿½×°ï¿½ï¿½
+	 * 7-Â½ï¿½Ë¼ï¿½×°ï¿½ï¿½
+	 * 8-ï¿½ï¿½ï¿½Ë¼ï¿½×°ï¿½ï¿½
 	 */
 	private Integer tool;
 	/**
-	 * ÔËÊä¹¤¾ßÃû³Æ
+	 * ï¿½ï¿½ï¿½ä¹¤ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String toolName;
 	/**
-	 * ÔËÊä¹¤¾ßºÅ
+	 * ï¿½ï¿½ï¿½ä¹¤ï¿½ßºï¿½
 	 */
 	private String toolNo;
 	/**
-	 * Ìáµ¥ºÅ
+	 * ï¿½áµ¥ï¿½ï¿½
 	 */
 	private String blNo;
 	/**
-	 * µ½»õÈÕÆÚ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Date arrivalDate;
 	/**
-	 * Ð¶±ÏÈÕÆÚ
+	 * Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Date uploadDate;
 	/**
-	 * Ä¿µÄµØ
+	 * Ä¿ï¿½Äµï¿½
 	 */
 	private String destination;
 	/**
-	 * ´æ»õµØµã
+	 * ï¿½ï¿½ï¿½ï¿½Øµï¿½
 	 */
 	private String stockLocation;
 	/**
-	 * Ã³Ò×¹ú±ð
+	 * Ã³ï¿½×¹ï¿½ï¿½
 	 */
 	private String tradeCode;
 	/**
-	 * Ã³Ò×¹ú±ðÃû³Æ
+	 * Ã³ï¿½×¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String tradeName;
 	/**
-	 * ÆðÔË¹ú
+	 * ï¿½ï¿½ï¿½Ë¹ï¿½
 	 */
 	private String countryLoad;
 	/**
-	 * ¾­Í£¸Û¸Û¿Ú±àÂë
+	 * ï¿½ï¿½Í£ï¿½Û¸Û¿Ú±ï¿½ï¿½ï¿½
 	 */
 	private String portStop;
 	/**
-	 * ¾­Í£¸Û¸Û¿Ú±àÂë
+	 * ï¿½ï¿½Í£ï¿½Û¸Û¿Ú±ï¿½ï¿½ï¿½
 	 */
 	private String portStopName;
 	/**
-	 * Ã³Ò×·½Ê½
+	 * Ã³ï¿½×·ï¿½Ê½
 	 */
 	private String tradeType;
 	/**
-	 * Ã³Ò×·½Ê½Ãû³Æ
+	 * Ã³ï¿½×·ï¿½Ê½ï¿½ï¿½ï¿½
 	 */
 	private String tradeTypeName;
 	/**
-	 * ¼à¹Ü·½Ê½
+	 * ï¿½ï¿½Ü·ï¿½Ê½
 	 */
 	private String chargeType;
 	/**
-	 * ¼à¹Ü·½Ê½Ãû³Æ
+	 * ï¿½ï¿½Ü·ï¿½Ê½ï¿½ï¿½ï¿½
 	 */
 	private String chargeTypeName;
 	/**
-	 * ±¨¼ìÀà±ð
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String tblType;
 	/**
-	 * ±¨¼ìÉê±¨Àà±ð
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ê±¨ï¿½ï¿½ï¿½
 	 */
 	private String tblReportType;
 	/**
-	 * ßéÍ·
+	 * ï¿½ï¿½Í·
 	 */
 	private String markNo;
 	/**
-	 * Ë÷ÅâÆÚ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Integer claimDays;
 	/**
-	 * ÌØÊâÒªÇó
+	 * ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½
 	 */
 	private String specRequire;
 	/**
-	 * ±¨¹Øµ¥ºÅ
+	 * ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½
 	 */
 	private String customDeclareNo;
 	/**
-	 * Éê±¨Àà±ð
+	 * ï¿½ê±¨ï¿½ï¿½ï¿½
 	 */
 	private String reportType;
 	/**
-	 * Ô¤Éê±¨±àÂë
+	 * Ô¤ï¿½ê±¨ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String declCode;
 	/**
-	 * ÍâÃ³×ÛºÏ·þÎñÆóÒµid
+	 * ï¿½ï¿½Ã³ï¿½ÛºÏ·ï¿½ï¿½ï¿½ï¿½ï¿½Òµid
 	 */
 	private Integer editId;
 	/**
-	 * ÍâÃ³×ÛºÏ·þÎñÆóÒµÃû³Æ
+	 * ï¿½ï¿½Ã³ï¿½ÛºÏ·ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
 	 */
 	private String editName; 
 	/**
-	 * ICIPÆ½Ì¨Î¨Ò»±êÊ¶·û
+	 * ICIPÆ½Ì¨Î¨Ò»ï¿½ï¿½Ê¶ï¿½ï¿½
 	 */
 	private Integer eportInboundNo;
 	/**
@@ -222,13 +222,15 @@ public class EntryVO implements Serializable{
 	 */
 	private Integer status;
 	/**
-	 * ÉóºË±¸×¢
+	 * ï¿½ï¿½Ë±ï¿½×¢
 	 */
 	private String regStatusDesc;
 	/**
-	 * ´´½¨Ê±¼ä
+	 * ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	private Date createTime;
+	private String applicant;
+	
 	
 	
 	public EntryVO(Integer id, String entInboundNo, String operType, Date declarationDate, String ciqbCode,
@@ -239,8 +241,8 @@ public class EntryVO implements Serializable{
 			String tradeCode, String tradeName, String countryLoad, String portStop, String portStopName,
 			String tradeType, String tradeTypeName, String chargeType, String chargeTypeName, String tblType,
 			String tblReportType, String markNo, Integer claimDays, String specRequire, String customDeclareNo,
-			String reportType, String declCode, Integer editId,String editName, Integer eportInboundNo, Integer status,
-			String regStatusDesc, Date createTime) {
+			String reportType, String declCode, Integer editId, String editName, Integer eportInboundNo, Integer status,
+			String regStatusDesc, Date createTime, String applicant) {
 		super();
 		this.id = id;
 		this.entInboundNo = entInboundNo;
@@ -292,63 +294,8 @@ public class EntryVO implements Serializable{
 		this.status = status;
 		this.regStatusDesc = regStatusDesc;
 		this.createTime = createTime;
+		this.applicant = applicant;
 	}
-	
-	public EntryVO(Integer id, String entInboundNo, String operType, Date declarationDate, String ciqbCode,
-			 String bargainNo, String shipperName, String shipperNameEn, String shipperAddr,
-			String consigneeName, String consigneeNameEn, String consigneeAddr, String portLoad,
-			String portDis, String portDisName, String fCode, Integer tool, String toolName,
-			String toolNo, String blNo, Date arrivalDate, Date uploadDate, String destination, String stockLocation,
-			String tradeCode, String countryLoad, String portStop,
-			String tradeType, String chargeType, String tblType,
-			String tblReportType, String markNo, Integer claimDays, String specRequire, String customDeclareNo,
-			String reportType, String declCode, Integer editId,Integer eportInboundNo, Integer status,
-			String regStatusDesc, Date createTime) {
-		super();
-		this.id = id;
-		this.entInboundNo = entInboundNo;
-		this.operType = operType;
-		this.declarationDate = declarationDate;
-		this.ciqbCode = ciqbCode;
-		this.bargainNo = bargainNo;
-		this.shipperName = shipperName;
-		this.shipperNameEn = shipperNameEn;
-		this.shipperAddr = shipperAddr;
-		this.consigneeName = consigneeName;
-		this.consigneeNameEn = consigneeNameEn;
-		this.consigneeAddr = consigneeAddr;
-		this.portLoad = portLoad;
-		this.portDis = portDis;
-		this.portDisName = portDisName;
-		this.fCode = fCode;
-		this.tool = tool;
-		this.toolName = toolName;
-		this.toolNo = toolNo;
-		this.blNo = blNo;
-		this.arrivalDate = arrivalDate;
-		this.uploadDate = uploadDate;
-		this.destination = destination;
-		this.stockLocation = stockLocation;
-		this.tradeCode = tradeCode;
-		this.countryLoad = countryLoad;
-		this.portStop = portStop;
-		this.tradeType = tradeType;
-		this.chargeType = chargeType;
-		this.tblType = tblType;
-		this.tblReportType = tblReportType;
-		this.markNo = markNo;
-		this.claimDays = claimDays;
-		this.specRequire = specRequire;
-		this.customDeclareNo = customDeclareNo;
-		this.reportType = reportType;
-		this.declCode = declCode;
-		this.editId = editId;
-		this.eportInboundNo = eportInboundNo;
-		this.status = status;
-		this.regStatusDesc = regStatusDesc;
-		this.createTime = createTime;
-	}
-	
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -651,6 +598,12 @@ public class EntryVO implements Serializable{
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	public String getApplicant() {
+		return applicant;
+	}
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
+	}
 	@Override
 	public String toString() {
 		return "EntryVO [id=" + id + ", entInboundNo=" + entInboundNo + ", operType=" + operType + ", declarationDate="
@@ -666,9 +619,9 @@ public class EntryVO implements Serializable{
 				+ ", tradeTypeName=" + tradeTypeName + ", chargeType=" + chargeType + ", chargeTypeName="
 				+ chargeTypeName + ", tblType=" + tblType + ", tblReportType=" + tblReportType + ", markNo=" + markNo
 				+ ", claimDays=" + claimDays + ", specRequire=" + specRequire + ", customDeclareNo=" + customDeclareNo
-				+ ", reportType=" + reportType + ", declCode=" + declCode + ", editId=" + editId + ", eportInboundNo="
-				+ eportInboundNo + ", status=" + status + ", regStatusDesc=" + regStatusDesc + ", createTime="
-				+ createTime + "]";
+				+ ", reportType=" + reportType + ", declCode=" + declCode + ", editId=" + editId + ", editName="
+				+ editName + ", eportInboundNo=" + eportInboundNo + ", status=" + status + ", regStatusDesc="
+				+ regStatusDesc + ", createTime=" + createTime + ", applicant=" + applicant + "]";
 	}
 	
 	

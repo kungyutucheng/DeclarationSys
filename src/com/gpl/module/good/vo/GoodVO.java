@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * value object±ãÓÚÏòÇ°Ì¨´«ÊäÊý¾Ý
+ * value objectï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author wyc
  *
  */
@@ -41,6 +41,7 @@ public class GoodVO {
 	private String operType;
 	private Integer status;
 	private Date createTime;
+	private String applicant;
 	
 	public GoodVO() {
 	}
@@ -52,7 +53,7 @@ public class GoodVO {
 			String poisonFlag, BigDecimal num, String ciqGoodsNo,Integer status,
 			String regNotes, Integer gmid, String cargobCode,
 			String ciqbName, String cbeComName, String remark, String editName,
-			String operType,  Date createTime) {
+			String operType,  Date createTime ,String applicant) {
 		super();
 		this.id = id;
 		this.gCode = gCode;
@@ -81,6 +82,7 @@ public class GoodVO {
 		this.operType = operType;
 		this.status = status;
 		this.createTime = createTime;
+		this.applicant = applicant;
 	}
 
 	@Id
@@ -298,6 +300,14 @@ public class GoodVO {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
 	}
 	
 	

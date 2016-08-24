@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gpl.framework.base.controller.BaseController;
+import com.gpl.framework.context.UserContext;
 import com.gpl.framework.model.AjaxModel;
 import com.gpl.framework.util.Page;
 import com.gpl.module.good.biz.GoodBiz;
@@ -61,7 +62,7 @@ public class GoodController extends BaseController{
 	
 	@RequestMapping(path = "/apply", method = RequestMethod.GET)
 	public ModelAndView apply(){
-		return new ModelAndView("good/apply2");
+		return new ModelAndView("good/apply");
 	}
 
 	@RequestMapping(path = "/saveGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
@@ -72,6 +73,7 @@ public class GoodController extends BaseController{
 		try{
 			goodMain.setCargobCode(Creator.createCargobCode());
 			goodMain.setOperType("A");
+			goodMain.setApplicant(UserContext.getContext().getUser().getAccount());
 			System.out.println(goodMain.toString());
 			model.setData(goodMainBiz.save(goodMain));
 		}catch(Exception e){

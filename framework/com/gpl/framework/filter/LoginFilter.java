@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 
 import com.gpl.authorization.model.User;
+import com.gpl.framework.context.UserContext;
 
 public class LoginFilter implements Filter{
 
@@ -33,19 +34,18 @@ public class LoginFilter implements Filter{
 		String uri = httpRequest.getRequestURI();
 		String assertUri = "assert";
 		String imagesUri = "images";
-		//String jsUri = "js";
-		System.out.println(uri);
-		//ÒÔÏÂuriÖ÷ÒªÊÇÇëÇó×ÊÔ´ÒÔ¼°loginÒ³Ãæ£¬²»½øĞĞ¹ıÂË
+		//loginè·¯å¾„åŠé™æ€èµ„æºæ–‡ä»¶ä¸åšå¤„ç†
 		if(uri.contains("login/login") || uri.contains(assertUri) || uri.endsWith(".jpg") || uri.endsWith(".png") || 
 				uri.endsWith(".js") || uri.endsWith(".css")){
 			chain.doFilter(request, response); 
 		}else{
 			User user = (User) session.getAttribute("user");
-			//ÒÑµÇÂ¼
+			UserContext.setContext(user);
+			//å·²ç™»å½•
 			if(user != null){
 				chain.doFilter(request, response);
 			}else{
-				//Î´µÇÂ¼
+				//æœªç™»å½•
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login/loginPage");
 			}
 		}

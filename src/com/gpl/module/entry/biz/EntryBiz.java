@@ -3,6 +3,7 @@ package com.gpl.module.entry.biz;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.gpl.framework.base.biz.BaseBiz;
@@ -11,6 +12,7 @@ import com.gpl.module.entry.dao.EntryDao;
 import com.gpl.module.entry.model.Entry;
 
 @Service
+
 public class EntryBiz extends BaseBiz<Entry, Integer>{
 
 	@Autowired
@@ -67,7 +69,8 @@ public class EntryBiz extends BaseBiz<Entry, Integer>{
 				+ "eportInboundNo,"
 				+ "status,"
 				+ "regStatusDesc,"
-				+ "createTime) from Entry where 1=1";
+				+ "createTime,"
+				+ "applicant) from Entry where 1=1";
 		if(page.getParams().get("ciqbCode") != null){
 			hql += " and ciqbCode ='" + page.getParams().get("ciqbCode") + "'";
 		}
@@ -190,6 +193,9 @@ public class EntryBiz extends BaseBiz<Entry, Integer>{
 		}
 		if(page.getParams().get("declCode") != null){
 			hql += " and declCode like '%" + page.getParams().get("declCode") + "%'";
+		}
+		if(page.getParams().get("applicant") != null){
+			hql += " and applicant like '%" + page.getParams().get("applicant") + "%'";
 		}
 		hql += " order by createTime desc";
 		return entryDao.findPage(page, hql, new HashMap<String,Object>());

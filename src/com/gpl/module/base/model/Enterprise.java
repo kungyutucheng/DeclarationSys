@@ -26,59 +26,59 @@ public class Enterprise implements Serializable{
 	public static final String ADDRESS = "address";
 	public static final String NOTE = "note";*/
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	private Integer id;
 	/**
-	 * Ãû³Æ
+	 * åç§°
 	 */
 	private String ename;
 	/**
-	 * ±¸°¸ºÅ
+	 * å¤‡æ¡ˆå·
 	 */
 	private String ecode;
 	/**
-	 * ×éÖ¯
+	 * ç»„ç»‡Ö¯
 	 */
 	private String organization;
 	/**
-	 * ÁªÏµÈË£¨¿ÉÄÜÊÇ£©
+	 * è”ç³»äºº
 	 */
 	private String contact;
 	/**
-	 * µç»°
+	 * è”ç³»æ–¹å¼
 	 */
 	private String telephone;
 	/**
-	 * µØÖ·
+	 * åœ°å€Ö·
 	 */
 	private String address;
 	/**
-	 * ±¸×¢
+	 * å¤‡æ³¨
 	 */
 	private String note;
 	/**
-	 * Â¼ÈëÕß
+	 * å½•å…¥è€…
 	 */
 	private String recorder;
 	/**
-	 * ´´½¨Ê±¼ä
+	 * åˆ›å»ºæ—¶é—´
 	 */
 	private Date createTime;
 	/**
-	 * ftpÕË»§
+	 * ftpè´¦å·
 	 */
 	private String ftpUser;
 	/**
-	 * ftpÃÜÂë
+	 * ftpå¯†ç 
 	 */
 	private String ftpPwd;
 	/**
-	 * ftp¶Ë¿Ú
+	 * ftpç«¯å£
 	 */
 	private String ftpPort;
 	/**
-	 * ftpµØÖ·
+	 * ftpåœ°å€Ö·
 	 */
 	private String ftpUrl;
 	@Id

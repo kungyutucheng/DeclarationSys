@@ -182,6 +182,12 @@
 						<input name="customDeclareNo" class="easyui-textbox">
 					</td>
 				</tr>
+				<tr>
+					<td>录入者</td>
+					<td>
+						<input name="applicant" class="easyui-textbox">
+					</td>
+				</tr>
 			</table>
 			<div class="subTitle">报检信息</div>
 			<hr/>
@@ -354,6 +360,7 @@
 			        		  return value;
 			        	  }
 			          }},
+			          {field:"applicant",title:"录入者",width:100},
 			          {field:"operType",title:"操作类型",width:80,formatter:function(value,row,index){
 			        	  if(value == "A"){
 			        		  return "<font color='blue'>新增</font>";

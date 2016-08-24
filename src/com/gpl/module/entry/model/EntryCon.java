@@ -18,31 +18,31 @@ public class EntryCon implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 主键
+	 * 涓婚敭
 	 */
 	private Integer id;
 	/**
-	 * 入境表id
+	 * 鍏ュ杩涘尯id
 	 */
 	private Integer eid;
 	/**
-	 * 箱号
+	 * 绠卞彿
 	 */
 	private String conNo;
 	/**
-	 * 尺寸
+	 * 灏哄
 	 */
 	private String conSize;
 	/**
-	 * 柜型
+	 * 鏌滃瀷
 	 */
 	private String conType;
 	/**
-	 * 封条号码
+	 * 灏佹潯鍙风爜
 	 */
 	private String sealNo;
 	/**
-	 * 创建时间
+	 * 鍒涘缓鏃堕棿
 	 */
 	private Date createTime;
 	@Id

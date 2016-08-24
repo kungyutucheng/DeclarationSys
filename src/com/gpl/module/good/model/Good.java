@@ -23,91 +23,97 @@ public class Good implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Ö÷¼ü
+	 * ä¸»é”®
 	 */
 	private Integer id;
 	/**
-	 * ÉÌÆ·»õºÅ
+	 * å•†å“è´§å·
 	 */
 	private String gCode;
 	/**
-	 * ÉÌÆ·Ãû³Æ
+	 * å•†å“åç§°
 	 */
 	private String gname;
 	/**
-	 * ¹æ¸ñĞÍºÅ
+	 * è§„æ ¼
 	 */
 	private String spec;
 	/**
-	 * ÉÌÆ·hs±àÂë
+	 * hsç 
 	 */
 	private String hsCode;
 	/**
-	 * ¼ÆÁ¿µ¥Î»
+	 * è®¡é‡å•ä½
 	 */
 	private String unit;
 	/**
-	 * ÉÌÆ·ÌõĞÎÂë
+	 * å•†å“æ¡å½¢ç 
 	 */
 	private String goodsBarCode;
 	/**
-	 * ÉÌÆ·ÃèÊö
+	 * å•†å“æè¿°
 	 */
 	private String goodsDesc;
 	/**
-	 * ÉÌÆ·±¸×¢
+	 * å•†å“å¤‡æ³¨
 	 */
 	private String gRemark;
 	/**
-	 * Éú²ú³§¼Ò
+	 * ç”Ÿäº§å‚å®¶
 	 */
 	private String comName;
 	/**
-	 * Éú²ú³§¼ÒµØÖ·
+	 * ç”Ÿäº§å‚å®¶åœ°å€Ö·
 	 */
 	private String manufactureAddr;
 	/**
-	 * Æ·ÅÆ
+	 * å“ç‰Œ
 	 */
 	private String brand;
 	/**
-	 * Ô­²ú¹ú/µØÇø
+	 * åŸäº§å›½/åœ°åŒº
 	 */
 	private String assemCountry;
 	/**
-	 * ³É·Ö
+	 * æˆåˆ†
 	 */
 	private String ingredient;
 	/**
-	 * ³¬·¶Î§Ê¹ÓÃÊ³Æ·Ìí¼Ó¼Á
+	 * è¶…èŒƒå›´ä½¿ç”¨é£Ÿå“æ·»åŠ å‰‚
 	 */
 	private String additiveFlag;
 	/**
-	 * º¬ÓĞ¶¾º¦ÎïÖÊ£¬Îª¿ÕÊ±Ä¬ÈÏÎª0
+	 * å«æœ‰æ¯’å®³ç‰©è´¨
 	 */
 	private String poisonFlag;
 	/**
-	 * ÉÌÆ·¿â´æÊıÁ¿
+	 * åº“å­˜
 	 */
 	private BigDecimal num;
 	/**
-	 * ÉÌÆ·±¸°¸ºÅ
+	 * å•†å“å¤‡æ¡ˆå·
 	 */
 	private String ciqGoodsNo;
 	/**
-	 * µ±Ç°×´Ì¬£¬0-Ä¬ÈÏ£»1-´ı·¢ËÍ£»2-´ıÉóºË£»3-½ÓÊÕÊ§°Ü£»4-Í¨¹ı£»5-²»Í¨¹ı
+	 * çŠ¶æ€
+	 * 0-é»˜è®¤
+	 * 1-å¾…å‘é€
+	 * 2-å¾…å®¡æ ¸
+	 * 3-æ¥æ”¶å¤±è´¥
+	 * 4-é€šè¿‡
+	 * 5-ä¸é€šè¿‡
 	 */
 	private Integer status;
 	/**
-	 * iciq»ØÖ´ĞÅÏ¢
+	 * iciqå›æ‰§ä¿¡æ¯
 	 */
 	private String regNotes;
 	/**
-	 * ÉÌÆ·±¸°¸ÉêÇëÖ÷±íid
+	 * ä¸»è¡¨id
 	 */
 	private Integer gmid;
 	/**
-	 * ÉÌÆ·Â¼ÈëÈÕÆÚ
+	 * åˆ›å»ºæ—¶é—´
 	 */
 	private Date createTime;
 	

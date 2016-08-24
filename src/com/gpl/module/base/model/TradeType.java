@@ -17,19 +17,19 @@ public class TradeType implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 主键
+	 * 涓婚敭
 	 */
 	private Integer id;
 	/**
-	 * 监管方式代码
+	 * 浠ｇ爜
 	 */
 	private String code;
 	/**
-	 * 监管方式
+	 * 鍚嶇О
 	 */
 	private String name;
 	/**
-	 * 备注
+	 * 澶囨敞
 	 */
 	private String note;
 	@Id
