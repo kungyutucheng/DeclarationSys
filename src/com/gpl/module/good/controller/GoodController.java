@@ -41,6 +41,7 @@ import static com.gpl.framework.model.AjaxModel.RECORD_FAILURE;
 
 @Controller
 @RequestMapping(path = "/good")
+
 public class GoodController extends BaseController{
 	
 	@Autowired
@@ -65,6 +66,7 @@ public class GoodController extends BaseController{
 		return new ModelAndView("good/apply");
 	}
 
+	
 	@RequestMapping(path = "/saveGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String saveGoodMain(GoodMain goodMain){
@@ -76,6 +78,7 @@ public class GoodController extends BaseController{
 			goodMain.setApplicant(UserContext.getContext().getUser().getAccount());
 			System.out.println(goodMain.toString());
 			model.setData(goodMainBiz.save(goodMain));
+			int i = 1/0;
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setMsg("系统出错，添加失败");

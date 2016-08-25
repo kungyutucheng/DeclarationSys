@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jms.MessageNotWriteableException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
@@ -13,7 +15,7 @@ import com.gpl.module.good.dao.GoodDao;
 import com.gpl.module.good.model.Good;
 
 @Service
-
+@Transactional
 public class GoodBiz extends BaseBiz<Good, Integer>{
 	
 	@Autowired
@@ -23,7 +25,6 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 		String hql = "from Good";
 		return goodDao.find(hql);
 	}
-	@Cacheable("orderAutoComplete")
 	public Page queryPage(Page page){
 		String hql = "select new GoodVO(g.id ,"
 				+ "g.gCode,"

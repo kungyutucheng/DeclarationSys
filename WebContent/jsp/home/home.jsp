@@ -108,6 +108,7 @@ $(function(){
 	
 	function organizeMenu(data){
 		var result = new Array();
+		//主节点排序
 		for(var i = 0 ;i <data.length ;i++){
 			for(var j = 0;j<data.length && j!=i;j++){
 				if(data[i].pid == null && data[j].pid == null){
@@ -126,11 +127,13 @@ $(function(){
 				item[0] = data[i];
 				var subItem = new Array();
 				var count = 0;
+				//组织主节点下的子节点
 				for(var j = 0;j < data.length ;j++){
 					if(data[j].pid == data[i].id){
 						subItem[count++] = data[j];
 					}
 				}
+				//子节点排序
 				for(var j = 0 ;j< subItem.length;j++){
 					for(var k = 0;k < subItem.length && j != k;k++){
 						if(subItem[j].sort < subItem[k].sort){
@@ -145,7 +148,7 @@ $(function(){
 			}
 		}
 		
-		
+		//创建html
 		for(var i = result.length - 1;i>=0;i--){
 			var content = $("<ul></ul>");
 			content.attr("class","nav nav-sidebar");

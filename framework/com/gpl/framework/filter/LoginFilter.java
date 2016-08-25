@@ -39,7 +39,9 @@ public class LoginFilter implements Filter{
 				uri.endsWith(".js") || uri.endsWith(".css")){
 			chain.doFilter(request, response); 
 		}else{
+			//记录入session中
 			User user = (User) session.getAttribute("user");
+			//放入上下文环境
 			UserContext.setContext(user);
 			//已登录
 			if(user != null){

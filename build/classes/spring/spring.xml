@@ -50,6 +50,9 @@
 				<prop key="hibernate.connection.useUnicode">true</prop>
 				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
 				<prop key="hibernate.connection.charSet">UTF-8</prop>
+				<!-- <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop> -->
 		    </props>
 		</property>
     </beans:bean>

@@ -25,3 +25,9 @@ hr{
 	background-color:#0081C2;
 	color:white;
 }
+
+.searchBtnDiv{
+	width:100%;
+	margin:10px 0;
+	text-align:center;
+}
