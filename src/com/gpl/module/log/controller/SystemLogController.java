@@ -9,32 +9,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.util.Page;
-import com.gpl.module.log.biz.LoginLogBiz;
+import com.gpl.module.log.biz.SystemLogBiz;
 
-@RequestMapping(path = "/loginLog")
+@RequestMapping(path = "/systemLog")
 @Controller
-public class LoginLogController extends BaseController{
+public class SystemLogController extends BaseController{
 
-	@Autowired
-	private LoginLogBiz loginLogBiz;
 	
+	@Autowired
+	private SystemLogBiz systemLogBiz;
 	
 	@RequestMapping(path = "/list")
 	public ModelAndView list(){
-		return new ModelAndView("log/loginLog/list");
+		return new ModelAndView("log/systemLog/list");
 	}
 	
-	/**
-	 * 分页查询
-	 * @return
-	 */
-	@RequestMapping(path = "/searchgrid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
+	@RequestMapping(path = "/searchgrid" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String searchgrid(){
 		Page page = getPage();
 		page.setParams(getAllParams());
-		System.out.println(getAllParams().toString());
-		return renderJsonStr(loginLogBiz.queryPage(page));
-		
+		return renderJsonStr(systemLogBiz.queryPage(page));
 	}
 }

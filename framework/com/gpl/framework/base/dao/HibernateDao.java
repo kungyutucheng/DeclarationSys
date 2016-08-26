@@ -28,13 +28,13 @@ import com.gpl.framework.util.Page;
 
 
 /**
- * ·â×°SpringSideÀ©Õ¹¹¦ÄÜµÄHibernate Dao·ºÐÍ»ùÀà
+ * ï¿½ï¿½×°SpringSideï¿½ï¿½Õ¹ï¿½ï¿½ï¿½Üµï¿½Hibernate Daoï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
  * 
- * À©Õ¹¹¦ÄÜ°üÀ¨·ÖÒ³²éÑ¯£¬°´ÊôÐÔ¹ýÂËÌõ¼þÁÐ±í²éÑ¯£¬¿ÉÔÚService²ãÖ±½ÓÊ¹ÓÃ£¬Ò²¿ÉÒÔÀ©Õ¹·ºÐÍdao×ÓÀàÊ¹ÓÃ
+ * ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½Ü°ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Serviceï¿½ï¿½Ö±ï¿½ï¿½Ê¹ï¿½Ã£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½daoï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
  * @author wyc
  *
- * @param <T> dao²Ù×÷µÄ¶ÔÏóÀàÐÍ
- * @param <PK> Ö÷¼üÀàÐÍ
+ * @param <T> daoï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param <PK> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 @SuppressWarnings("deprecation")
 public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao<T, PK>{
@@ -42,7 +42,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	public static final Logger logger = Logger.getLogger(HibernateDao.class);
 	
 	/**
-	 * ÓÃÓÚdao²ã×ÓÀàµÄ¹¹Ôìº¯Êý£¬Í¨¹ý×ÓÀàµÄ·ºÐÍ¶¨ÒåÈ¡µÃ¶ÔÏóÀàÐÍCLass
+	 * ï¿½ï¿½ï¿½ï¿½daoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ìº¯ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Í¶ï¿½ï¿½ï¿½È¡ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CLass
 	 */
 	public HibernateDao(){
 		super();
@@ -50,7 +50,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 
 	
 	/**
-	 * ÓÃÓÚÊ¡ÂÔdao²ã£¬service²ãÖ±½ÓÊ¹ÓÃÍ¨ÓÃµÄhibernateDaoµÄ¹¹Ôìº¯Êý£¬ÔÚ¹¹Ôìº¯ÊýÖÐ¶¨Òå¶ÔÏóÀàÐÍ
+	 * ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½daoï¿½ã£¬serviceï¿½ï¿½Ö±ï¿½ï¿½Ê¹ï¿½ï¿½Í¨ï¿½Ãµï¿½hibernateDaoï¿½Ä¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param sessionFactory
 	 * @param entityClass
 	 */
@@ -58,7 +58,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 		super(sessionFactory, entityClass);
 	}
 
-	//  --  ·ÖÒ³²éÑ¯º¯Êý -- //
+	//  --  ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ -- //
 	
 	public List<T> getAll(String className){
 		String hql = " from " + className;
@@ -95,8 +95,10 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 			public Object doInHibernate(Session session) 
 					throws HibernateException, SQLException {
 				Query query = session.createQuery(hql);
-				if(values != null){
-					query.setProperties(values);
+				if(values != null && values.length > 0){
+					for(int i = 0;i < values.length ;i++){
+						query.setParameter(i, values[i]);
+					}
 				}
 				query.setMaxResults(page.getPageSize());
 				query.setFirstResult(page.getPageSize() * (page.getPage() - 1));
@@ -113,9 +115,9 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	
 	/**
 	 * 
-	 * @param page ·ÖÒ³Êý¾Ý
-	 * @param object ²éÑ¯²ÎÊý
-	 * @param orders Ë³Ðò²ÎÊý
+	 * @param page ï¿½ï¿½Ò³ï¿½ï¿½ï¿½
+	 * @param object ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+	 * @param orders Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public Page<T> findPage(final Page<T> page ,final Object object,final String[] orders){
@@ -226,7 +228,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	}
 	
 	/**
-	 * ´Ë´¦Ê¹ÓÃX¶ø²»ÊÇTµÄÔ­ÒòÊÇ£ºÈç¹ûÊ¹ÓÃT£¬ÄÇÃ´Ö»ÄÜ°ó¶¨T£¬¶øÊ¹ÓÃXÔò¿ÉÒÔ°ó¶¨ÆäËûÊý¾ÝÀàÐÍ£¬²»ÊÜ¾ÖÏÞ
+	 * ï¿½Ë´ï¿½Ê¹ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½Ã´Ö»ï¿½Ü°ï¿½Tï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½
 	 * @param hql
 	 * @param values
 	 * @return
@@ -291,6 +293,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 					long totalCount = countHqlResult(hql);
 					page.setTotal(totalCount);
 				}
+				
 				return list;
 			}
 		});
@@ -302,7 +305,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	protected long countHqlResult(final String hql,final Object... values){
 		String countHql = prepareCountHql(hql);
 		try{
-			Long count = findUnique(hql, values);
+			Long count = findUnique(countHql, values);
 			if(count == null){
 				return 0l;
 			}
@@ -326,7 +329,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	}
 	
 	/**
-	 * select×Ó¾äÓëorder by×Ó¾ä»áÓ°Ïìcount²éÑ¯,½øÐÐ¼òµ¥µÄÅÅ³ý
+	 * selectï¿½Ó¾ï¿½ï¿½ï¿½order byï¿½Ó¾ï¿½ï¿½Ó°ï¿½ï¿½countï¿½ï¿½Ñ¯,ï¿½ï¿½ï¿½Ð¼òµ¥µï¿½ï¿½Å³ï¿½
 	 * @param orgHql
 	 * @return
 	 */
@@ -334,6 +337,7 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 		String fromHql = orgHql;
 		fromHql = StringUtils.substring(fromHql, StringUtils.lastIndexOf(fromHql, "from"));
 		fromHql = StringUtils.substringBefore(fromHql, "order by");
+		System.out.println(fromHql);
 		return "select count(*) " + fromHql;
 	}
 	
@@ -341,11 +345,11 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 	private Criteria getCriteria(final Page<T> page,final Object object,Session session){
 		Criteria criteria = session.createCriteria(entityClass);
 		Example example = Example.create(criteria);
-		//¿ªÆôÄ£ºý²éÑ¯
+		//ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ñ¯
 		example.enableLike(MatchMode.ANYWHERE);
-		//¿ÕÖµ²»×ö²éÑ¯
+		//ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
 		example.excludeNone();
-		//0²»×ö²éÑ¯
+		//0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
 		example.excludeZeroes();
 		criteria.add(example);
 		return criteria;

@@ -1,5 +1,6 @@
 package com.gpl.module.good.biz;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 		return goodDao.find(hql);
 	}
 	public Page queryPage(Page page){
+		List<Object> params = new ArrayList<Object>();
 		String hql = "select new GoodVO(g.id ,"
 				+ "g.gCode,"
 				+ "g.gname,"
@@ -57,73 +59,93 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 				+ ")"
 				+ " from Good g,GoodMain gm where g.gmid = gm.id";
 			if(page.getParams().get("id") != null){
-				hql += " and g.id=" + page.getParams().get("id");
+				hql += " and g.id = ?";
+				params.add(Integer.valueOf(page.getParams().get("id").toString()));
 			}
 			if(page.getParams().get("ciqGoodsNo") != null){
-				hql += " and g.ciqGoodsNo like '%" + page.getParams().get("ciqGoodsNo") + "%'";
+				hql += " and g.ciqGoodsNo like ?";
+				params.add("%" + page.getParams().get("ciqGoodsNo") + "%");
 			}
 			if(page.getParams().get("status") != null){
-				hql += " and g.status=" + page.getParams().get("status");
+				hql += " and g.status = ?";
+				params.add(Integer.valueOf(page.getParams().get("status").toString()));
 			}
 			if(page.getParams().get("gCode") != null){
-				hql += " and g.gCode like '%" + page.getParams().get("gCode") +"%'";
+				hql += " and g.gCode like ?";
+				params.add("%" + page.getParams().get("gCode") + "%");
 			}
 			if(page.getParams().get("startNum") != null){
-				hql += " and g.num>=" + page.getParams().get("startNum");
+				hql += " and g.num >= ?";
+				params.add(Integer.valueOf(page.getParams().get("startNum").toString()));
 			}
 			if(page.getParams().get("endNum") != null){
-				hql += " and g.num<=" + page.getParams().get("endNum");
+				hql += " and g.num <= ?";
+				params.add(Integer.valueOf(page.getParams().get("endNum").toString()));
 			}
 			if(page.getParams().get("gname") != null){
-				hql += " and g.gname like '%" + page.getParams().get("gname") + "%'";
+				hql += " and g.gname like ?";
+				params.add("%" + page.getParams().get("gname") + "%");
 			}
 			if(page.getParams().get("hsCode") != null){
-				hql += " and g.hdCode like '%" + page.getParams().get("hsCode") + "%'";
+				hql += " and g.hdCode like ?";
+				params.add("%" + page.getParams().get("hsCode") + "%");
 			}
 			if(page.getParams().get("goodsDesc") != null){
-				hql += " and g.goodsDesc like '%" + page.getParams().get("goodsDesc") + "%'";
+				hql += " and g.goodsDesc like ?";
+				params.add("%" + page.getParams().get("goodsDesc") + "%");
 			}
 			if(page.getParams().get("comName") != null){
-				hql += " and g.comName like '%" + page.getParams().get("comName") + "%'";
+				hql += " and g.comName like '%" + page.getParams().get("comName") + "%";
 			}
 			if(page.getParams().get("brand") != null){
-				hql += " and g.brand like '%" + page.getParams().get("brand") + "%'";
+				hql += " and g.brand like ?";
+				params.add("%" + page.getParams().get("brand") + "%");
 			}
 			if(page.getParams().get("assemCountry") != null){
-				hql += " and g.assemCountry like '%" + page.getParams().get("assemCountry") + "%'";
+				hql += " and g.assemCountry like ?";
+				params.add("%" + page.getParams().get("assemCountry") + "%");
 			}
 			if(page.getParams().get("cargobCode") != null){
-				hql += " and g.cargobCode like '%" + page.getParams().get("cargobCode") + "%'";
+				hql += " and g.cargobCode like ?";
+				params.add("%" + page.getParams().get("cargobCode") + "%");
 			}
 			if(page.getParams().get("ciqbCode") != null){
-				hql += " and gm.ciqbCode='" + page.getParams().get("ciqbCode") + "'";
+				hql += " and gm.ciqbCode = ?";
+				params.add(page.getParams().get("ciqbCode"));
 			}
 			if(page.getParams().get("cbeComId") != null){
-				hql += " and gm.cbeComId=" + page.getParams().get("cbeComId");
+				hql += " and gm.cbeComId = ?";
+				params.add(Integer.valueOf(page.getParams().get("cbeComId").toString()));
 			}
 			if(page.getParams().get("editId") != null){
-				hql += " and gm.editId=" + page.getParams().get("editId");
+				hql += " and gm.editId = ?";
+				params.add(Integer.valueOf(page.getParams().get("editId").toString()));
 			}
 			if(page.getParams().get("operType") != null){
-				hql += " and gm.operType='" + page.getParams().get("operType") +"'"; 
+				hql += " and gm.operType = ?";
+				params.add(page.getParams().get("operType")); 
 			}
 			if(page.getParams().get("startTime") != null){
-				hql += " and g.createTime>='" + page.getParams().get("startTime") +"'";
+				hql += " and g.createTime >= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+				params.add(page.getParams().get("startTime"));
 			}
 			if(page.getParams().get("endTime") != null){
-				hql += " and g.createTime <='" + page.getParams().get("endTime") +"'";
+				hql += " and g.createTime <= ?";
+				params.add(page.getParams().get("endTime"));
 			}
 			if(page.getParams().get("noNotNull") != null){
 				hql += " and g.ciqGoodsNo is not null";
 			}
 			if(page.getParams().get("gmid") != null){
-				hql += " and gmid=" + page.getParams().get("gmid");
+				hql += " and gmid = ?";
+				params.add(Integer.valueOf(page.getParams().get("gmid").toString()));
 			}
 			if(page.getParams().get("applicant") != null){
-				hql += " and gm.applicant like '%" + page.getParams().get("applicant") + "%'";
+				hql += " and gm.applicant like ?";
+				params.add("%" + page.getParams().get("applicant") + "%");
 			}
 			hql	+= " order by g.createTime desc";
-		return goodDao.findPage(page, hql, new HashMap<String,Object>());
+		return goodDao.findPage(page, hql, params.toArray());
 	}
 	
 	public void batchUpdate(Integer gmid){

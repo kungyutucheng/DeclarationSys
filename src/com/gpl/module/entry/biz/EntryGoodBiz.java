@@ -1,5 +1,9 @@
 package com.gpl.module.entry.biz;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,97 +49,128 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 				+ "goodsBatchNo,"
 				+ "packPieceNum,"
 				+ "createTime) from EntryGood where 1=1";
+		List<Object> params = new ArrayList<Object>();
 		if(page.getParams().get("eid") != null){
-			hql += " and eid=" + page.getParams().get("eid");
+			hql += " and eid = ?";
+			params.add(Integer.valueOf(page.getParams().get("eid").toString()));
 		}
 		if(page.getParams().get("contId") != null){
-			hql += " and contId=" + page.getParams().get("contId");
+			hql += " and contId = ?";
+			params.add(Integer.valueOf(page.getParams().get("contId").toString()));
 		}
 		if(page.getParams().get("hsCode") != null){
-			hql += " and hsCode like '%" + page.getParams().get("hsCode") + "%'";
+			hql += " and hsCode like ?";
+			params.add("%" + page.getParams().get("hsCode") + "%");
 		}
 		if(page.getParams().get("ciqGoodsNo") != null){
-			hql += " and ciqGoodsNo like '%" + page.getParams().get("ciqGoodsNo") + "%'";
+			hql += " and ciqGoodsNo like ?";
+			params.add("%" + page.getParams().get("ciqGoodsNo") + "%");
 		}
 		if(page.getParams().get("gCode") != null){
-			hql += " and gCode like '%" + page.getParams().get("gCode") + "%'";
+			hql += " and gCode like ?";
+			params.add("%" + page.getParams().get("gCode") + "%");
 		}
 		if(page.getParams().get("goodsMaterial") != null){
-			hql += " and goodsMaterial like '%" + page.getParams().get("goodsMaterial") + "%'";
+			hql += " and goodsMaterial like ?";
+			params.add("%" + page.getParams().get("goodsMaterial") + "%");
 		}
 		if(page.getParams().get("packType") != null){
-			hql += " and packType='" + page.getParams().get("packType") + "'"; 
+			hql += " and packType = ?";
+			params.add(page.getParams().get("packType")); 
 		}
 		if(page.getParams().get("fCode") != null){
-			hql += " and fCode='" + page.getParams().get("fCode") + "'";
+			hql += " and fCode = ?";
+			params.add(page.getParams().get("fCode"));
 		}
 		if(page.getParams().get("startUPric") != null){
-			hql += " and uPric>=" + page.getParams().get("startUPric");
+			hql += " and uPric >= ?";
+			params.add(new BigDecimal(page.getParams().get("startUPric").toString()));
 		}
 		if(page.getParams().get("endUPric") != null){
-			hql += " and UPric<=" + page.getParams().get("endUPric");
+			hql += " and UPric <= ?";
+			params.add(new BigDecimal(page.getParams().get("endUPric").toString()));
 		}
 		if(page.getParams().get("buyFromCity") != null){
-			hql += " and buyFromCity like '%" + page.getParams().get("buyFromCity") + "%'";
+			hql += " and buyFromCity like ?";
+			params.add("%" + page.getParams().get("buyFromCity") + "%");
 		}
 		if(page.getParams().get("startQtp") != null){
-			hql += " and qtp>=" + page.getParams().get("startQtp");
+			hql += " and qtp >= ?";
+			params.add(new BigDecimal(page.getParams().get("startQtp").toString()));
 		}
 		if(page.getParams().get("endQtp") != null){
-			hql += " and qtp<=" + page.getParams().get("endQtp");
+			hql += " and qtp <= ?";
+			params.add(new BigDecimal(page.getParams().get("endQtp").toString()));
 		}
 		if(page.getParams().get("qtpUnit") != null){
-			hql += " and qtpUnit='" + page.getParams().get("qtpUnit") +"'";
+			hql += " and qtpUnit = ?";
+			params.add(page.getParams().get("qtpUnit"));
 		}
 		if(page.getParams().get("startQty") != null){
-			hql += " and qty>=" + page.getParams().get("startQty");
+			hql += " and qty >= ?";
+			params.add(new BigDecimal(page.getParams().get("startQty").toString()));
 		}
 		if(page.getParams().get("endQty") != null){
-			hql += " and qty<=" + page.getParams().get("endQty");
+			hql += " and qty <= ?";
+			params.add(new BigDecimal(page.getParams().get("endQty").toString()));
 		}
 		if(page.getParams().get("startKgs") != null){
-			hql += " and kgs>=" + page.getParams().get("kgs");
+			hql += " and kgs >= ?";
+			params.add(new BigDecimal(page.getParams().get("kgs").toString()));
 		}
 		if(page.getParams().get("endKgs") != null){
-			hql += " and kgs<=" + page.getParams().get("endKgs");
+			hql += " and kgs <= ?";
+			params.add(new BigDecimal(page.getParams().get("endKgs").toString()));
 		}
 		if(page.getParams().get("startNet") != null){
-			hql += " and net>=" + page.getParams().get("startNet");
+			hql += " and net >= ?";
+			params.add(new BigDecimal(page.getParams().get("startNet").toString()));
 		}
 		if(page.getParams().get("endNet") != null){
-			hql += " and net<=" + page.getParams().get("endNet");
+			hql += " and net <= ?";
+			params.add(new BigDecimal(page.getParams().get("endNet").toString()));
 		}
 		if(page.getParams().get("startFcy") != null){
-			hql += " and fcy>=" + page.getParams().get("startFcy");
+			hql += " and fcy >= ?";
+			params.add(new BigDecimal(page.getParams().get("startFcy").toString()));
 		}
 		if(page.getParams().get("endFcy") != null){
-			hql += " and fcy<=" + page.getParams().get("endFcy");
+			hql += " and fcy <= ?";
+			params.add(new BigDecimal(page.getParams().get("endFcy").toString()));
 		}
 		if(page.getParams().get("kgsUnit") != null){
-			hql += " and kgsUnit='" + page.getParams().get("kgsUnit") + "'";
+			hql += " and kgsUnit = ?";
+			params.add(page.getParams().get("kgsUnit"));
 		}
 		if(page.getParams().get("startPackNum") != null){
-			hql += " and packNum>=" + page.getParams().get("startPackNum");
+			hql += " and packNum >= ?";
+			params.add(Integer.valueOf(page.getParams().get("startPackNum").toString()));
 		}
 		if(page.getParams().get("endPackNum") != null){
-			hql += " and packNum<=" + page.getParams().get("endPackNum");
+			hql += " and packNum <= ?";
+			params.add(Integer.valueOf(page.getParams().get("endPackNum").toString()));
 		}
 		if(page.getParams().get("goodsBatchNo") != null){
-			hql += " and goodsBatchNo like '%" + page.getParams().get("goodsBatchNo") + "%'";
+			hql += " and goodsBatchNo like ?";
+			params.add("%" + page.getParams().get("goodsBatchNo") + "%");
 		}
 		if(page.getParams().get("startPackPieceNum") != null){
-			hql += " and packPieceNum>=" + page.getParams().get("startPackPieceNum");
+			hql += " and packPieceNum >= ?";
+			params.add(Integer.valueOf(page.getParams().get("startPackPieceNum").toString()));
 		}
 		if(page.getParams().get("endPackPieceNum") != null){
-			hql += " and packPieceNum<=" + page.getParams().get("endPackPieceNum");
+			hql += " and packPieceNum <= ?";
+			params.add(Integer.valueOf(page.getParams().get("endPackPieceNum").toString()));
 		}
 		if(page.getParams().get("startTime") != null){
-			hql += " and createTime >='" + page.getParams().get("startTime") + "'";
+			hql += " and createTime >= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("startTime"));
 		}
 		if(page.getParams().get("endTime") != null){
-			hql += " and createTime <='" + page.getParams().get("endTime") + "'";
+			hql += " and createTime <= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("endTime"));
 		}
 		hql += " order by createTime desc";
-		return entryGoodDao.findPage(page, hql);
+		return entryGoodDao.findPage(page, hql,params.toArray());
 	}
 }

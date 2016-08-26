@@ -1,7 +1,10 @@
 package com.gpl.module.entry.biz;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -71,134 +74,177 @@ public class EntryBiz extends BaseBiz<Entry, Integer>{
 				+ "regStatusDesc,"
 				+ "createTime,"
 				+ "applicant) from Entry where 1=1";
+		List<Object> params = new ArrayList<Object>();
 		if(page.getParams().get("ciqbCode") != null){
-			hql += " and ciqbCode ='" + page.getParams().get("ciqbCode") + "'";
+			hql += " and ciqbCode = ?";
+			params.add(page.getParams().get("ciqbCode"));
 		}
 		if(page.getParams().get("status") != null){
-			hql += " and status =" + page.getParams().get("status"); 
+			hql += " and status = ?";
+			params.add(Integer.valueOf(page.getParams().get("status").toString())); 
 		}
 		if(page.getParams().get("entInboundNo") != null){
-			hql += " and entInboundNo like '%" + page.getParams().get("entInboundNo") + "%'";
+			hql += " and entInboundNo like ?";
+			params.add("%" + page.getParams().get("entInboundNo") + "%");
 		}
 		if(page.getParams().get("operType") != null){
-			hql += " and operType='" + page.getParams().get("operType") + "'";
+			hql += " and operType = ?";
+			params.add(page.getParams().get("operType"));
 		}
 		if(page.getParams().get("startDeclarationDate") != null){
-			hql += " and declarationDate>='" + page.getParams().get("startDeclarationDate") + "'";
+			hql += " and declarationDate >= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("startDeclarationDate"));
 		}
 		if(page.getParams().get("endDeclarationDate") != null){
-			hql += " and declarationDate<='" + page.getParams().get("endDeclarationDate") + "'";
+			hql += " and declarationDate <= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("endDeclarationDate"));
 		}
 		if(page.getParams().get("tool") != null){
-			hql += " and tool=" + page.getParams().get("tool");
+			hql += " and tool = ?";
+			params.add(Integer.valueOf(page.getParams().get("tool").toString()));
 		}
 		if(page.getParams().get("toolName") != null){
-			hql += " and toolName like '%" + page.getParams().get("toolName") + "%'";
+			hql += " and toolName like ?";
+			params.add("%" + page.getParams().get("toolName") + "%");
 		}
 		if(page.getParams().get("toolNo") != null){
-			hql += " and toolNo like '%" + page.getParams().get("toolNo") + "%'";
+			hql += " and toolNo like ?";
+			params.add("%" + page.getParams().get("toolNo") + "%");
 		}
 		if(page.getParams().get("startArrivalDate") != null){
-			hql += " and arrivalDate>='" + page.getParams().get("startArrivalDate") + "'";
+			hql += " and arrivalDate >= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("startArrivalDate"));
 		}
 		if(page.getParams().get("endArrivalDate") != null){
-			hql += " and arrivalDate<='" + page.getParams().get("endArrivalDate") + "'";
+			hql += " and arrivalDate <= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("endArrivalDate"));
 		}
 		if(page.getParams().get("destination") != null){
-			hql += " and destination like '%" + page.getParams().get("destination") + "%'";
+			hql += " and destination like ?";
+			params.add("%" + page.getParams().get("destination") + "%");
 		}
 		if(page.getParams().get("startUploadDate") != null){
-			hql += " and uploadDate>='" + page.getParams().get("startUploadDate") +"'";
+			hql += " and uploadDate >= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("startUploadDate"));
 		}
 		if(page.getParams().get("endUploadDate") != null){
-			hql += " and uploadDate<='" + page.getParams().get("endUploadDate") + "'";
+			hql += " and uploadDate <= STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s')";
+			params.add(page.getParams().get("endUploadDate"));
 		}
 		if(page.getParams().get("stockLocation") != null){
-			hql += " and stockLocation like '%" + page.getParams().get("stockLocation") + "%'";
+			hql += " and stockLocation like ?";
+			params.add("%" + page.getParams().get("stockLocation") + "%");
 		}
 		if(page.getParams().get("tblType") != null){
-			hql += " and tblType=" + page.getParams().get("tblType");
+			hql += " and tblType = ?";
+			params.add(page.getParams().get("tblType"));
 		}
 		if(page.getParams().get("tblReportType") != null){
-			hql += " and tblReportType=" + page.getParams().get("tblReportType");
+			hql += " and tblReportType = ?";
+			params.add(page.getParams().get("tblReportType"));
 		}
 		if(page.getParams().get("specRequire") != null){
-			hql += " and specRequire like '%" + page.getParams().get("specRequire") + "%'";
+			hql += " and specRequire like ?";
+			params.add("%" + page.getParams().get("specRequire") + "%");
 		}
 		if(page.getParams().get("startClaimDays") != null){
-			hql += " and claimDays>=" + page.getParams().get("startClaimDays");
+			hql += " and claimDays >= ?";
+			params.add(Integer.valueOf(page.getParams().get("startClaimDays").toString()));
 		}
 		if(page.getParams().get("endClaimDays") != null){
-			hql += " and claimDays<=" + page.getParams().get("endClaimDays");
+			hql += " and claimDays <= ?";
+			params.add(Integer.valueOf(page.getParams().get("endClaimDays").toString()));
 		}
 		if(page.getParams().get("customDeclareNo") != null){
-			hql += " and customDeclareNo like '%" + page.getParams().get("customDeclareNo") + "%'";
+			hql += " and customDeclareNo like ?";
+			params.add("%" + page.getParams().get("customDeclareNo") + "%");
 		}
 		if(page.getParams().get("editId") != null){
-			hql += " and editId=" + page.getParams().get("editId");
+			hql += " and editId = ?";
+			params.add(Integer.valueOf(page.getParams().get("editId").toString()));
 		}
 		if(page.getParams().get("bargainNo") != null){
-			hql += " and bargainNo like '%" + page.getParams().get("bargainNo") + "%'";
+			hql += " and bargainNo like ?";
+			params.add("%" + page.getParams().get("bargainNo") + "%");
 		}
 		if(page.getParams().get("shipperName") != null){
-			hql += " and shipperName like '%" + page.getParams().get("shipperName") + "%'";
+			hql += " and shipperName like ?";
+			params.add("%" + page.getParams().get("shipperName") + "%");
 		}
 		if(page.getParams().get("consigneeName") != null){
-			hql += " and consigneeName like '%" + page.getParams().get("consigneeName") + "%'";
+			hql += " and consigneeName like ?";
+			params.add("%" + page.getParams().get("consigneeName") + "%");
 		}
 		if(page.getParams().get("shipperNameEn") != null){
-			hql += " and shipperNameEn like '%" + page.getParams().get("shipperNameEn") + "%'";
+			hql += " and shipperNameEn like ?";
+			params.add("%" + page.getParams().get("shipperNameEn") + "%");
 		}
 		if(page.getParams().get("consigneeNameEn") != null){
-			hql += " and consigneeNameEn like '%" + page.getParams().get("consigneeNameEn") + "%'";
+			hql += " and consigneeNameEn like ?";
+			params.add("%" + page.getParams().get("consigneeNameEn") + "%");
 		}
 		if(page.getParams().get("shipperAddr") != null){
-			hql += " and shipperAddr like '%" + page.getParams().get("shipperAddr") + "%'";
+			hql += " and shipperAddr like ?";
+			params.add("%" + page.getParams().get("shipperAddr") + "%");
 		}
 		if(page.getParams().get("consigneeAddr") != null){
-			hql += " and consigneeAddr like '%" + page.getParams().get("consigneeAddr") + "%'";
+			hql += " and consigneeAddr like ?";
+			params.add("%" + page.getParams().get("consigneeAddr") + "%");
 		}
 		if(page.getParams().get("blNo") != null){
-			hql += " and blNo like '%" + page.getParams().get("blNo") + "%'";
+			hql += " and blNo like ?";
+			params.add("%" + page.getParams().get("blNo") + "%");
 		}
 		if(page.getParams().get("tradeType") != null){
-			hql += " and tradeType=" + page.getParams().get("tradeType");
+			hql += " and tradeType = ?";
+			params.add(page.getParams().get("tradeType"));
 		}
 		if(page.getParams().get("chargeType") != null){
-			hql += " and chargeType=" + page.getParams().get("chargeType");
+			hql += " and chargeType = ?";
+			params.add(page.getParams().get("chargeType"));
 		}
 		if(page.getParams().get("tradeCode") != null){
-			hql += " and tradeCode=" + page.getParams().get("tradeCode");
+			hql += " and tradeCode = ?";
+			params.add(page.getParams().get("tradeCode"));
 		}
 		if(page.getParams().get("portLoad") != null){
-			hql += " and portLoad=" + page.getParams().get("portLoad");
+			hql += " and portLoad = ?";
+			params.add(page.getParams().get("portLoad"));
 		}
 		if(page.getParams().get("countryLoad") != null){
-			hql += " and countryLoad like '%" + page.getParams().get("countryLoad") + "%'";
+			hql += " and countryLoad like ?";
+			params.add("%" + page.getParams().get("countryLoad") + "%");
 		}
 		if(page.getParams().get("portStop") != null){
-			hql += " and portStop=" + page.getParams().get("portStop");
+			hql += " and portStop = ?";
+			params.add(page.getParams().get("portStop"));
 		}
 		if(page.getParams().get("portDis") != null){
-			hql += " and portDis=" + page.getParams().get("portDis");
+			hql += " and portDis = ?";
+			params.add(page.getParams().get("portDis"));
 		}
 		if(page.getParams().get("markNo") != null){
-			hql += " and markNo like '%" + page.getParams().get("markNo") + "%'";
+			hql += " and markNo like ?";
+			params.add("%" + page.getParams().get("markNo") + "%");
 		}
 		if(page.getParams().get("fCode") != null){
-			hql += " and fCode=" + page.getParams().get("fCode");
+			hql += " and fCode = ?";
+			params.add(page.getParams().get("fCode"));
 		}
 		if(page.getParams().get("reportType") != null){
-			hql += " and reportType=" + page.getParams().get("reportType");
+			hql += " and reportType = ?";
+			params.add(page.getParams().get("reportType"));
 		}
 		if(page.getParams().get("declCode") != null){
-			hql += " and declCode like '%" + page.getParams().get("declCode") + "%'";
+			hql += " and declCode like ?";
+			params.add("%" + page.getParams().get("declCode") + "%");
 		}
 		if(page.getParams().get("applicant") != null){
-			hql += " and applicant like '%" + page.getParams().get("applicant") + "%'";
+			hql += " and applicant like ?";
+			params.add("%" + page.getParams().get("applicant") + "%");
 		}
 		hql += " order by createTime desc";
-		return entryDao.findPage(page, hql, new HashMap<String,Object>());
+		return entryDao.findPage(page, hql, params.toArray());
 	}
 	
 }

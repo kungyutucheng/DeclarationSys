@@ -198,7 +198,8 @@
 						<input class="easyui-combobox"
 							style="width:100%;"
 							 name="editId"
-							 data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll'">
+							 data-options="valueField: 'id',textField: 'ename',url:'${basePath }/ent/getAll',
+							 icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
 					<td>合同号</td>
 					<td>
@@ -413,6 +414,9 @@
 			        	  return (new Date(value)).format("yyyy-MM-dd");
 			          }},
 			          {field:"uploadDate",title:"卸毕日期",width:100,formatter:function(value,row,index){
+			        	  if(value == null){
+			        		  return "";
+			        	  }
 			        	  return (new Date(value)).format("yyyy-MM-dd");
 			          }},
 			          {field:"destination",title:"目的地",width:150},

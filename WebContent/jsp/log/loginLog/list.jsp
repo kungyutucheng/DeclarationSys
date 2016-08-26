@@ -43,8 +43,8 @@
 				</tr>
 			</table>
 			<div class="searchBtnDiv">
-				<button class="btn btn-primary myBtn" onclick="search()">查询</button>
-				<button class="btn btn-primary myBtn" onclick="resetForm()">重置</button>
+				<button class="btn btn-primary myBtn" onclick="search()" type="button">查询</button>
+				<button class="btn btn-primary myBtn" onclick="resetForm()" type="button">重置</button>
 			</div>
 		</form>
 	</div>
@@ -52,7 +52,7 @@
 		<table id="logDg"></table>
 	</div>
 	<script>
-	(function(){
+	$(function(){
 		$("#logDg").datagrid({
 			url:"${basePath}/loginLog/searchgrid",
 			rownumbers:true,
@@ -62,7 +62,7 @@
 			columns:[[
 			         {field:"id",hidden:true},
 			         {field:"account",title:"账号",width:100},
-			         {field:"ip",title:"登陆ip",width:100},
+			         {field:"ip",title:"登陆ip",width:200},
 			         {field:"result",title:"登陆结果",width:80,formatter:function(value,row,index){
 			        	 if(value == 1){
 			        		 return "<font style='color:green;'>成功</font>";
@@ -83,7 +83,7 @@
 	
 	
 	function search(){
-		$("#logDg").datagrid("reload",{queryParams:$("#searchForm").serializeObject()});
+		$("#logDg").datagrid("reload",$("#searchForm").serializeObject());
 	}
 	
 	function resetForm(){
