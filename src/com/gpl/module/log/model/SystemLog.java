@@ -113,7 +113,7 @@ public class SystemLog implements Serializable{
 	public void setParams(String params) {
 		this.params = params;
 	}
-	@Column
+	@Column(insertable = false , updatable = false)
 	public Date getCreateTime() {
 		return createTime;
 	}

@@ -18,50 +18,50 @@ public class Page<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * ¹«¹²±äÁ¿
+	 * æ’åºå¸¸é‡
 	 */
 	private static final String ASC = "asc";
 	private static final String DESC = "desc";
 
 	/**
-	 * Ò³ºÅ
+	 * é¡µå·
 	 */
 	private int page = -1;
 	
 	
 	/**
-	 * Ã¿Ò³ÊıÁ¿
+	 * æ¯é¡µè®°å½•æ•°
 	 */
 	private int pageSize = -1;
 	
 	/**
-	 * ¼ÇÂ¼×ÜÊı
+	 * æ€»è®°å½•æ•°
 	 */
 	private long total = -1;
 	
 	/**
-	 * ²éÑ¯½á¹û
+	 * ç»“æœé›†
 	 */
 	private List<T> rows;
 	
 	/**
-	 * ²éÑ¯µÄÅÅĞò×Ö¶Î£¨½ö½öÊÇ×Ö¶Î£©£¬¶à¸ö×Ö¶ÎÖ®¼äÒÔ¡°£¬¡±¸ô¿ª
+	 * æ’åºå­—æ®µ
 	 */
 	private String orderBy = null;
 	/**
-	 * ÓëÅÅĞò×Ö¶Î¶ÔÓ¦µÄÅÅĞò·½Ê½£¬¶à¸ö×Ö¶ÎÖ®¼äÒÔ¡°£¬¡±¸ô¿ª
+	 * æ’åºå­—æ®µå¯¹åº”çš„æ’åºè§„åˆ™
 	 */
 	private String order = null;
 	private boolean autoCount = true;
 	
 	/**
-	 * ²éÑ¯²ÎÊı
+	 * æŸ¥è¯¢å‚æ•°
 	 */
 	private Map<String, Object> params = new HashMap<String,Object>();
 	
 	
 	/**
-	 * ×Ö¶Î³£Á¿£¬±ÜÃâĞŞ¸ÄÃû×ÖÊ±ÒıÆğµÄÂé·³
+	 * å¸¸é‡
 	 */
 	public static final String PAGE_NO = "page";
 	public static final String PAGE_SIZE = "rows";
@@ -79,7 +79,7 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * »ñµÃµ±Ç°µÄÒ³ºÅ£¬ĞòºÅ´Ó1¿ªÊ¼£¬Ä¬ÈÏÎª1
+	 * è·å–é¡µæ•°
 	 * @return
 	 */
 	public int getPage() {
@@ -87,7 +87,7 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * ÉèÖÃµ±Ç°Ò³µÄÒ³ºÅ£¬ĞòºÅ´Ó1¿ªÊ¼£¬µÍÓÚ1Ê±×Ô¶¯µ÷ÕûÎª1
+	 * è®¾ç½®é¡µæ•°
 	 * @param pageNo
 	 */
 	public void setPage(int page) {
@@ -99,7 +99,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * ÉèÖÃµ±Ç°Ò³µÄÒ³ºÅ£¬·µ»Øµ±Ç°¶ÔÏó£¬ÓÃÓÚÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®é¡µæ•°
 	 * @param pageNo
 	 * @return
 	 */
@@ -108,12 +108,16 @@ public class Page<T> implements Serializable {
 		return this;
 	}
 
+	/**
+	 * è·å–æ¯é¡µè®°å½•æ•°
+	 * @return
+	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	/**
-	 * ÉèÖÃÃ¿Ò³µÄÊı¾İÁ¿£¬Ä¬ÈÏÖµÎª-1
+	 * è®¾ç½®æ¯é¡µè®°å½•æ•°
 	 * @param pageSize
 	 */
 	public void setPageSize(int pageSize) {
@@ -121,7 +125,7 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * ÉèÖÃÃ¿Ò³µÄÊı¾İÁ¿£¬Ä¬ÈÏÖµÎª-1£¬·µ»Øµ±Ç°¶ÔÏóÒÔ±ãÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®æ¯é¡µè®°å½•æ•°
 	 * @param pageSize
 	 * @return
 	 */
@@ -130,12 +134,16 @@ public class Page<T> implements Serializable {
 		return this;
 	}
 	
+	/**
+	 * è·å–æ€»è®°å½•æ•°
+	 * @return
+	 */
 	public long getTotal() {
 		return total;
 	}
 
 	/**
-	 * ÉèÖÃÊı¾İ×ÜÁ¿£¬Ä¬ÈÏÖµÎª-1
+	 * è®¾ç½®æ€»è®°å½•æ•°
 	 * @param totalCount
 	 */
 	public void setTotal(long total) {
@@ -143,7 +151,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * ÉèÖÃÊı¾İ×ÜÁ¿£¬Ä¬ÈÏÖµÎª-1£¬·µ»Øµ±Ç°¶ÔÏóÒÔ±ãÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®æ€»è®°å½•æ•°
 	 * @param totalCount
 	 * @return
 	 */
@@ -152,25 +160,32 @@ public class Page<T> implements Serializable {
 		return this;
 	}
 
-	
+	/**
+	 * è·å–ç»“æœé›†
+	 * @return
+	 */
 	public List<T> getRows() {
 		return rows;
 	}
 
 	/**
-	 * ·µ»Ø²éÑ¯½á¹û¼¯
+	 * è®¾ç½®ç»“æœé›†
 	 * @param result
 	 */
 	public void setRows(List<T> rows) {
 		this.rows = rows;
 	}
 
+	/**
+	 * è·å–æ’åºå­—æ®µ
+	 * @return
+	 */
 	public String getOrderBy() {
 		return orderBy;
 	}
 
 	/**
-	 * ÉèÖÃÅÅĞò×Ö¶Î£¬¶à¸ö×Ö¶ÎÖ®¼äÒÔ¡°£¬¡±¸ô¿ª
+	 * è®¾ç½®æ’åºå­—æ®µ
 	 * @param orderBy
 	 */
 	public void setOrderBy(String orderBy) {
@@ -178,7 +193,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * ÉèÖÃÅÅĞò×Ö¶Î£¬·µ»Øµ±Ç°¶ÔÏóÒÔ±ãÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®æ’åºå­—æ®µ
 	 * @param orderBy
 	 * @return
 	 */
@@ -187,12 +202,16 @@ public class Page<T> implements Serializable {
 		return this;
 	}
 
+	/**
+	 * è·å–æ’åºè§„åˆ™
+	 * @return
+	 */
 	public String getOrder() {
 		return order;
 	}
 
 	/**
-	 * ÉèÖÃÅÅĞò·½Ê½£¬¶à¸ö×Ö¶ÎÖ®¼äÒÔ¡°,¡±¸ô¿ª£¬Ä¬ÈÏÖµÖ»ÄÜÊÇ¡°ASC¡±»ò¡°DESC¡±Ö®ÖĞµÄÒ»¸ö£¬²»Çø·Ö´óĞ¡Ğ´
+	 * ç»„ç»‡æ’åºè§„åˆ™
 	 * @param order
 	 */
 	public void setOrder(String order) {
@@ -200,14 +219,14 @@ public class Page<T> implements Serializable {
 		String orders [] = StringUtils.split(temp, ",");
 		for(String item : orders){
 			if(!StringUtils.equals(item, ASC) && !StringUtils.equals(item, DESC)){
-				throw new IllegalArgumentException("ÅÅĞò·½Ïò" + order + "²»ºÏ·¨");
+				throw new IllegalArgumentException("æ’åºè§„åˆ™" + order + "ä¸ç¬¦åˆè¦æ±‚");
 			}
 		}
 		this.order = temp;
 	}
 	
 	/**
-	 * ÊÇ·ñÒÑÉèÖÃÅÅĞò
+	 * æ˜¯å¦è®¾ç½®æ’åº
 	 * @return
 	 */
 	public boolean isOrderBySetted(){
@@ -215,7 +234,7 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * ÉèÖÃÅÅĞò·½Ê½£¬·µ»Øµ±Ç°¶ÔÏóÒÔ±ãÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®æ’åºè§„åˆ™
 	 * @param order
 	 * @return
 	 */
@@ -229,14 +248,14 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * ÉèÖÃ²éÑ¯¶ÔÏóÊ±ÊÇ·ñ×Ô¶¯ÏÈÖ´ĞĞcount²éÑ¯»ñÈ¡×Ü¼ÇÂ¼Êı.
+	 * è®¾ç½®æ˜¯å¦è®¡ç®—æ€»æ•°
 	 */
 	public void setAutoCount(boolean autoCount) {
 		this.autoCount = autoCount;
 	}
 	
 	/**
-	 * ÉèÖÃ²éÑ¯¶ÔÏóÊ±ÊÇ·ñ×Ô¶¯ÏÈÖ´ĞĞcount²éÑ¯»ñÈ¡×Ü¼ÇÂ¼Êı£¬·µ»Øµ±Ç°¶ÔÏóÒÔ±ãÁ¬ĞøÉèÖÃ
+	 * é“¾å¼è®¾ç½®æ˜¯å¦è®°å½•æ€»æ•°
 	 * @param autoCount
 	 * @return
 	 */
@@ -254,7 +273,7 @@ public class Page<T> implements Serializable {
 	}
 
 	/**
-	 * »ñÈ¡×ÜÒ³Êı
+	 * è·å–é¡µæ•°
 	 * @return
 	 */
 	public long getPageCount(){
@@ -271,7 +290,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * »ñÈ¡Ã¿Ò»Ò³µÚÒ»ÌõÊı¾İµÄĞòºÅ
+	 * è·å–æ¯é¡µçš„ç¬¬ä¸€æ¡è®°å½•
 	 * @return
 	 */
 	public int getFirstInPage(){
@@ -279,7 +298,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * ÅĞ¶ÏÊÇ·ñ»¹ÓĞÏÂÒ»Ò³
+	 * æ˜¯å¦æœ‰ä¸‹ä¸€é¡µ
 	 * @return
 	 */
 	public boolean hasNext(){
@@ -287,7 +306,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÒ»Ò³µÄÒ³ºÅ£¬Èç¹ûÒÑ¾­ÊÇÎ²Ò³£¬·µ»ØÎ²Ò³Ò³ºÅ
+	 * è·å–ä¸‹ä¸€é¡µé¡µå·
 	 * @return
 	 */
 	public int getNextPage(){
@@ -295,7 +314,7 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÓĞÉÏÒ»Ò³
+	 * æ˜¯å¦æœ‰å‰ä¸€é¡µ
 	 * @return
 	 */
 	public boolean hasPre(){
@@ -303,10 +322,20 @@ public class Page<T> implements Serializable {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÒ»Ò³Ò³ºÅ£¬Èç¹ûÒÑ¾­ÊÇÊ×Ò³£¬·µ»ØÊ×Ò³ºÅÂë
+	 * è·å–å‰ä¸€é¡µé¡µå·
 	 * @return
 	 */
 	public int getPrePage(){
 		return hasPre() ? page - 1 : page;
 	}
+
+	@Override
+	public String toString() {
+		return "Page [page=" + page + ", pageSize=" + pageSize + ", total="
+				+ total + ", rows=" + rows + ", orderBy=" + orderBy
+				+ ", order=" + order + ", autoCount=" + autoCount + ", params="
+				+ params + "]";
+	}
+	
+	
 }

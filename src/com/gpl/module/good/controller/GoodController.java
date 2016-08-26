@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gpl.framework.annotation.SystemControllerLog;
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.context.UserContext;
 import com.gpl.framework.model.AjaxModel;
@@ -29,7 +30,6 @@ import com.gpl.module.good.model.GoodMain;
 import com.gpl.module.util.Creator;
 
 import net.sf.json.JSONObject;
-
 import static com.gpl.framework.model.AjaxModel.SAVE_SUCCESS;
 import static com.gpl.framework.model.AjaxModel.SAVE_FAILURE;
 import static com.gpl.framework.model.AjaxModel.UPDATE_SUCCESS;
@@ -66,9 +66,14 @@ public class GoodController extends BaseController{
 		return new ModelAndView("good/apply");
 	}
 
-	
+	/**
+	 * 保存商品备案主表信息
+	 * @param goodMain 保存的对象
+	 * @return 保存结果
+	 */
 	@RequestMapping(path = "/saveGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
+	@SystemControllerLog(desc = "保存主表信息")
 	public String saveGoodMain(GoodMain goodMain){
 		AjaxModel model = new AjaxModel(true);
 		model.setMsg("添加成功");
@@ -76,9 +81,7 @@ public class GoodController extends BaseController{
 			goodMain.setCargobCode(Creator.createCargobCode());
 			goodMain.setOperType("A");
 			goodMain.setApplicant(UserContext.getContext().getUser().getAccount());
-			System.out.println(goodMain.toString());
 			model.setData(goodMainBiz.save(goodMain));
-			int i = 1/0;
 		}catch(Exception e){
 			e.printStackTrace();
 			model.setMsg("系统出错，添加失败");
@@ -87,6 +90,11 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
+	/**
+	 * 更新主表信息
+	 * @param goodMain 更新的对象
+	 * @return 更新结果
+	 */
 	@RequestMapping(path = "/updateGoodMain" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String updateGoodMain(GoodMain goodMain){
@@ -105,6 +113,11 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 
+	/**
+	 * 保存商品信息
+	 * @param good 保存的商品对象
+	 * @return 保存结果
+	 */
 	@RequestMapping(path = "/saveGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String saveGood(Good good){
@@ -121,6 +134,11 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
+	/**
+	 * 更新商品信息
+	 * @param good 更新的商品对象
+	 * @return 更新结果
+	 */
 	@RequestMapping(path = "/updateGood" , method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String updateGood(Good good){
@@ -136,6 +154,11 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
+	/**
+	 * 批量删除商品信息
+	 * @param ids 删除的商品id
+	 * @return 删除结果
+	 */
 	@RequestMapping(path = "/deleteGood" , method = RequestMethod.POST , produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String deleteGood(String ids){
@@ -151,6 +174,10 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
+	/**
+	 * 获取对应主表下所有商品信息
+	 * @return 
+	 */
 	@RequestMapping(path = "/getGood" , method = RequestMethod.POST , produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getGood(){
@@ -161,8 +188,8 @@ public class GoodController extends BaseController{
 	
 	/**
 	 * 提交备案，将gmid下的所有商品的状态值从0（新增）修改为1（请求发送）
-	 * @param gmid
-	 * @return
+	 * @param gmid 主表id
+	 * @return 备案结果
 	 */
 	@RequestMapping(path = "/commit" , method = RequestMethod.POST ,produces = "text/application;charset=utf-8")
 	@ResponseBody
@@ -180,6 +207,11 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
+	/**
+	 * 提交单条商品备案
+	 * @param id 备案的商品id 
+	 * @return 备案结果
+	 */
 	@RequestMapping(path = "/commitGood",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String commitGood(Integer id){
@@ -197,49 +229,12 @@ public class GoodController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@RequestMapping(path = "/save",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
-	@ResponseBody
-	@Transactional
-	public String save(){
-		AjaxModel model = new AjaxModel(true);
-		model.setMsg("添加成功");
-		try{
-			GoodMain goodMain = new GoodMain();
-			goodMain.setCargobCode(Creator.createCargobCode());
-			goodMain.setCbeComId(getInt("cbeComId"));
-			goodMain.setCiqbCode(getString("ciqbCode"));
-			goodMain.setEditId(getInt("editId"));
-			goodMain.setRemark(getString("remark"));
-			Integer id = goodMainBiz.save(goodMain);
-			
-			Date date = new Date();
-			JSONArray jsonArray = new JSONArray(getString("goods"));
-			for(int i = 0;i < jsonArray.length() ;i++){
-				Good good = new Good(jsonArray.getJSONObject(i));
-				good.setGmid(id);
-				good.setCreateTime(date);
-				good.setStatus(1);
-				goodBiz.save(good);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			model.setSuccess(false);
-			model.setMsg("系统出错，添加失败");
-		}
-		
-		return renderJsonStr(model);
-	}
+
 	
 	@RequestMapping(path = "/getNull")
 	@ResponseBody
 	public String getNull(){
 		return "[]";
-	}
-	
-	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
-	@ResponseBody
-	public String getAll(){
-		return renderJsonStr(goodBiz.getAll());
 	}
 	
 	@RequestMapping(path = "/searchgrid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")

@@ -6,7 +6,10 @@ import java.util.jar.Attributes.Name;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.util.JSONUtils;
+
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -48,6 +51,10 @@ public class SystemLogAspect {
 		
 	}
 	
+	/**
+	 * 用于拦截controller层记录用户操作
+	 * @param joinPoint
+	 */
 	@Before("controllerAspect()")
 	public void doBefore(JoinPoint joinPoint){
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
@@ -61,11 +68,74 @@ public class SystemLogAspect {
 			log.setAccount(user.getAccount());
 			log.setDescription(getControllerMethodDesc(joinPoint));
 			log.setMethod(joinPoint.getTarget().getClass().getName() + "-" + joinPoint.getSignature().getName() + "()");
+			log.setType(1);
+			systemLogBiz.save(log);
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 	}
 
+	/**
+	 * 用于拦截biz层的异常信息
+	 * @param joinPoint
+	 * @param e
+	 */
+	@AfterThrowing(pointcut = "bizAspect()",throwing = "e")
+	public void doAfterThrowing(JoinPoint joinPoint , Throwable e){
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		User user = UserContext.getContext().getUser();
+		String params = "";
+		if(joinPoint.getArgs() != null && joinPoint.getArgs().length > 0){
+			for(int i = 0 ; i < joinPoint.getArgs().length ; i++){
+				params += joinPoint.getArgs()[i] + ";";
+			}
+		}
+		
+		try{
+			SystemLog log = new SystemLog();
+			log.setAccount(user.getAccount());
+			log.setDescription(getServiceMethodDesc(joinPoint));
+			log.setDetail(e.getMessage());
+			log.setType(2);
+			log.setEcode(e.getClass().getName());
+			log.setMethod(joinPoint.getTarget().getClass().getName() + "-" + joinPoint.getSignature().getName() + "()");
+			log.setParams(params);
+			systemLogBiz.save(log);
+		}catch(Exception e1){
+			LOGGER.error(e1.getMessage());
+		}
+	}
+	
+	/**
+	 * 获取注解中对方法的描述，用于biz层
+	 * @param joinPoint
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	private String getServiceMethodDesc(JoinPoint joinPoint) throws ClassNotFoundException {
+		String targetName = joinPoint.getTarget().getClass().getName();
+		String methodName = joinPoint.getSignature().getName();
+		Object [] arguments = joinPoint.getArgs();
+		Class targetClass = Class.forName(targetName);
+		Method [] methods = targetClass.getMethods();
+		String desc = "";
+		for(Method method : methods){
+			if(method.getName().equals(methodName)){
+				Class [] clazzs = method.getParameterTypes();
+				if(clazzs.length == arguments.length){
+					desc = method.getAnnotation(SystemBizLog.class).desc();
+				}
+			}
+		}
+		return desc;
+	}
+
+	/**
+	 * 获取注解中对方法的描述，用于controller层
+	 * @param joinPoint
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	private String getControllerMethodDesc(JoinPoint joinPoint) throws ClassNotFoundException {
 		String targetName = joinPoint.getTarget().getClass().getName();
 		String methodName = joinPoint.getSignature().getName();
