@@ -3,6 +3,7 @@ package com.gpl.module.good.biz;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,11 +23,6 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 	
 	@Autowired
 	private GoodDao goodDao;
-	
-	public List<Good> getAll(){
-		String hql = "from Good";
-		return goodDao.find(hql);
-	}
 	
 	@SystemBizLog(desc = "分页查询")
 	public Page queryPage(Page page){
@@ -151,8 +147,15 @@ public class GoodBiz extends BaseBiz<Good, Integer>{
 		return goodDao.findPage(page, hql, params.toArray());
 	}
 	
-	public void batchUpdate(Integer gmid){
-		String hql = "update Good set status=1 where gmid=" + gmid;
-		goodDao.batchExecute(hql, new HashMap<String,Object>());
+	/**
+	 * 批量备案商品
+	 * @param gmid
+	 */
+	@SystemBizLog(desc = "批量备案商品")
+	public void batchRecord(Integer gmid){
+		String hql = "update Good set status=1 where gmid=:gmid";
+		Map<String, Object> values = new HashMap<String,Object>();
+		values.put("gmid", gmid);
+		goodDao.batchExecute(hql, values);
 	}
 }

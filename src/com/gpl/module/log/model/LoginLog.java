@@ -70,6 +70,11 @@ public class LoginLog implements Serializable{
 	public void setLoginTime(Date loginTime) {
 		this.loginTime = loginTime;
 	}
+	@Override
+	public String toString() {
+		return "LoginLog [id=" + id + ", account=" + account + ", ip=" + ip + ", result=" + result + ", loginTime="
+				+ loginTime + "]";
+	}
 	
 	
 }

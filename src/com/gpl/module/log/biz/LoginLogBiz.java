@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gpl.framework.annotation.SystemBizLog;
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
 import com.gpl.module.log.dao.LoginLogDao;
@@ -21,6 +22,12 @@ public class LoginLogBiz extends BaseBiz<LoginLog, Integer>{
 	@Autowired
 	private LoginLogDao loginLogDao;
 
+	/**
+	 * 分页查询
+	 * @param page
+	 * @return
+	 */
+	@SystemBizLog(desc = "分页查询")
 	public Page queryPage(Page page) {
 		String hql = "from LoginLog where 1=1";
 		List<Object> params = new ArrayList<Object>(); 

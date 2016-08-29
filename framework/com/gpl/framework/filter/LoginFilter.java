@@ -37,7 +37,7 @@ public class LoginFilter implements Filter{
 		//login路径及静态资源文件不做处理
 		if(uri.contains("login/login") || uri.contains(assertUri) || uri.endsWith(".jpg") || uri.endsWith(".png") || 
 				uri.endsWith(".js") || uri.endsWith(".css")){
-			chain.doFilter(request, response); 
+			chain.doFilter(request, response);
 		}else{
 			//记录入session中
 			User user = (User) session.getAttribute("user");

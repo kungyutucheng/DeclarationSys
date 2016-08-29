@@ -37,8 +37,10 @@
 					</td>
 					<td>登录时间</td>
 					<td>
-						<input class="easyui-datetimebox" name="startTime">&nbsp;-
-						<input class="easyui-datetimebox" name="endTime">
+						<input class="easyui-datetimebox" name="startTime"
+						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">&nbsp;-
+						<input class="easyui-datetimebox" name="endTime"
+						data-options="icons:[{iconCls:'icon-clear',handler:function(e){$(e.data.target).combobox('clear');}}]">
 					</td>
 				</tr>
 			</table>

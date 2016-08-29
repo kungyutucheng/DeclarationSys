@@ -8,6 +8,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gpl.framework.annotation.SystemBizLog;
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
 import com.gpl.module.entry.dao.EntryGoodDao;
@@ -19,6 +20,12 @@ public class EntryGoodBiz extends BaseBiz<EntryGood, Integer>{
 	@Autowired
 	private EntryGoodDao entryGoodDao;
 
+	/**
+	 * 分页查询
+	 * @param page
+	 * @return
+	 */
+	@SystemBizLog(desc = "分页查询")
 	public Page queryPage(Page page) {
 		String hql = "select new EntryGoodVO(id,"
 				+ "eid,"

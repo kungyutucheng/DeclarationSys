@@ -44,9 +44,24 @@
 				        <input type="button" class="btn btn-primary myBtn" value="修改" style="width:auto;" onclick="reviseGoodMain();">
 				        <input type="button" class="btn btn-primary myBtn" value="重置" style="width:auto;" onclick="resetForm();">
 				        <input type="button" class="btn btn-primary myBtn" value="提交备案" style="width:auto;" onclick="commit();">
+				        <input type="button" class="btn btn-primary myBtn" value="从文件中导入" style="width:auto;" onclick="openUploadFileDlg();">
 		            </div>
 		        </form>
-			</div> 
+			</div>
+			<div id="uploadFileDlg" class="easyui-dialog" style="width:800px;text-align:center;"
+			closed="true">
+				<form id="uploadFileForm" method="post" style="width:100%;text-align:center;padding:20px 0;">
+					<input id="file" type="file" style="width:500px;display:inline-block;">
+					<button id="uploadBtn" class="easyui-linkButton" style="width:auto;display:inline-block;">上传</button> 
+				</form>
+				<div class="progress progress-bar-striped active" style="display:none;">
+					<div id="progressBar" class="progress-bar progress-bar-info" role="progressbar"
+					aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+					style="width:0%;">
+					</div>
+				</div>
+				<table id="uploadGoodDg"></table>
+			</div>
 		</div>
 		<div data-options="region:'center',split:true" title="备案商品详细" style="height:auto;">
 			<table id="goodDg"></table>
@@ -193,7 +208,88 @@
     	                  ]]
     	        
     		});
+    		
+    		$("#uploadBtn").attr("disabled",false);
+    		$("#uploadBtn").click(function(){
+    			$("#progressBar").width("0%");
+    			$(this).attr("disabled",true);
+    			$("#progressBar").parent().show();
+    			$("#progressBar").parent().addClass("active");
+    			uploadFile();
+    		});
+    		
     	});
+    	
+    	 function uploadFile() {
+    	        var fileObj = $("#file").get(0).files[0]; // js 获取文件对象
+    	        console.info("上传的文件："+fileObj);
+    	        var FileController = "${basePath}/good/upload"; // 接收上传文件的后台地址 
+    	        // FormData 对象
+    	        var form = new FormData();
+    	        // form.append("author", "hooyes"); // 可以增加表单数据
+    	        form.append("file", fileObj); // 文件对象
+    	        // XMLHttpRequest 对象
+    	        var xhr = new XMLHttpRequest();
+    	        xhr.open("post", FileController, true);
+    	        xhr.onload = function() {
+    	            alert("上传完成");
+    	            $("#uploadBtn").attr('disabled', false);
+    	            $("#uploadBtn").val("上传");
+    	            $("#progressBar").parent().removeClass("active");
+    	            $("#progressBar").parent().hide();
+    	        };
+    	        xhr.upload.addEventListener("progress", progressFunction, false);
+    	        xhr.send(form);
+    	    }
+    	    ;
+    	    function progressFunction(evt) {
+    	        var progressBar = $("#progressBar");
+    	        if (evt.lengthComputable) {
+    	            var completePercent = Math.round(evt.loaded / evt.total * 100)+ "%";
+    	            progressBar.width(completePercent);
+    	            $("#uploadBtn").val("正在上传 " + completePercent);
+    	        }
+    	    };
+    	    
+    	/* function uploadFile(){
+    		var fileObj = $("#file").filebox("getValue");
+    		console.log("上传的文件是：" + fileObj);
+    		var form = new FormData();
+    		form.append("file",fileObj);
+    		$.ajax({
+    			url:"${basePath}/good/upload",
+    			type:"post",
+    			data:form,
+    			processData:false,
+    			contentType:false,
+    			xhr:function(){
+    				var xhr = jQuery.ajaxSettings.xhr();
+    				xhr.upload.onload = function(){
+    					layer.msg("上传完成");
+    					$("#uploadBtn").attr("disabled",false);
+    					$("#progressBar").parent().removeClass("active");
+    					$("#progressBar").parent().hide();
+    				}
+    				xhr.upload.onprogress = function(ev){
+    					var progressBar = $("#progressBar");
+    					if(ev.lengthComputable){
+    						var completePercent = Math.round(ev.loaded / ev.total * 100) + "%";
+    						progressBar.width(completePercent);
+    						$("#uploadBtn").val("正在上传：" + completePercent);
+    					}
+    				}
+    				return xhr;
+    			},
+    			success:function(data){
+    				if(data == "1"){
+    					layer.msg("上传成功");
+    				}else{
+    					layer.msg("上传失败");
+    				}
+    			}
+    		});
+    	} */
+    	
     	function saveGoodMain(){
     		$("#goodMainForm").form("submit",{
     			url:"${basePath}/good/saveGoodMain",
@@ -321,6 +417,11 @@
 					});
 				}
 			});
+    	}
+    	
+    	//打开文件上传对话框
+    	function openUploadFileDlg(){
+    		$("#uploadFileDlg").dialog("open").dialog("center").dialog("setTitle","文件上传");
     	}
     </script>
 	</div>

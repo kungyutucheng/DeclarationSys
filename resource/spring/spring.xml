@@ -64,6 +64,13 @@
     <beans:bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >  
 		<property name="order" value="0" />  
 	</beans:bean>
+	
+	<!-- 文件上传 -->
+	<beans:bean id="multipartResolver" class="com.gpl.framework.listener.CustomMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- 100M -->
+		<property name="maxUploadSize" value="838860800"></property>
+	</beans:bean>
     
     <!-- 事务管理器 -->
 	<bean id="transactionManager"

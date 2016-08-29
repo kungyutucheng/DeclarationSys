@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gpl.framework.annotation.SystemBizLog;
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
 import com.gpl.module.log.dao.SystemLogDao;
@@ -17,6 +18,12 @@ public class SystemLogBiz extends BaseBiz<SystemLog, Integer>{
 	@Autowired
 	private SystemLogDao systemLogDao;
 
+	/**
+	 * 分页查询
+	 * @param page
+	 * @return
+	 */
+	@SystemBizLog(desc = "分页查询")
 	public Page queryPage(Page page) {
 		String hql = "from SystemLog where 1=1";
 		List<Object> params = new ArrayList<Object>();
@@ -50,5 +57,9 @@ public class SystemLogBiz extends BaseBiz<SystemLog, Integer>{
 		}
 		hql += " order by createTime desc";
 		return systemLogDao.findPage(page, hql, params.toArray());
+	}
+	
+	public int saveLog(SystemLog log){
+		return (int) systemLogDao.getHibernateTemplate().save(log);
 	}
 }

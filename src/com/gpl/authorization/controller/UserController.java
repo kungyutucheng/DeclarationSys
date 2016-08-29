@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpl.authorization.biz.UserBiz;
+import com.gpl.framework.annotation.SystemControllerLog;
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.model.AjaxModel;
 
@@ -17,17 +18,22 @@ public class UserController extends BaseController{
 	@Autowired
 	private UserBiz userBiz;
 	
+	/**
+	 * 鑾峰彇宸︿晶妯″潡鏁版嵁
+	 * @return
+	 */
 	@RequestMapping(path = "/getModules",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
+	@SystemControllerLog(desc = "鑾峰彇宸︿晶妯″潡鏁版嵁")
 	public String getModules(){
 		AjaxModel model = new AjaxModel();
 		boolean success = true;
-		String msg = "获取数据成功";
+		String msg = "鑾峰彇鏁版嵁鎴愬姛";
 		try{
 			System.out.println(userBiz.getModules(getString("account")).toString());
 			model.setData(userBiz.getModules(getString("account")));
 		}catch(Exception e){
-			msg = "获取数据失败";
+			msg = "鑾峰彇鏁版嵁澶辫触";
 			success = false;
 		}
 		model.setSuccess(success);
@@ -35,9 +41,4 @@ public class UserController extends BaseController{
 		return renderJsonStr(model);
 	}
 	
-	@RequestMapping(path = "/test",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String test(){
-		return renderJsonStr(userBiz.getModules("admin"));
-	}
 }

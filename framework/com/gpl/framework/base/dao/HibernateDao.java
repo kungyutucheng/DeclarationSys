@@ -241,10 +241,11 @@ public class HibernateDao <T,PK extends Serializable> extends SimpleHibernateDao
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				Query query = session.createQuery(hql);
-				if(values != null){
-					query.setProperties(values);
+				if(values != null && values.size() > 0){
+					for(String key : values.keySet()){
+						query.setParameter(key, values.get(key));
+					}
 				}
-				
 				return query.list();
 			}
 		});

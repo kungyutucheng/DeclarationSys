@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gpl.framework.annotation.SystemBizLog;
 import com.gpl.framework.base.biz.BaseBiz;
 import com.gpl.framework.util.Page;
 import com.gpl.module.base.dao.EnterpriseDao;
@@ -16,6 +17,12 @@ public class EnterpriseBiz extends BaseBiz<Enterprise, Integer>{
 	@Autowired
 	private EnterpriseDao enterpriseDao;
 	
+	/**
+	 * 分页查询
+	 * @param page
+	 * @return
+	 */
+	@SystemBizLog(desc = "分页查询")
 	public Page queryPage(Page page){
 		String hql = "from Enterprise where 1=1";
 		if(page != null){

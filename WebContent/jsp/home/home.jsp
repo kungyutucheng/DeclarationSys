@@ -95,7 +95,6 @@ $(function(){
 	$.post("${basePath }/user/getModules",
 			{account:"<%=((User)session.getAttribute("user")).getAccount() %>"},
 			function(result){
-			console.log(result);
 			var res = $.parseJSON(result);
 			if(result && res.success){
 				var data = res.data;

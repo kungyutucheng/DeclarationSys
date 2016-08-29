@@ -69,7 +69,7 @@ public class SystemLogAspect {
 			log.setDescription(getControllerMethodDesc(joinPoint));
 			log.setMethod(joinPoint.getTarget().getClass().getName() + "-" + joinPoint.getSignature().getName() + "()");
 			log.setType(1);
-			systemLogBiz.save(log);
+			systemLogBiz.saveLog(log);
 		}catch(Exception e){
 			LOGGER.error(e.getMessage());
 		}
@@ -100,7 +100,7 @@ public class SystemLogAspect {
 			log.setEcode(e.getClass().getName());
 			log.setMethod(joinPoint.getTarget().getClass().getName() + "-" + joinPoint.getSignature().getName() + "()");
 			log.setParams(params);
-			systemLogBiz.save(log);
+			systemLogBiz.saveLog(log);
 		}catch(Exception e1){
 			LOGGER.error(e1.getMessage());
 		}

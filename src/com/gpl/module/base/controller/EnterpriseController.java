@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gpl.framework.annotation.SystemControllerLog;
 import com.gpl.framework.base.controller.BaseController;
 import com.gpl.framework.model.AjaxModel;
 import com.gpl.framework.util.Page;
@@ -19,6 +20,11 @@ public class EnterpriseController extends BaseController{
 	@Autowired
 	private EnterpriseBiz enterpriseBiz;
 	
+	/**
+	 * 分页查询
+	 * @return
+	 */
+	@SystemControllerLog(desc = "分页查询")
 	@RequestMapping(path = "/searchGrid",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String searchGrid(){
@@ -27,6 +33,11 @@ public class EnterpriseController extends BaseController{
 		return renderJsonStr(enterpriseBiz.queryPage(page));
 	}
 	
+	/**
+	 * 获取企业全部数据
+	 * @return
+	 */
+	@SystemControllerLog(desc = "获取企业全部数据")
 	@RequestMapping(path = "/getAll",method = RequestMethod.POST,produces = "text/application;charset=utf-8")
 	@ResponseBody
 	public String getAll(){
