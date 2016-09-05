@@ -74,11 +74,39 @@
 				</table>
 			</div>
 		</div>
+		<div id="mm" class="easyui-menu" style="width: 120px;">
+	        <div id="mm-tabclose" name="6">刷新</div>
+	        <div id="Div1" name="1">关闭</div>
+	        <div id="mm-tabcloseall" name="2">全部关闭</div>
+	        <div id="mm-tabcloseother" name="3">除此之外全部关闭</div>
+	        <div class="menu-sep"></div>
+	        <div id="mm-tabcloseright" name="4">当前页右侧全部关闭</div>
+	        <div id="mm-tabcloseleft" name="5">当前页左侧全部关闭</div>
+	    </div>
 	</div>
 	<form action="${basePath }/login/logout" method="get" id="logoutForm"></form>
 <script>
 
 $(function(){
+	//监听右键事件，创建右键菜单
+	$("#tabs").tabs({
+		onContextMenu:function(e, title,index){
+            e.preventDefault();
+            if(index>0){
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                }).data("tabTitle", title);
+            }
+        }
+	});
+	 //右键菜单click
+    $("#mm").menu({
+        onClick : function (item) {
+        	console.log(item.name);
+            closeTab(this, item.name);
+        }
+    });
 	<%-- $("#dg").datagrid({
 		url:"${basePath }/user/getModules",
 		queryParams:{
@@ -185,7 +213,7 @@ $(function(){
 		var mname = data.title;
 		var href = "${basePath}/"+url;
 		//直接使用href会导致同时打开的标签页共用id，导致id冲突，所以要使用iframed的方式来避免
-		var content = "<iframe frameborder='0' src='" + href +"' style='width:100%;height:100%;'></iframe>";
+		var content = "<iframe name='" + mname + "' frameborder='0' src='" + href +"' style='width:100%;height:100%;'></iframe>";
 		$("#tabs").tabs("add",{
 			id:mname,
 			content:content,
@@ -202,6 +230,56 @@ $(function(){
 			}
 		});
 	}
+	
+	//删除Tabs
+    function closeTab(menu, type) {
+		console.log("type:" + type);
+        var allTabs = $("#tabs").tabs('tabs');
+        var allTabtitle = [];
+        $.each(allTabs, function (i, n) {
+            var opt = $(n).panel('options');
+            if (opt.closable)
+                allTabtitle.push(opt.title);
+        });
+        var curTabTitle = $(menu).data("tabTitle");
+        console.log("cuttTabTitle:" + curTabTitle);
+        var curTabIndex = $("#tabs").tabs("getTabIndex", $("#tabs").tabs("getTab", curTabTitle));
+        console.log("curTabIndex:" + curTabIndex);
+        switch (type) {
+            case "1"://关闭当前
+                $("#tabs").tabs("close", curTabIndex);
+                return false;
+                break;
+            case "2"://全部关闭
+                for (var i = 0; i < allTabtitle.length; i++) {
+                    $('#tabs').tabs('close', allTabtitle[i]);
+                }
+                break;
+            case "3"://除此之外全部关闭
+                for (var i = 0; i < allTabtitle.length; i++) {
+                    if (curTabTitle != allTabtitle[i])
+                        $('#tabs').tabs('close', allTabtitle[i]);
+                }
+                $('#tabs').tabs('select', curTabTitle);
+                break;
+            case "4"://当前侧面右边
+                for (var i = curTabIndex; i < allTabtitle.length; i++) {
+                    $('#tabs').tabs('close', allTabtitle[i]);
+                }
+                $('#tabs').tabs('select', curTabTitle);
+                break;
+            case "5": //当前侧面左边
+                for (var i = 0; i < curTabIndex - 1; i++) {
+                    $('#tabs').tabs('close', allTabtitle[i]);
+                }
+                $('#tabs').tabs('select', curTabTitle);
+                break;
+            case "6": //刷新
+                document.getElementsByName(curTabTitle)[0].contentWindow.location.reload(true);
+                break;
+        }
+
+    }
 
 </script>
 </body>

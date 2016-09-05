@@ -5,7 +5,7 @@ public class AjaxModel {
 	public static final String SAVE_SUCCESS = "添加成功";
 	public static final String SAVE_FAILURE = "系统出错，添加失败";
 	public static final String UPDATE_SUCCESS = "更新成功";
-	public static final String UPDATE_FAILURE = "系统出错，删除失败";
+	public static final String UPDATE_FAILURE = "系统出错，更新失败";
 	public static final String DELETE_SUCCESS = "删除成功";
 	public static final String DELETE_FAILURE = "系统出错，删除失败";
 	public static final String RECORD_SUCCESS = "提交备案成功";
